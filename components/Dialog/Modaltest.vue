@@ -1,92 +1,139 @@
 <template>
-  <transition name="modal-animation">
-    <div v-show="modalActive" class="modal">
-      <transition name="modal-animation-inner">
-        <div v-show="modalActive" class="modal-inner">
-          <i @click="close" class="far fa-times-cirle"></i>
-          <!--Modal Content -->
-          <slot />
-          <BaseButton @click="close">Close</BaseButton>
-        </div>
-      </transition>
+  <div class="modal-overlay">
+    <div class="modal">
+      <h6>Silahkan Pilih Lokasi</h6>
+      <h5>Anda dapat memilih lebih dari satu lokasi</h5>
+      <label for ="test">Cari Kota</label>
+      <span>
+        <input name="test" id="test" 
+               type="text" placeholder="Contoh : Bandung, Karawang"/>
+    </span>
+    <h4>Atau Cari Berdasarkan Provinsi</h4>
+    <v-card
+    class="mx-auto"
+    max-width="700"
+    outlined
+    max-height="150"
+  >
+  <v-container>
+    <div class="scrollable">
+    <v-row no-gutters>
+      <v-col
+        v-for="n in 12"
+        :key="n"
+        cols="12"
+        sm="4"
+      >
+        <v-card
+          class="pa-2"
+          outlined
+          tile
+        >
+          One of three columns
+        </v-card>
+      </v-col>
+    </v-row>
+  </div>
+  </v-container>
+  </v-card>
+  <button>Menampilkan Mobil Impian</button>
     </div>
-  </transition>
+    <div class="close" @click="$emit('close-modal')">
+    </div>
+  </div>
 </template>
 
 <script>
-export default {
-  props: ['modalActive'],
-  setup(props, { emit }) {
-    const close = () => {
-      emit("close");
-    };
-
-    return { close }
-  }
+  export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.modal-animation-enter-active-,
-.modal-animation-leave-active {
-  transition: opacity 0.3s cubic-bezier(0.52, 0.02, 0.19, 1.02);
-}
+<style scoped>
 
-.modal-animation-enter-from,
-.modal-animation-leave-to {
-  opacity: 0;
-}
-
-.modal-animation-enter-active {
-  transition: opacity 0.3s cubic-bezier(0.52, 0.02, 0.19, 1.02);
-}
-
-.modal-aniation-inner-leave-active {
-  transition: opacity 0.3s cubic-bezier(0.52, 0.02, 0.19, 1.02);
-}
-
-.modal-animation-inner-enter-from {
-  opacity: 0;
-  transform: scale(0.8);
-}
-
-.modal-animation-inner-leave-to {
-  transform: scale(0.8);
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  background-color: #000000da;
 }
 
 .modal {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100hv;
-  width: 100hv;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-color: rgba(255, 255, 255, 0.7);
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  text-align: center;
+  background-color: white;
+  height: 500px;
+  width: 1500px;
+  margin-top: 15%;
+  padding: 60px 0;
+  border-radius: 20px;
+}
+.close {
+  margin: 10% 0 0 16px;
+  cursor: pointer;
+}
 
-  .modal-inner {
-    position: relative;
-    max-width: 640px;
-    width: 80%;
-    padding: 64px 16px;
-  }
+.close-img {
+  width: 25px;
+}
 
-  i {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    font-size: 20px;
-    cursor: pointer;
+label{
+  float :left;
+  margin-left: 35%;
+  font-weight: 300;
+  font-size: 20px;
+}
+span {
+   display: block;
+   overflow: hidden;
+   padding: 0px 4px 0px 6px;
+}
+          
+ input {
+  width: 50%;
+  margin-right: 40%;
+  font-weight: 300;
+  font-size: 20px;
+}
+.check {
+  width: 150px;
+}
 
-    &:hover {
-      color: crimson;
-    }
-  }
+h6 {
+  font-size: 25px;
+  margin: 20px 0;
+  font-weight: bold;
+}
 
+h5 {
+  font-weight: 300;
+  font-size: 20px;
+  margin: 20px 0;
+}
+
+h4{
+  font-weight: 300;
+  font-size: 20px;
+  margin: 20px 0;
+}
+
+p {
+  font-size: 16px;
+  margin: 20px 0;
+}
+
+button {
+  margin-top: 10px;
+  background-color: #ac003e;
+  width: 300px;
+  height: 40px;
+  color: white;
+  font-size: 14px;
+}
+.scrollable{
+  overflow-y: auto;
+  max-height: 150px;
 }
 </style>

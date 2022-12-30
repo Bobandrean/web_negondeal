@@ -10,11 +10,10 @@
         </v-row>
         <v-row>
             <v-col>
-
-                <BaseButton @click="toggleModal">Modal</BaseButton>
+                <BaseButton @click="showModal = true">Modal</BaseButton>   
             </v-col>
             <v-col>
-                <BaseButton>Harga</BaseButton>
+                <BaseButton @click="showHarga = true">Harga</BaseButton>
 
             </v-col>
             <v-col>
@@ -91,9 +90,12 @@
             </v-col>
         </v-row>
     </BaseCard>
+    <Modaltest v-show ="showModal"/>
+    <Modal v-show ="showHarga"/>
 </template>
 
 <script>
+import Modaltest from '@/components/Dialog/Modaltest.vue'
 import Modal from '@/components/Dialog/Modal.vue'
 import { ref } from 'vue'
 definePageMeta({
@@ -105,21 +107,13 @@ export default {
     data() {
         return {
             showModal: false,
+            showHarga: false,
         }
     },
     components: {
+        Modaltest,
         Modal
     },
-    setup() {
-        const modalActive = ref(false);
-
-        const toggleModal = () => {
-            modalActive.value = !modalActive.value;
-        };
-
-        return { modalActive, toggleModal };
-    }
-
 }
 
 </script>
