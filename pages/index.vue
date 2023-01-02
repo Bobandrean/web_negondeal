@@ -68,9 +68,9 @@
             <BaseCarCard></BaseCarCard>
         </v-col>
     </v-row>
-    <BaseCard>
+    <v-row>
+            <BaseCard width="1000">
         <v-row>
-
             <v-col md="12">
                 <h2>Belum menemukan yang Anda cari?</h2>
             </v-col>
@@ -80,16 +80,17 @@
         </v-row>
         <v-row>
             <v-col md="6">
-                <BaseInput></BaseInput>
+                <BaseInput placeholder=""></BaseInput>
             </v-col>
             <v-col md="6">
                 <BaseInput></BaseInput>
             </v-col>
             <v-col md="12">
-                eButton>
+                <BaseButton>Kirim</BaseButton>
             </v-col>
         </v-row>
     </BaseCard>
+    </v-row>
     <Modaltest v-show ="showModal"/>
     <Modal v-show ="showHarga"/>
 </template>

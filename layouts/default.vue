@@ -9,7 +9,7 @@
 
                 <BaseButton color="black"> Beli Mobil</BaseButton>
 
-                <BaseButton> NND Certified</BaseButton>
+                <BaseButton to="/detail"> NND Certified</BaseButton>
 
                 <BaseButton> Jual Mobil </BaseButton>
 
