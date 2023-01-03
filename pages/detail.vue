@@ -6,9 +6,48 @@
     <v-carousel-item
       v-for="(item,i) in items"
       :key="i"
-      :src="item.src"
-    ></v-carousel-item>
+      eager
+    >
+    <v-img :src="item.src" height="100%" eager/>
+</v-carousel-item>
   </v-carousel>
+  <v-sheet
+    class="mx-auto"
+    elevation="8"
+    max-width="800"
+  >
+    <v-slide-group
+      v-model="model"
+      class="pa-4"
+      selected-class="bg-success"
+      show-arrows
+    >
+      <v-slide-group-item
+        v-for="n in 15"
+        :key="n"
+        v-slot="{ isSelected, toggle, selectedClass }"
+      >
+        <v-card
+          color="grey-lighten-1"
+          :class="['ma-4', selectedClass]"
+          height="200"
+          width="100"
+          @click="toggle"
+        >
+          <div class="d-flex fill-height align-center justify-center">
+            <v-scale-transition>
+              <v-icon
+                v-if="isSelected"
+                color="white"
+                size="48"
+                icon="mdi-close-circle-outline"
+              ></v-icon>
+            </v-scale-transition>
+          </div>
+        </v-card>
+      </v-slide-group-item>
+    </v-slide-group>
+  </v-sheet>
             </v-col>
             <v-col class="md-5">
                 <v-card
@@ -183,7 +222,7 @@
       <p>Penjual Terverifikasi</p>
       <v-row>
         <v-col md="4" align="center">
-            <button>Test Drive</button>
+            <BaseButton to="/testdrive">Test Drive</BaseButton>
         </v-col>
         <v-col md="4" align="center">
             <button>Hubungi</button>
@@ -278,7 +317,7 @@
                     <BaseButton to="/inspeksi">Lihat Selengkapnya</BaseButton>
                 </v-col>
                 <v-col md="6">
-                    <BaseButton>Download Laporan Inspeksi</BaseButton>
+                    <BaseButton @click="showModalDetail = true">Download Laporan Inspeksi</BaseButton>
                 </v-col>
             </v-row>
 </v-card>
@@ -419,10 +458,12 @@
             <BaseCarCard></BaseCarCard>
         </v-col>
     </v-row>
+    <Modaldetail v-show="showModalDetail"/>
     </v-container>
 </template>
 
 <script>
+import Modaldetail from '@/components/Dialog/Modaldetail.vue'
 import { ref } from 'vue'
 definePageMeta({
     layout: 'default'
@@ -430,6 +471,7 @@ definePageMeta({
 export default {
     data () {
       return {
+        showModalDetail : false,
         items: [
           {
             src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
@@ -445,6 +487,9 @@ export default {
           },
         ],
       }
+    },
+    components: {
+        Modaldetail
     },
   }
 </script>

@@ -18,7 +18,7 @@
   >
             <v-row no-gutters>
                 <v-col md="6">
-                    <p class="loui4">Laporan Inspeksi 05 July 2022</p>
+                    <p class="loui4" style="margin-top:5%">Laporan Inspeksi 05 July 2022</p>
                 </v-col>
             </v-row>
             <v-row no-gutters>
@@ -84,7 +84,7 @@
   >
             <v-row no-gutters>
                 <v-col md="6">
-                    <p class="loui4">Tes Jalan</p>
+                    <p class="loui4" style="margin-top:5%">Tes Jalan</p>
                 </v-col>
             </v-row>
             <v-row>
@@ -94,7 +94,7 @@
                         <p class="loui4">Akselerasi Mesin</p>
                     </v-col>
                     <v-col md="3">
-                        <p class="loui3">?</p>
+                        <i class="fa-regular fa-circle-check"></i>
                     </v-col>
                     </v-row>
                     <v-row>
@@ -102,7 +102,7 @@
                         <p class="loui4">Engine Starting</p>
                     </v-col>
                     <v-col md="3">
-                        <p class="loui3">?</p>
+                        <i class="fa-regular fa-circle-check"></i>
                     </v-col>
                     </v-row>
                     <v-row>
@@ -110,7 +110,7 @@
                         <p class="loui4">Racksteer</p>
                     </v-col>
                     <v-col md="3">
-                        <p class="loui3">?</p>
+                        <i class="fa-regular fa-circle-check"></i>
                     </v-col>
                     </v-row>
                     <v-row>
@@ -118,7 +118,7 @@
                         <p class="loui4">Sistem Pengereman</p>
                     </v-col>
                     <v-col md="3">
-                        <p class="loui3">?</p>
+                        <i class="fa-regular fa-circle-check"></i>
                     </v-col>
                     </v-row>
                     <v-row>
@@ -126,7 +126,7 @@
                         <p class="loui4">Bunyi Perpindahan Transmisi</p>
                     </v-col>
                     <v-col md="3">
-                        <p class="loui3">?</p>
+                        <i class="fa-regular fa-circle-check"></i>
                     </v-col>
                     </v-row>
                 </v-col>
@@ -137,7 +137,7 @@
                         <p class="loui4">Engine Idling</p>
                     </v-col>
                     <v-col md="3">
-                        <p class="loui3">?</p>
+                        <i class="fa-regular fa-circle-check"></i>
                     </v-col>
                     </v-row>
                     <v-row>
@@ -145,7 +145,7 @@
                         <p class="loui4">Suara Mesin</p>
                     </v-col>
                     <v-col md="3">
-                        <p class="loui3">?</p>
+                        <i class="fa-regular fa-circle-check"></i>
                     </v-col>
                     </v-row>
                     <v-row>
@@ -153,7 +153,7 @@
                         <p class="loui4">ABS Sensor</p>
                     </v-col>
                     <v-col md="3">
-                        <p class="loui3">?</p>
+                        <i class="fa-regular fa-circle-check"></i>
                     </v-col>
                     </v-row>
                     <v-row>
@@ -161,7 +161,7 @@
                         <p class="loui4">Suara Kaki Kaki</p>
                     </v-col>
                     <v-col md="3">
-                        <p class="loui3">?</p>
+                        <i class="fa-regular fa-circle-check"></i>
                     </v-col>
                     </v-row>
                     <v-row>
@@ -169,7 +169,7 @@
                         <p class="loui4">Sistem Kopling</p>
                     </v-col>
                     <v-col md="3">
-                        <p class="loui3">?</p>
+                        <i class="fa-regular fa-circle-check"></i>
                     </v-col>
                     </v-row>
                 </v-col>
@@ -181,6 +181,7 @@
 </template>
 
 <script>
+import '@fortawesome/fontawesome-free/css/all.css'
 import { ref } from 'vue'
 definePageMeta({
     layout: 'custom'
@@ -202,5 +203,6 @@ export default {
 .loui2{
     font-size: 14px;
     text-align: right;
+    color: green;
 }
 </style>
