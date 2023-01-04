@@ -23,7 +23,7 @@
                 <BaseButton>Tahun</BaseButton>
             </v-col>
             <v-col>
-                <BaseDropDown>Lokasi</BaseDropDown>
+                <BaseDropDown :items="lokasi">Lokasi</BaseDropDown>
             </v-col>
             <v-col> ModalFilter </v-col>
             <v-col>
@@ -99,6 +99,11 @@ const test = ref("");
 
 const openModal = () => {
     test.value.$refs.test.open()
-}
+};
+
+const lokasi = [
+    { text: 'Semua Lokasi', value: 'all_location' },
+    { text: 'Pilih Lokasi', value: 'pick_location' },
+];
 
 </script>
