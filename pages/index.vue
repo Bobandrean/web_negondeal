@@ -14,13 +14,13 @@
         </v-row>
         <v-row>
             <v-col>
-                <BaseButton @click="openModal">Open</BaseButton>
+                <BaseButton @click="openLogin">Open</BaseButton>
             </v-col>
             <v-col>
-                <BaseButton>Harga</BaseButton>
+                <BaseButton @click="openHarga">Harga</BaseButton>
             </v-col>
             <v-col>
-                <BaseButton>Tahun</BaseButton>
+                <BaseButton @click="openTahun">Tahun</BaseButton>
             </v-col>
             <v-col>
                 <BaseDropDown :items="lokasi">Lokasi</BaseDropDown>
@@ -99,6 +99,26 @@ const test = ref("");
 
 const openModal = () => {
     test.value.$refs.test.open()
+};
+
+const openHarga = () => {
+    test.value.$refs.harga.open()
+};
+
+const openTahun = () => {
+    test.value.$refs.tahun.open()
+};
+
+const openLokasi = () => {
+    test.value.$refs.lokasi.open()
+};
+
+const openDaftar = () => {
+    test.value.$refs.daftar.open()
+};
+
+const openLogin = () => {
+    test.value.$refs.login.open()
 };
 
 const lokasi = [

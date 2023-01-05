@@ -11,50 +11,12 @@
     <v-img :src="item.src" height="100%" eager/>
 </v-carousel-item>
   </v-carousel>
-  <v-sheet
-    class="mx-auto"
-    elevation="8"
-    max-width="800"
-  >
-    <v-slide-group
-      v-model="model"
-      class="pa-4"
-      selected-class="bg-success"
-      show-arrows
-    >
-      <v-slide-group-item
-        v-for="n in 15"
-        :key="n"
-        v-slot="{ isSelected, toggle, selectedClass }"
-      >
-        <v-card
-          color="grey-lighten-1"
-          :class="['ma-4', selectedClass]"
-          height="200"
-          width="100"
-          @click="toggle"
-        >
-          <div class="d-flex fill-height align-center justify-center">
-            <v-scale-transition>
-              <v-icon
-                v-if="isSelected"
-                color="white"
-                size="48"
-                icon="mdi-close-circle-outline"
-              ></v-icon>
-            </v-scale-transition>
-          </div>
-        </v-card>
-      </v-slide-group-item>
-    </v-slide-group>
-  </v-sheet>
             </v-col>
             <v-col class="md-5">
                 <v-card
-    class="mx-auto"
+    class="mx-auto card1"
     max-width="500"
     height="400"
-    style="border-style: thin; border-color:black; border-width: 3px"
   >
     <v-card-text>
       <div>Nama Mobil Yang Di Dapat</div>
@@ -120,6 +82,47 @@
         </v-col>
     </v-row>
   </v-card>
+            </v-col>
+        </v-row>
+        <v-row>
+            <v-col md="6">
+                <v-sheet
+    class="mx-auto"
+    elevation="8"
+    max-width="800"
+  >
+    <v-slide-group
+      v-model="model"
+      class="pa-4"
+      selected-class="bg-success"
+      show-arrows
+    >
+      <v-slide-group-item
+        v-for="n in 15"
+        :key="n"
+        v-slot="{ isSelected, toggle, selectedClass }"
+      >
+        <v-card
+          color="grey-lighten-1"
+          :class="['ma-4', selectedClass]"
+          height="200"
+          width="100"
+          @click="toggle"
+        >
+          <div class="d-flex fill-height align-center justify-center">
+            <v-scale-transition>
+              <v-icon
+                v-if="isSelected"
+                color="white"
+                size="48"
+                icon="mdi-close-circle-outline"
+              ></v-icon>
+            </v-scale-transition>
+          </div>
+        </v-card>
+      </v-slide-group-item>
+    </v-slide-group>
+  </v-sheet>
             </v-col>
         </v-row>
         <v-row>
@@ -521,5 +524,11 @@ export default {
 .loui-3{
     font-size: 13px;
     text-align: right;
+}
+.card1{
+    border-radius: 30px;
+  background: white;
+  box-shadow: 15px 15px 30px #bebebe,
+             -15px -15px 30px #ffffff;
 }
 </style>
