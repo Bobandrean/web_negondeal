@@ -6,6 +6,7 @@
     <!-- End Modal -->
 
     <BaseCard>
+        {{ unit }}
         <v-row>
             <v-col lg="12">
                 <BaseInput @keyup="getData" v-model="search" placeholder="Cari Mobil Anda (Merek/Jenis)" type="text">
@@ -91,6 +92,9 @@
 </template>
 
 <script setup>
+import { useCounterStore } from '@/stores/counter'
+import { useUnitStore } from '@/stores/unit'
+
 definePageMeta({
     layout: "default",
 });
@@ -125,5 +129,16 @@ const lokasi = [
     { text: 'Semua Lokasi', value: 'all_location' },
     { text: 'Pilih Lokasi', value: 'pick_location' },
 ];
+
+const counterStore = useCounterStore()
+const unitStore = useUnitStore()
+
+// const getUnit = computed(() => unitStore.getUnit())
+
+// onMounted(() => {
+//     unitStore.getUnitService()
+// })
+
+const { pending, data: unit } = useLazyAsyncData('count', () => $fetch('http://127.0.0.1:8000/api/v1/get_unit'))
 
 </script>

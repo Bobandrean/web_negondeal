@@ -10,6 +10,11 @@ export default defineNuxtConfig({
   vite: {
     define: {
       "process.env.DEBUG": false,
+      "process.env.BASE_URL": process.env.BASE_URL,
     },
   },
+  modules: [
+    // ...
+    "@pinia/nuxt",
+  ],
 });
