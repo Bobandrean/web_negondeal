@@ -3,6 +3,8 @@
 
     <!-- Modal -->
     <DialogFilterLocation ref="test"></DialogFilterLocation>
+    <DialogRangeHarga ref="harga"></DialogRangeHarga>
+    <DialogCariTahun ref="tahun"></DialogCariTahun>
     <!-- End Modal -->
 
     <BaseCard>
@@ -15,7 +17,7 @@
         </v-row>
         <v-row>
             <v-col>
-                <BaseButton @click="openLogin">Open</BaseButton>
+                <BaseButton @click="openDetail">Open</BaseButton>
             </v-col>
             <v-col>
                 <BaseButton @click="openHarga">Harga</BaseButton>
@@ -100,17 +102,19 @@ definePageMeta({
 });
 
 const test = ref("");
+const harga = ref("");
+const tahun = ref("");;
 
 const openModal = () => {
     test.value.$refs.test.open()
 };
 
 const openHarga = () => {
-    test.value.$refs.harga.open()
+    harga.value.$refs.harga.open()
 };
 
 const openTahun = () => {
-    test.value.$refs.tahun.open()
+    tahun.value.$refs.tahun.open()
 };
 
 const openLokasi = () => {
@@ -123,6 +127,10 @@ const openDaftar = () => {
 
 const openLogin = () => {
     test.value.$refs.login.open()
+};
+
+const openDetail = () => {
+    test.value.$refs.pesandetail.open()
 };
 
 const lokasi = [
