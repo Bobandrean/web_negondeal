@@ -4,7 +4,7 @@
             <v-progress-linear :active="isActive" color="deep-purple" height="4" indeterminate></v-progress-linear>
         </template>
 
-        <v-img @click="$router.push('/detail/1')" cover height="250" :src="items?.unit_photo?.[0]?.path"></v-img>
+        <v-img @click="handleDetail(items?.id)" cover height="250" :src="items?.unit_photo?.[0]?.path"></v-img>
 
         <v-card-item>
             <v-card-title>{{ items?.nama }}</v-card-title>
@@ -21,7 +21,7 @@
         <v-divider class="mx-4 mb-1"></v-divider>
 
         <div class="px-4">
-            <v-chip-group column>
+            <v-chip-group column v-model="selection">
                 <v-chip>{{ items?.tahun }}</v-chip>
                 <v-chip>{{ items?.transmisi }}</v-chip>
                 <v-chip>{{ items?.bahan_bakar }}</v-chip>
@@ -48,6 +48,7 @@
                 </v-row>
             </v-chip-group> -->
         </div>
+        <v-divider></v-divider>
         <v-card-text>
             <v-row>
                 <v-col sm="6">
@@ -64,25 +65,21 @@
     </v-card>
 </template>
 
-<script>
-export default {
-    data: () => ({
-        loading: false,
-        selection: 1,
-    }),
+<script setup>
+import { defineProps } from 'vue'
+import { useRouter } from "vue-router";
 
-    methods: {
-        reserve() {
-            this.loading = true
+const router = useRouter();
 
-            setTimeout(() => (this.loading = false), 2000)
-        },
-    },
-    props: {
-        items: {
+const handleDetail = (id) => {
+  console.log("kepencet");
+  router.push(`/detail/${id}`);
+};
+
+defineProps({
+    items: {
             type: Object,
             default: () => { },
         },
-    },
-}
+})
 </script>

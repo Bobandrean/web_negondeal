@@ -1,4 +1,8 @@
 <template>
+       <!-- Modal -->
+        <DialogUserRegister ref="daftar"></DialogUserRegister>
+        <DialogAkunLogin ref="login"></DialogAkunLogin>
+    <!-- End Modal -->
     <v-card>
         <v-layout>
             <!-- <v-system-bar color="deep-purple darken-3"></v-system-bar> -->
@@ -14,11 +18,10 @@
                 <BaseButton> Jual Mobil </BaseButton>
 
                 <BaseButton> Blog </BaseButton>
-
-                <BaseDropDown></BaseDropDown>
-
                 <v-spacer></v-spacer>
-
+                <BaseButton> Lainnya </BaseButton>
+                <v-spacer></v-spacer>
+                <BaseDropDown @menuClick="handleAkun" class="justify-end" label="Akun" :items="akun"></BaseDropDown>
 
             </v-app-bar>
 
@@ -51,55 +54,39 @@
 
 </template>
   
-<script>
-export default {
-    data: () => ({
-        drawer: false,
-        group: null,
-        links: [
-            'Home',
-            'About Us',
-            'Team',
-            'Services',
-            'Blog',
-            'Contact Us',
-        ],
-        items: [
-            {
-                title: 'Foo',
-                value: 'foo',
-            },
-            {
-                title: 'Bar',
-                value: 'bar',
-            },
-            {
-                title: 'Fizz',
-                value: 'fizz',
-            },
-            {
-                title: 'Buzz',
-                value: 'buzz',
-            },
-        ],
-        valueSelect:
-            [
-                {
-                    title: 'Tentang NND',
-                    value: '/about'
-                },
-                {
-                    title: 'FAQ',
-                    value: '/faq'
-                }
-            ]
-    }),
+<script setup>
+import { defineProps } from 'vue'
 
-    watch: {
-        group() {
-            this.drawer = false
-        },
-    },
+const daftar = ref("");
+const login = ref("");
+
+const openDaftar = () => {
+    daftar.value.$refs.daftar.open()
+};
+
+const openLogin = () => {
+    login.value.$refs.login.open()
+};
+
+const akun = [
+    { text: 'Login', value: 'pick_login' },
+    { text: 'Daftar', value: 'pick_daftar' },
+];
+
+const handleAkun = (e) => {
+    if (e.id == 0) {
+        openLogin()
+    } else if (e.id == 1) {
+        openDaftar()
+    }
 }
+
+defineProps({
+    items: {
+            type: Object,
+            default: () => { },
+        },
+})
+
 </script>
   

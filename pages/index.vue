@@ -2,9 +2,10 @@
 
 
     <!-- Modal -->
-    <DialogFilterLocation ref="test"></DialogFilterLocation>
+    <DialogFilterLocation ref="lokasim"></DialogFilterLocation>
     <DialogRangeHarga ref="harga"></DialogRangeHarga>
     <DialogCariTahun ref="tahun"></DialogCariTahun>
+    <DialogMobilJenis ref="jenis"></DialogMobilJenis>
     <!-- End Modal -->
 
     <BaseCard>
@@ -16,7 +17,7 @@
         </v-row>
         <v-row>
             <v-col>
-                <BaseButton @click="openDetail">Open</BaseButton>
+                <BaseDropDown @menuClick="handleModal1" label="Merek & Jenis" :items="modal1">Merek & Jenis</BaseDropDown>
             </v-col>
             <v-col>
                 <BaseButton @click="openHarga">Harga</BaseButton>
@@ -27,21 +28,22 @@
             <v-col>
                 <BaseDropDown @menuClick="handleMenu" label="Lokasi" :items="lokasi">Lokasi</BaseDropDown>
             </v-col>
-            <v-col> ModalFilter </v-col>
+            <v-col> 
+                <BaseButton>Filter Lainnya</BaseButton>
+             </v-col>
             <v-col>
                 <BaseButton>Reset filter</BaseButton>
             </v-col>
         </v-row>
     </BaseCard>
-    <v-row>
-        <v-col>
-            <p>Menampilkan 471 Mobil</p>
-            <BaseDropDown color="secondary"></BaseDropDown>
-        </v-col>
-    </v-row>
     <v-divider class="ma-6"> </v-divider>
     <v-row>
-        <h2>Highlight</h2>
+        <v-col md="2" no-gutters align="center">
+            <p>Menampilkan 471 Mobil</p>
+        </v-col>
+        <v-col md="2" no-gutters>
+            <BaseDropDown color="secondary" label="Sort By" :items="sort"> Sort By</BaseDropDown>
+        </v-col>
     </v-row>
     <v-row>
         <v-col md="4" v-for="car in getUnit" :key="car.id">
@@ -61,7 +63,7 @@
         </v-col>
     </v-row>
     <v-row>
-        <BaseCard width="1000">
+        <BaseCard>
             <v-row>
                 <v-col md="12">
                     <h2>Belum menemukan yang Anda cari?</h2>
@@ -94,12 +96,13 @@ definePageMeta({
     layout: "default",
 });
 
-const test = ref("");
+const jenis = ref("");
 const harga = ref("");
-const tahun = ref("");;
+const tahun = ref("");
+const lokasim = ref("");
 
 const openModal = () => {
-    test.value.$refs.test.open()
+    jenis.value.$refs.jenis.open()
 };
 
 const openHarga = () => {
@@ -111,15 +114,7 @@ const openTahun = () => {
 };
 
 const openLokasi = () => {
-    test.value.$refs.lokasi.open()
-};
-
-const openDaftar = () => {
-    test.value.$refs.daftar.open()
-};
-
-const openLogin = () => {
-    test.value.$refs.login.open()
+    lokasim.value.$refs.lokasim.open()
 };
 
 const openDetail = () => {
@@ -129,6 +124,18 @@ const openDetail = () => {
 const lokasi = [
     { text: 'Semua Lokasi', value: 'all_location' },
     { text: 'Pilih Lokasi', value: 'pick_location' },
+];
+
+const modal1 = [
+    { text: 'Merek', value: 'pick_merek' },
+    { text: 'Jenis', value: 'pick_jenis' },
+];
+
+const sort = [
+    { text: 'Harga Terendah - Tinggi', value: 'pick_desc' },
+    { text: 'Harga Tinggi - Terendah', value: 'pick_asc' },
+    { text: 'Jarak Tempuh Terendah', value: 'pick_jarak_asc' },
+    { text: 'Tahun Terkini - Terlampau', value: 'pick_tahun_asc' },
 ];
 
 const counterStore = useCounterStore()
@@ -141,12 +148,19 @@ onMounted(() => {
 })
 
 
-
 const handleMenu = (e) => {
     if (e.id == 0) {
         console.log("buka modal semua lokasi")
     } else if (e.id == 1) {
-        openHarga()
+        openLokasi()
+    }
+}
+
+const handleModal1 = (e) => {
+    if (e.id == 0) {
+        console.log("buka modal semua lokasi")
+    } else if (e.id == 1) {
+        openModal()
     }
 }
 

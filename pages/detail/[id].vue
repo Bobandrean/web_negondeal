@@ -404,36 +404,31 @@
   </v-container>
 </template>
 
-<script>
-import Modaldetail from '@/components/Dialog/Modaldetail.vue'
+<script setup>
 import { ref } from 'vue'
+import { useCounterStore } from '@/stores/counter'
+import { useUnitStore } from '@/stores/unit'
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+
+const counterStore = useCounterStore()
+const unitStore = useUnitStore()
+
+const getDetailUnit = computed(() => unitStore.getDetailUnit);
+
+
 definePageMeta({
   layout: 'default'
 })
-export default {
-  data() {
-    return {
-      showModalDetail: false,
-      items: [
-        {
-          src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
-        },
-        {
-          src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg',
-        },
-        {
-          src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg',
-        },
-        {
-          src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg',
-        },
-      ],
-    }
-  },
-  components: {
-    Modaldetail
-  },
-}
+
+const item = [
+  {src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg'},
+  {src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg'},
+  {src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg'},
+  {src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg'},
+];
+
 </script>
 
 <style scoped>

@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const host = "http://127.0.0.1:8000"
+const host = "https://api-nnd.sitama.co.id"
 const baseUrl = `${host}/api/`
 
 class Api {
