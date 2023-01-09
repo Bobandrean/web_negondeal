@@ -19,11 +19,13 @@ export const useUnitStore = defineStore('unit', () => {
         try {
             const res = await unitServices.getUnit()
             console.log(res)
-            setUnit(res)
+            setUnit(res.data)
         } catch (error) {
             console.error(error)
         }
     }
+
+
 
     return {
         unit,

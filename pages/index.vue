@@ -8,7 +8,6 @@
     <!-- End Modal -->
 
     <BaseCard>
-        {{ unit }}
         <v-row>
             <v-col lg="12">
                 <BaseInput @keyup="getData" v-model="search" placeholder="Cari Mobil Anda (Merek/Jenis)" type="text">
@@ -26,7 +25,7 @@
                 <BaseButton @click="openTahun">Tahun</BaseButton>
             </v-col>
             <v-col>
-                <BaseDropDown :items="lokasi">Lokasi</BaseDropDown>
+                <BaseDropDown @menuClick="handleMenu" label="Lokasi" :items="lokasi">Lokasi</BaseDropDown>
             </v-col>
             <v-col> ModalFilter </v-col>
             <v-col>
@@ -45,14 +44,8 @@
         <h2>Highlight</h2>
     </v-row>
     <v-row>
-        <v-col md="4">
-            <BaseCarCard></BaseCarCard>
-        </v-col>
-        <v-col md="4">
-            <BaseCarCard></BaseCarCard>
-        </v-col>
-        <v-col md="4">
-            <BaseCarCard></BaseCarCard>
+        <v-col md="4" v-for="car in getUnit" :key="car.id">
+            <BaseCarCard :items="car"></BaseCarCard>
         </v-col>
     </v-row>
     <v-divider class="ma-6"> </v-divider>
@@ -141,12 +134,20 @@ const lokasi = [
 const counterStore = useCounterStore()
 const unitStore = useUnitStore()
 
-// const getUnit = computed(() => unitStore.getUnit())
+const getUnit = computed(() => unitStore.getUnit())
 
-// onMounted(() => {
-//     unitStore.getUnitService()
-// })
+onMounted(() => {
+    unitStore.getUnitService('')
+})
 
-const { pending, data: unit } = useLazyAsyncData('count', () => $fetch('http://127.0.0.1:8000/api/v1/get_unit'))
+
+
+const handleMenu = (e) => {
+    if (e.id == 0) {
+        console.log("buka modal semua lokasi")
+    } else if (e.id == 1) {
+        openHarga()
+    }
+}
 
 </script>

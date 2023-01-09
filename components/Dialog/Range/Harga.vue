@@ -1,6 +1,6 @@
 <template>
-        <BaseDialog ref="harga" class-name="px-5 py-8" :max-width="500">
-            <v-container>
+    <BaseDialog ref="harga" class-name="px-5 py-8" :max-width="500">
+        <v-container>
             <v-row>
                 <v-col>
                     <p>Harga</p>
@@ -13,42 +13,20 @@
             </v-row>
             <v-row>
                 <v-col>
-                    <v-range-slider
-    v-model="range"
-    :max="10"
-    :min="-10"
-    :step="1"
-    hide-details
-    class="align-center slider-color"
-  >
+                    <v-range-slider v-model="range" :max="10" :min="-10" :step="1" hide-details
+                        class="align-center slider-color">
                     </v-range-slider>
                 </v-col>
             </v-row>
             <v-row>
                 <v-col md="6" align="center">
-                    <v-text-field
-                        :model-value="range[0]"
-                        hide-details
-                        single-line
-                        type="number"
-                        variant="outlined"
-                        density="compact"
-                        style="width: 70px"
-                        @change="$set(range, 0, $event)"
-                    >
+                    <v-text-field :model-value="range[0]" hide-details single-line type="number" variant="outlined"
+                        density="compact" style="width: 70px" @change="$set(range, 0, $event)">
                     </v-text-field>
                 </v-col>
                 <v-col md="6" align="center">
-                    <v-text-field
-                        :model-value="range[1]"
-                        hide-details
-                        single-line
-                        type="number"
-                        variant="outlined"
-                        style="width: 70px"
-                        density="compact"
-                        @change="$set(range, 1, $event)"
-                    >
+                    <v-text-field :model-value="range[1]" hide-details single-line type="number" variant="outlined"
+                        style="width: 70px" density="compact" @change="$set(range, 1, $event)">
                     </v-text-field>
                 </v-col>
             </v-row>
@@ -67,15 +45,17 @@
 </template>
 
 <script>
-  export default {
-    data () {
-      return {
-        range: [-5, 5],
-      }
+export default {
+    data() {
+        return {
+            range: [-5, 5],
+        }
     },
-  }
+}
 </script>
 
 <style>
-
+.v-slider-thumb__surface {
+    color: red !important;
+}
 </style>
