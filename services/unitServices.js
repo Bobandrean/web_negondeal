@@ -58,8 +58,8 @@ class UnitServices {
       .catch((err) => err)
   }
 
-  async detailUnit(payload) {
-    return await api.doPost(`v1/getdetailunit/${payload.id}`)
+  async detailUnit(id) {
+    return await api.doPost(`v1/getdetailunit/${id}`)
       .then((res) => res)
       .catch((err) => err)
   }

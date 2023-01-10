@@ -33,7 +33,7 @@ export const useUnitStore = defineStore('unit', () => {
     const setDetailUnit = (value) => {
         detailUnit.value = value
     }
-
+    
     const getDetailUnitService = async () => {
         console.log("test")
         try{
