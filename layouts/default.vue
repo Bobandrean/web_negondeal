@@ -3,12 +3,13 @@
     <DialogUserRegister ref="daftar"></DialogUserRegister>
     <DialogAkunLogin ref="login"></DialogAkunLogin>
     <!-- End Modal -->
+
     <v-card>
         <v-layout>
             <!-- <v-system-bar color="deep-purple darken-3"></v-system-bar> -->
 
-            <v-app-bar color="orange" prominent>
-                <!-- <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon> -->
+            <v-app-bar color="orange">
+
                 <v-btn variant="text" icon="mdi-magnify" to="/">Logo</v-btn>
 
                 <BaseButton color="black" to="/"> Beli Mobil</BaseButton>
@@ -18,7 +19,6 @@
                 <BaseButton> Jual Mobil </BaseButton>
 
                 <BaseButton> Blog </BaseButton>
-                <v-spacer></v-spacer>
                 <BaseButton> Lainnya </BaseButton>
                 <v-spacer></v-spacer>
                 <BaseDropDown @menuClick="handleAkun" class="justify-end" label="Akun" :items="akun"></BaseDropDown>

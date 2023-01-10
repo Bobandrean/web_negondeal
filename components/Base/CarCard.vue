@@ -71,15 +71,14 @@ import { useRouter } from "vue-router";
 
 const router = useRouter();
 
-const handleDetail = (id) => {
-  console.log("kepencet");
-  router.push(`/detail/${id}`);
+const handleDetail = async (id) => {
+    await router.push(`/detail/${id}`);
 };
 
 defineProps({
     items: {
-            type: Object,
-            default: () => { },
-        },
+        type: Object,
+        default: () => { },
+    },
 })
 </script>

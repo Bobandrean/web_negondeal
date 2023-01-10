@@ -13,7 +13,6 @@ export default defineNuxtConfig({
       "process.env.BASE_URL": process.env.BASE_URL,
     },
   },
-  mode: "spa",
   modules: [
     // ...
     "@pinia/nuxt",

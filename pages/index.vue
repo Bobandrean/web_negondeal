@@ -17,7 +17,8 @@
         </v-row>
         <v-row>
             <v-col>
-                <BaseDropDown @menuClick="handleModal1" label="Merek & Jenis" :items="modal1">Merek & Jenis</BaseDropDown>
+                <BaseDropDown @menuClick="handleModal1" label="Merek & Jenis" :items="modal1">Merek & Jenis
+                </BaseDropDown>
             </v-col>
             <v-col>
                 <BaseButton @click="openHarga">Harga</BaseButton>
@@ -28,9 +29,9 @@
             <v-col>
                 <BaseDropDown @menuClick="handleMenu" label="Lokasi" :items="lokasi">Lokasi</BaseDropDown>
             </v-col>
-            <v-col> 
+            <v-col>
                 <BaseButton>Filter Lainnya</BaseButton>
-             </v-col>
+            </v-col>
             <v-col>
                 <BaseButton>Reset filter</BaseButton>
             </v-col>
@@ -144,7 +145,7 @@ const unitStore = useUnitStore()
 const getUnit = computed(() => unitStore.getUnit())
 
 onMounted(() => {
-    unitStore.getUnitService('')
+    unitStore.getUnitService()
 })
 
 
