@@ -15,10 +15,19 @@ export const useUnitStore = defineStore('unit', () => {
         unit.value = value
     }
 
-    const getUnitService = async () => {
-        console.log("tests")
+    const getUnitService = async (payload) => {
+        console.log(payload.name, "check")
+        const query = {
+            name: payload.name ? payload.name : "",
+            min_price: payload.min_price ? payload.min_price : "",
+            max_price: payload.max_price ? payload.max_price : "",
+            min_year: payload.min_year ? payload.min_year : "",
+            max_year: payload.max_year ? payload.max_year : "",
+            merk: payload.merk ? payload.merk : "",
+            type: payload.type ? payload.type : ""
+        }
         try {
-            const res = await unitServices.getUnit()
+            const res = await unitServices.getUnit(query)
             console.log(res)
             setUnit(res.data)
         } catch (error) {
@@ -26,7 +35,7 @@ export const useUnitStore = defineStore('unit', () => {
         }
     }
 
-    const getDetailUnit = () =>{
+    const getDetailUnit = () => {
         return detailUnit.value
     }
 
@@ -36,8 +45,10 @@ export const useUnitStore = defineStore('unit', () => {
 
     const getDetailUnitService = async () => {
         console.log("test")
-        try{
-            const res = await unitServices.detailUnit({id})
+        try {
+            const res = await unitServices.detailUnit({
+                id
+            })
             console.log(res)
             setDetailUnit(res.data)
         } catch (error) {

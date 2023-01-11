@@ -11,13 +11,15 @@
     <BaseCard>
         <v-row>
             <v-col lg="12">
-                <BaseInput @keyup="getData" v-model="search" placeholder="Cari Mobil Anda (Merek/Jenis)" type="text">
+                <BaseInput @keyup.enter="SearchHandle" v-model="search.name" placeholder="Cari Mobil Anda (Merek/Jenis)"
+                    type="text">
                 </BaseInput>
             </v-col>
         </v-row>
         <v-row>
             <v-col>
-                <BaseDropDown @menuClick="handleModal1" label="Merek & Jenis" :items="modal1">Merek & Jenis</BaseDropDown>
+                <BaseDropDown @menuClick="handleModal1" label="Merek & Jenis" :items="modal1">Merek & Jenis
+                </BaseDropDown>
             </v-col>
             <v-col>
                 <BaseButton @click="openHarga">Harga</BaseButton>
@@ -28,9 +30,9 @@
             <v-col>
                 <BaseDropDown @menuClick="handleMenu" label="Lokasi" :items="lokasi">Lokasi</BaseDropDown>
             </v-col>
-            <v-col> 
+            <v-col>
                 <BaseButton>Filter Lainnya</BaseButton>
-             </v-col>
+            </v-col>
             <v-col>
                 <BaseButton>Reset filter</BaseButton>
             </v-col>
@@ -100,6 +102,20 @@ const jenis = ref("");
 const harga = ref("");
 const tahun = ref("");
 const lokasim = ref("");
+
+const search = reactive({
+    name: '',
+    min_price: '',
+    max_price: '',
+    min_year: '',
+    max_year: '',
+    merk: '',
+    type: ''
+})
+
+const SearchHandle = () => {
+    unitStore.getUnitService(search)
+};
 
 const openModal = () => {
     jenis.value.$refs.jenis.open()
