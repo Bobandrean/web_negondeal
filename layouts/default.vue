@@ -1,7 +1,7 @@
 <template>
-       <!-- Modal -->
-        <DialogUserRegister ref="daftar"></DialogUserRegister>
-        <DialogAkunLogin ref="login"></DialogAkunLogin>
+    <!-- Modal -->
+    <DialogUserRegister ref="daftar"></DialogUserRegister>
+    <DialogAkunLogin ref="login"></DialogAkunLogin>
     <!-- End Modal -->
     <v-card>
         <v-layout>
@@ -9,9 +9,9 @@
 
             <v-app-bar color="orange" prominent>
                 <!-- <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon> -->
-                <v-btn variant="text" icon="mdi-magnify">Logo</v-btn>
+                <v-btn variant="text" icon="mdi-magnify" to="/">Logo</v-btn>
 
-                <BaseButton color="black"> Beli Mobil</BaseButton>
+                <BaseButton color="black" to="/"> Beli Mobil</BaseButton>
 
                 <BaseButton to="/detail"> NND Certified</BaseButton>
 
@@ -53,7 +53,7 @@
     </v-card>
 
 </template>
-  
+
 <script setup>
 import { defineProps } from 'vue'
 
@@ -83,10 +83,9 @@ const handleAkun = (e) => {
 
 defineProps({
     items: {
-            type: Object,
-            default: () => { },
-        },
+        type: Object,
+        default: () => { },
+    },
 })
 
 </script>
-  

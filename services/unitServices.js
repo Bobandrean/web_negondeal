@@ -8,12 +8,15 @@ class UnitServices {
   }
 
   async getUnit(query) {
+    console.log(query, "halo2");
+
     return await api.doGet(`v1/get_unit_all_tayang?${new URLSearchParams(query || "").toString()}`)
       .then((res) => res)
       .catch((err) => err)
   }
 
   async getTayangUnit(query) {
+    console.log(query, "halo");
     return await api.doGet(`v1/get_tayang_unit?${new URLSearchParams(query || "").toString()}`)
       .then((res) => res)
       .catch((err) => err)

@@ -11,13 +11,15 @@
     <BaseCard>
         <v-row>
             <v-col lg="12">
-                <BaseInput @keyup="getData" v-model="search" placeholder="Cari Mobil Anda (Merek/Jenis)" type="text">
+                <BaseInput @keyup.enter="SearchHandle" v-model="search.name" placeholder="Cari Mobil Anda (Merek/Jenis)"
+                    type="text">
                 </BaseInput>
             </v-col>
         </v-row>
         <v-row>
             <v-col>
-                <BaseDropDown @menuClick="handleModal1" label="Merek & Jenis" :items="modal1">Merek & Jenis</BaseDropDown>
+                <BaseDropDown @menuClick="handleModal1" label="Merek & Jenis" :items="modal1">Merek & Jenis
+                </BaseDropDown>
             </v-col>
             <v-col>
                 <BaseButton @click="openHarga">Harga</BaseButton>
@@ -28,9 +30,9 @@
             <v-col>
                 <BaseDropDown @menuClick="handleMenu" label="Lokasi" :items="lokasi">Lokasi</BaseDropDown>
             </v-col>
-            <v-col> 
+            <v-col>
                 <BaseButton>Filter Lainnya</BaseButton>
-             </v-col>
+            </v-col>
             <v-col>
                 <BaseButton>Reset filter</BaseButton>
             </v-col>
@@ -91,63 +93,60 @@
 <script setup>
 import { useCounterStore } from '@/stores/counter'
 import { useUnitStore } from '@/stores/unit'
-
 definePageMeta({
     layout: "default",
 });
-
 const jenis = ref("");
 const harga = ref("");
 const tahun = ref("");
 const lokasim = ref("");
-
+const search = reactive({
+    name: '',
+    min_price: '',
+    max_price: '',
+    min_year: '',
+    max_year: '',
+    merk: '',
+    type: ''
+})
+const SearchHandle = () => {
+    unitStore.getUnitService(search)
+};
 const openModal = () => {
     jenis.value.$refs.jenis.open()
 };
-
 const openHarga = () => {
     harga.value.$refs.harga.open()
 };
-
 const openTahun = () => {
     tahun.value.$refs.tahun.open()
 };
-
 const openLokasi = () => {
     lokasim.value.$refs.lokasim.open()
 };
-
 const openDetail = () => {
     test.value.$refs.pesandetail.open()
 };
-
 const lokasi = [
     { text: 'Semua Lokasi', value: 'all_location' },
     { text: 'Pilih Lokasi', value: 'pick_location' },
 ];
-
 const modal1 = [
     { text: 'Merek', value: 'pick_merek' },
     { text: 'Jenis', value: 'pick_jenis' },
 ];
-
 const sort = [
     { text: 'Harga Terendah - Tinggi', value: 'pick_desc' },
     { text: 'Harga Tinggi - Terendah', value: 'pick_asc' },
     { text: 'Jarak Tempuh Terendah', value: 'pick_jarak_asc' },
     { text: 'Tahun Terkini - Terlampau', value: 'pick_tahun_asc' },
 ];
-
 const counterStore = useCounterStore()
 const unitStore = useUnitStore()
-
 const getUnit = computed(() => unitStore.getUnit())
-
 onMounted(() => {
     unitStore.getUnitService('')
 })
-
-
 const handleMenu = (e) => {
     if (e.id == 0) {
         console.log("buka modal semua lokasi")
@@ -155,7 +154,6 @@ const handleMenu = (e) => {
         openLokasi()
     }
 }
-
 const handleModal1 = (e) => {
     if (e.id == 0) {
         console.log("buka modal semua lokasi")
@@ -163,5 +161,4 @@ const handleModal1 = (e) => {
         openModal()
     }
 }
-
 </script>

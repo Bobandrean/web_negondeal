@@ -1,6 +1,7 @@
 <template>
-    <DialogFilterLocation ref="test"></DialogFilterLocation>
-    {{ unit }}
+    <!--Modal-->
+    <DialogDetailPesan ref="pesandetail"></DialogDetailPesan>
+    <!--EndModal-->
     <v-container>
         <v-row>
             <v-col md="8">
@@ -22,52 +23,33 @@
                     show-arrows
                     >
                         <v-slide-group-item
-                        v-for="n in 10"
-                        :key="n"
-                        v-slot="{ isSelected, toggle, selectedClass }"
+                        v-for="photo in getDetailUnit.photo_selling"
+                        :key="photo.id"
                          >
-        <v-card
-          color="grey-lighten-1"
-          :class="['ma-4', selectedClass]"
-          height="100"
-          width="100"
-          @click="toggle"
-        >
-          <div class="d-flex fill-height align-center justify-center">
-            <v-scale-transition>
-              <v-icon
-                v-if="isSelected"
-                color="white"
-                size="48"
-                icon="mdi-close-circle-outline"
-              ></v-icon>
-            </v-scale-transition>
-          </div>
-        </v-card>
-      </v-slide-group-item>
+                         <v-img :src="photo.path" height="100px" width="100px" eager/>
+                        </v-slide-group-item>
                     </v-slide-group>
                     </v-col>
                 </v-row>
                 <v-row>
                     <v-col>
                      <v-card
-    class="mx-auto"
-    width="600"
+    class="mx-auto card1"
+    width="800"
     height="300"
-    style="border-style: thin; border-color:black; border-width: 1px"
   >
             <v-row>
                 <v-col md="2" align="center">
-                    <p class="loui-1">Transmisi Manual</p>
+                    <p class="loui-1">Transmisi<br> {{getDetailUnit.transmisi}}</p>
                 </v-col>
                 <v-col md="2">
-                    <p class="loui-1">Bahan Bakar Bensin</p>
+                    <p class="loui-1">Bahan Bakar<br> {{getDetailUnit.bahan_bakar}}</p>
                 </v-col>
                 <v-col md="2">
-                    <p class="loui-1">Jarak Tempuh 20.000km</p>
+                    <p class="loui-1">Jarak Tempuh<br> {{getDetailUnit.odometer}}KM</p>
                 </v-col>
                 <v-col md="2">
-                    <p class="loui-1">Warna Putih</p>
+                    <p class="loui-1">Warna<br> {{getDetailUnit.warna}}</p>
                 </v-col>
                 <v-col md="2">
                     <p class="loui-1">STNK pribadi</p>
@@ -137,21 +119,20 @@
                 <v-row>
                     <v-col>
                         <v-card
-    class="mx-auto"
-    width="600"
+    class="mx-auto card1"
+    width="800"
     height="400"
-    style="border-style: thin; border-color:black; border-width: 2px"
   >
             <v-row>
                 <v-col>
-                <p>Laporan Inspeksi (170 Titik)</p>
+                <p class="mt-5 ml-4">Laporan Inspeksi (170 Titik)</p>
                 </v-col>
             </v-row>
             <v-row>
                 <v-card
-    class="mx-auto"
+    class="mx-auto ma-5"
     width="600"
-    height="180"
+    height="200"
     style="border-style: thin; border-color:black; border-width: 2px"
   >             <v-row justify="center">
                 <v-col md="4" align=center>
@@ -159,19 +140,19 @@
                 </v-col>
                 <v-divider vertical></v-divider>
                 <v-col md="8">
-                    <v-expansion-panels max-width="100">
+                    <v-expansion-panels max-width="100" class="mt-4 scrollable">
       <v-expansion-panel
         v-for="i in 3"
         :key="i"
         title="Item"
-        text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+        text="Lorem ipsum dolor sit amet,."
       ></v-expansion-panel>
     </v-expansion-panels>
                 </v-col>
                  </v-row>
                 </v-card>
             </v-row>
-            <v-row style="margin-top:70px">
+            <v-row style="margin-top:30px">
                 <v-col md="6" align="center">
                     <BaseButton to="/inspeksi">Lihat Selengkapnya</BaseButton>
                 </v-col>
@@ -185,14 +166,13 @@
                 <v-row>
                     <v-col>
                         <v-card
-    class="mx-auto"
+    class="mx-auto card1"
     width="800"
-    height="550"
-    style="border-style: thin; border-color:black; border-width: 2px"
+    height="600"
   >
             <v-row>
                 <v-col>
-                <p>Simulasi Kredit</p>
+                <p class="mt-3 ml-3">Simulasi Kredit</p>
                 </v-col>
             </v-row>
             <v-row>
@@ -263,7 +243,7 @@
                     <v-col>
                         <v-card
     class="mx-auto card1"
-    max-width="500"
+    width="500"
     height="400"
   >
     <v-card-text>
@@ -271,15 +251,15 @@
       <p class="text--primary rounded-0">
         NND Showroom
       </p>
-      <v-row>
-        <v-col md="3">
-            <p>{{getDetailUnit.tahun}}</p>
+      <v-row class="mt-2 mb-1">
+        <v-col md="3" align="center">
+            <v-chip>{{getDetailUnit.tahun}}</v-chip>
         </v-col>
-        <v-col md="4">
-            <p>20.000 km</p>
+        <v-col md="4" align="center">
+            <v-chip>{{getDetailUnit.odometer}}KM</v-chip>
         </v-col>
-        <v-col md="3">
-            <p>Sunroof</p>
+        <v-col md="3" align="center">
+            <v-chip>Sunroof</v-chip>
         </v-col>
       </v-row>
       <v-card class="mx-auto"
@@ -288,7 +268,7 @@
       <v-container>
         <v-row>
             <v-col md="9">
-                <p>Rp. XXXXXX ,</p>
+                <p>Rp.{{getDetailUnit.harga}},</p>
             </v-col>
             <v-col md="3">
                 <p>25% off</p>
@@ -335,10 +315,9 @@
                 <v-row>
                     <v-col>
                         <v-card
-    class="mx-auto"
+    class="mx-auto card1"
     max-width="500"
-    height="400"
-    style="border-style: thin; border-color:black; border-width: 1px"
+    height="500"
   >
     <v-card-text>
       <div>Informasi Penjual</div>
@@ -348,7 +327,7 @@
       <p>Penjual Terverifikasi</p>
       <v-row>
         <v-col md="4" align="center">
-            <BaseButton to="/testdrive">Test Drive</BaseButton>
+            <BaseButton @click="openDetail">Test Drive</BaseButton>
         </v-col>
         <v-col md="4" align="center">
             <BaseButton>Hubungi</BaseButton>
@@ -358,15 +337,17 @@
         </v-col>
       </v-row>
       <v-row>
-        <button>Tampilkan ### mobil lainnya dari penjual ini</button>
+        <v-col align="center">
+            <BaseButton>Tampilkan ## Lainnya Dari Penjual Ini</BaseButton>
+        </v-col>
       </v-row>
       <v-row><p>Alamat</p></v-row>
-      <v-row><p>Lorem Ipsum, Lorem Ipsum</p></v-row>
+      <v-row><p>{{getDetailUnit.alamat}}</p></v-row>
       <v-row><p>No Telepon : </p></v-row>
       <v-row>
         <v-col md="3">
             <p v-if="show">081xxxxx </p> 
-            <p v-if="show1">08122293949</p>
+            <p v-if="show1">{{getDetailUnit.no_hp}}</p>
         </v-col>
         <v-col md="3">
             <button @click="c1()">tampilkan</button>
@@ -412,13 +393,12 @@
                 <v-row>
                     <v-col>
                         <v-card
-    max-width="400"
-    class="mx-auto"
-    variant="outlined"
+    max-width="500"
+    class="mx-auto card1"
   >
              <v-row>
             <v-col>
-            <p>Kenapa Beli di NND ShowRoom ?</p>
+            <p class="mt-4 ml-4">Kenapa Beli di NND ShowRoom ?</p>
             </v-col>
             </v-row>
             <v-row>
@@ -482,12 +462,6 @@
       layout: 'default'
   });
   
-  const test = ref("");
-  
-  const openDetail = () => {
-      test.value.$refs.pesandetail.open()
-  };
-  
   export default {
       data () {
         return {
@@ -525,13 +499,17 @@
   import { useRoute } from "vue-router";
   
   const route = useRoute();
+  const pesandetail = ref("");
   
   const counterStore = useCounterStore()
   const unitStore = useUnitStore()
   
   const getDetailUnit = computed(() => unitStore.getDetailUnit);
   
-  
+  const openDetail = () => {
+    pesandetail.value.$refs.pesandetail.open()
+};
+
   onMounted(() => {
       unitStore.fetchDetailUnit(route.params.id)
       console.log(route.params.id)
@@ -581,5 +559,16 @@
    .loui-3 {
      font-size: 13px;
      text-align: right;
+     margin-right: 20%;
    }
+   .card1{
+    border-radius: 30px;
+  background: white;
+  box-shadow: 15px 15px 30px #bebebe,
+             -15px -15px 30px #ffffff;
+}
+
+.scrollable{
+  overflow-y: auto;
+}
   </style>
