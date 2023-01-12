@@ -4,17 +4,22 @@
     <!-- Modal -->
     <DialogFilterLocation ref="lokasim"></DialogFilterLocation>
     <DialogRangeHarga ref="harga"></DialogRangeHarga>
-    <DialogCariTahun ref="tahun"></DialogCariTahun>
+    <DialogCariTahun ref="tahun" @dataYear="handleDataYear"></DialogCariTahun>
     <DialogMobilJenis ref="jenis"></DialogMobilJenis>
     <!-- End Modal -->
 
     <BaseCard>
         <v-row>
             <v-col lg="12">
-                <BaseInput @keyup.enter="SearchHandle" v-model="search.name" placeholder="Cari Mobil Anda (Merek/Jenis)"
-                    type="text">
+
+                <BaseInput @keyup.enter="SearchHandle(search.name)" v-model="search.name"
+                    placeholder="Cari Mobil Anda (Merek/Jenis)" type="text">
                 </BaseInput>
             </v-col>
+        </v-row>
+        {{ result }}
+        <v-row v-if="query != null">
+
         </v-row>
         <v-row>
             <v-col>
@@ -34,7 +39,7 @@
                 <BaseButton>Filter Lainnya</BaseButton>
             </v-col>
             <v-col>
-                <BaseButton>Reset filter</BaseButton>
+                <BaseButton to="/">Tampilkan Semua</BaseButton>
             </v-col>
         </v-row>
     </BaseCard>
@@ -93,15 +98,22 @@
 <script setup>
 import { useCounterStore } from '@/stores/counter'
 import { useUnitStore } from '@/stores/unit'
+import { useRoute, useRouter } from 'vue-router';
+
 
 definePageMeta({
     layout: "default",
 });
+const counterStore = useCounterStore()
+const unitStore = useUnitStore()
+const route = useRoute()
+const router = useRouter()
 
 const jenis = ref("");
 const harga = ref("");
 const tahun = ref("");
 const lokasim = ref("");
+const result = ref("");
 
 const search = reactive({
     name: '',
@@ -113,8 +125,49 @@ const search = reactive({
     type: ''
 })
 
-const SearchHandle = () => {
-    unitStore.getUnitService(search)
+const handleDataYear = (val) => {
+    search.min_year = val[0] ?? 0
+    search.max_year = val[1] ?? 0
+
+    fetchDataSearch()
+}
+
+const searchResult = () => {
+    result = route.query
+}
+
+const SearchHandle = (val) => {
+
+    search.name = val
+
+    fetchDataSearch()
+};
+
+const fetchDataSearch = async () => {
+    const query = {}
+
+    if (search.name !== "") {
+        query.name = search.name
+    }
+
+    if (search.min_year !== "") {
+        query.min_year = search.min_year
+    }
+
+    if (search.max_year !== "") {
+        query.max_year = search.max_year
+    }
+
+    await router.push({
+        path: '/',
+        query: query
+    })
+
+    unitStore.getUnitService(route.query)
+}
+
+const clearSearch = () => {
+    unitStore.getUnitService(clear);
 };
 
 const openModal = () => {
@@ -154,8 +207,9 @@ const sort = [
     { text: 'Tahun Terkini - Terlampau', value: 'pick_tahun_asc' },
 ];
 
-const counterStore = useCounterStore()
-const unitStore = useUnitStore()
+const fetchData = () => {
+    const query = {}
+}
 
 const getUnit = computed(() => unitStore.getUnit())
 

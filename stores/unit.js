@@ -16,7 +16,6 @@ export const useUnitStore = defineStore('unit', () => {
     }
 
     const getUnitService = async (payload) => {
-        console.log(payload.name, "check")
         const query = {
             name: payload.name ? payload.name : "",
             min_price: payload.min_price ? payload.min_price : "",

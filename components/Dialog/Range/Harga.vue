@@ -14,7 +14,7 @@
             <form @submit.prevent="handleSubmit">
                 <v-row>
                     <v-col>
-                        <v-range-slider v-model="range" :max="600000000" @update:modelValue="handleChangeRange" :min="0"
+                        <v-range-slider v-model="range" :max="200000000" @update:modelValue="handleChangeRange" :min="0"
                             :step="1" hide-details class="align-center slider-color">
                         </v-range-slider>
                     </v-col>
@@ -54,7 +54,7 @@ import { useUnitStore } from '@/stores/unit'
 export default {
     data() {
         return {
-            range: [1000000, 600000000],
+            range: [1000000, 200000000],
         }
     },
     setup() {
@@ -63,7 +63,7 @@ export default {
 
         const formValues = reactive({
             max_price: 1000000,
-            min_price: 600000000,
+            min_price: 200000000,
 
         })
 
