@@ -4,11 +4,10 @@
             <v-progress-linear :active="isActive" color="deep-purple" height="4" indeterminate></v-progress-linear>
         </template>
 
-        <v-img cover height="250"
-            src="https://negondeal.oss-ap-southeast-5.aliyuncs.com/2022/09/2022090000000030/IMG_9785.JPG"></v-img>
+        <v-img @click="handleDetail(items?.id)" cover height="250" :src="items?.unit_photo?.[0]?.path"></v-img>
 
         <v-card-item>
-            <v-card-title>Mobil</v-card-title>
+            <v-card-title>{{ items?.nama }}</v-card-title>
 
             <v-card-subtitle>
                 <span class="mr-1">NND Cerfified</span>
@@ -22,27 +21,38 @@
         <v-divider class="mx-4 mb-1"></v-divider>
 
         <div class="px-4">
-            <v-chip-group v-model="selection">
+            <v-chip-group column v-model="selection">
+                <v-chip>{{ items?.tahun }}</v-chip>
+                <v-chip>{{ items?.transmisi }}</v-chip>
+                <v-chip>{{ items?.bahan_bakar }}</v-chip>
+                <v-chip>{{ items?.odometer }}</v-chip>
+                <v-chip>Jakarta</v-chip>
+            </v-chip-group>
+            <!-- <v-chip-group v-model="selection">
                 <v-row>
-                    <v-col sm="4">
-                        <v-chip>2018</v-chip>
+                    <v-col sm="3" align="center">
+                        <v-chip>{{ items?.tahun }}</v-chip>
                     </v-col>
-                    <v-col sm="4">
-                        <v-chip>Matic</v-chip>
+                    <v-col sm="3" align="center">
+                        <v-chip>{{ items?.transmisi }}</v-chip>
                     </v-col>
-                    <v-col sm="4">
-                        <v-chip>Bensin</v-chip>
+                    <v-col sm="4" align="center">
+                        <v-chip>{{ items?.bahan_bakar }}</v-chip>
                     </v-col>
-                    <v-col sm="4">
+                    <v-col sm="4" align="center">
+                        <v-chip style="max-width:350px">{{ items?.odometer }}</v-chip>
+                    </v-col>
+                    <v-col sm="4" align="center">
                         <v-chip>Jakarta</v-chip>
                     </v-col>
                 </v-row>
-            </v-chip-group>
+            </v-chip-group> -->
         </div>
+        <v-divider></v-divider>
         <v-card-text>
             <v-row>
                 <v-col sm="6">
-                    Rp.150.000.000
+                    Rp. {{ items?.harga }}
                 </v-col>
                 <v-col sm="6">
                     200.000/Bulan
@@ -55,19 +65,22 @@
     </v-card>
 </template>
 
-<script>
-export default {
-    data: () => ({
-        loading: false,
-        selection: 1,
-    }),
+<script setup>
+import { defineProps } from 'vue'
+import { useRouter } from "vue-router";
 
-    methods: {
-        reserve() {
-            this.loading = true
+const router = useRouter();
 
-            setTimeout(() => (this.loading = false), 2000)
-        },
+const handleDetail = async (id) => {
+    await router.push(`/detail/${id}`);
+
+    window.location.reload()
+};
+
+defineProps({
+    items: {
+        type: Object,
+        default: () => { },
     },
-}
+})
 </script>

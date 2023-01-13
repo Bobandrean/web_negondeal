@@ -1,7 +1,8 @@
 <template>
+    <DialogFilterLocation ref="test"></DialogFilterLocation>
     <v-container>
         <v-row>
-            <v-col class="md-7">
+            <v-col md="7">
                 <v-carousel hide-delimiters>
     <v-carousel-item
       v-for="(item,i) in items"
@@ -11,8 +12,45 @@
     <v-img :src="item.src" height="100%" eager/>
 </v-carousel-item>
   </v-carousel>
+  <v-sheet
+    class="mx-auto"
+    elevation="8"
+    max-width="800"
+  >
+    <v-slide-group
+      v-model="model"
+      class="pa-4"
+      selected-class="bg-success"
+      show-arrows
+    >
+      <v-slide-group-item
+        v-for="n in 15"
+        :key="n"
+        v-slot="{ isSelected, toggle, selectedClass }"
+      >
+        <v-card
+          color="grey-lighten-1"
+          :class="['ma-4', selectedClass]"
+          height="200"
+          width="100"
+          @click="toggle"
+        >
+          <div class="d-flex fill-height align-center justify-center">
+            <v-scale-transition>
+              <v-icon
+                v-if="isSelected"
+                color="white"
+                size="48"
+                icon="mdi-close-circle-outline"
+              ></v-icon>
+            </v-scale-transition>
+          </div>
+        </v-card>
+      </v-slide-group-item>
+    </v-slide-group>
+  </v-sheet>
             </v-col>
-            <v-col class="md-5">
+            <v-col md="5">
                 <v-card
     class="mx-auto card1"
     max-width="500"
@@ -86,47 +124,6 @@
         </v-row>
         <v-row>
             <v-col md="6">
-                <v-sheet
-    class="mx-auto"
-    elevation="8"
-    max-width="800"
-  >
-    <v-slide-group
-      v-model="model"
-      class="pa-4"
-      selected-class="bg-success"
-      show-arrows
-    >
-      <v-slide-group-item
-        v-for="n in 15"
-        :key="n"
-        v-slot="{ isSelected, toggle, selectedClass }"
-      >
-        <v-card
-          color="grey-lighten-1"
-          :class="['ma-4', selectedClass]"
-          height="200"
-          width="100"
-          @click="toggle"
-        >
-          <div class="d-flex fill-height align-center justify-center">
-            <v-scale-transition>
-              <v-icon
-                v-if="isSelected"
-                color="white"
-                size="48"
-                icon="mdi-close-circle-outline"
-              ></v-icon>
-            </v-scale-transition>
-          </div>
-        </v-card>
-      </v-slide-group-item>
-    </v-slide-group>
-  </v-sheet>
-            </v-col>
-        </v-row>
-        <v-row>
-            <v-col md="6">
             <v-card
     class="mx-auto"
     width="600"
@@ -134,7 +131,7 @@
     style="border-style: thin; border-color:black; border-width: 1px"
   >
             <v-row>
-                <v-col md="2">
+                <v-col md="2" align="center">
                     <p class="loui-1">Transmisi Manual</p>
                 </v-col>
                 <v-col md="2">
@@ -209,8 +206,8 @@
                 </v-col>
             </v-row>
 </v-card>
-</v-col>
-<v-col md="6">
+            </v-col>
+            <v-col md="6">
     <v-card
     class="mx-auto"
     max-width="500"
@@ -228,10 +225,10 @@
             <BaseButton to="/testdrive">Test Drive</BaseButton>
         </v-col>
         <v-col md="4" align="center">
-            <button>Hubungi</button>
+            <BaseButton>Hubungi</BaseButton>
         </v-col>
         <v-col md="4" align="center">
-            <button>Deal</button>
+            <BaseButton>Deal</BaseButton>
         </v-col>
       </v-row>
       <v-row>
@@ -240,7 +237,15 @@
       <v-row><p>Alamat</p></v-row>
       <v-row><p>Lorem Ipsum, Lorem Ipsum</p></v-row>
       <v-row><p>No Telepon : </p></v-row>
-      <v-row><p>081xxxxx </p> <button>tampilkan</button></v-row>
+      <v-row>
+        <v-col md="3">
+            <p v-if="show">081xxxxx </p> 
+            <p v-if="show1">08122293949</p>
+        </v-col>
+        <v-col md="3">
+            <button @click="c1()">tampilkan</button>
+        </v-col>
+    </v-row>
       <v-row><NuxtLink to="/detail">Bagaimana Cara membeli di NND Showroom</NuxtLink></v-row>
       <v-row><p>Testimoni Konsumen Atas Penjual Ini :</p></v-row>
       <v-row>
@@ -276,14 +281,14 @@
       </v-row>
     </v-card-text>
   </v-card>
-</v-col>
+            </v-col>
         </v-row>
         <v-row>
             <v-col md="6">
                 <v-card
     class="mx-auto"
     width="600"
-    height="300"
+    height="400"
     style="border-style: thin; border-color:black; border-width: 2px"
   >
             <v-row>
@@ -298,8 +303,8 @@
     height="180"
     style="border-style: thin; border-color:black; border-width: 2px"
   >             <v-row justify="center">
-                <v-col md="4">
-                    <p>Kualitas Inspeksi Nego N Deal</p>
+                <v-col md="4" align=center>
+                    <p style="margin-top:50px; font-size:20px">Kualitas Inspeksi Nego N Deal</p>
                 </v-col>
                 <v-divider vertical></v-divider>
                 <v-col md="8">
@@ -315,12 +320,12 @@
                  </v-row>
                 </v-card>
             </v-row>
-            <v-row>
-                <v-col md="6">
+            <v-row style="margin-top:70px">
+                <v-col md="6" align="center">
                     <BaseButton to="/inspeksi">Lihat Selengkapnya</BaseButton>
                 </v-col>
-                <v-col md="6">
-                    <BaseButton @click="showModalDetail = true">Download Laporan Inspeksi</BaseButton>
+                <v-col md="6" align="center">
+                    <BaseButton @click="openDetail">Download Laporan Inspeksi</BaseButton>
                 </v-col>
             </v-row>
 </v-card>
@@ -384,7 +389,7 @@
                     </v-row>
                     <v-row justify="center">
                         <v-col md="12" align="right">
-                            <p>Dropdown</p>
+                            <BaseDropDown></BaseDropDown>
                         </v-col>
                     </v-row>
                 </v-col>
@@ -396,7 +401,7 @@
                     </v-row>
                     <v-row justify="center">
                         <v-col md="4">
-                            <p>Dropdown</p>
+                            <BaseDropDown></BaseDropDown>
                         </v-col>
                     </v-row>
                     <v-row justify="center">
@@ -461,20 +466,25 @@
             <BaseCarCard></BaseCarCard>
         </v-col>
     </v-row>
-    <Modaldetail v-show="showModalDetail"/>
     </v-container>
 </template>
 
 <script>
-import Modaldetail from '@/components/Dialog/Modaldetail.vue'
-import { ref } from 'vue'
 definePageMeta({
     layout: 'default'
-})
+});
+
+const test = ref("");
+
+const openDetail = () => {
+    test.value.$refs.pesandetail.open()
+};
+
 export default {
     data () {
       return {
-        showModalDetail : false,
+        show : true,
+        show1 : false,
         items: [
           {
             src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
@@ -491,9 +501,12 @@ export default {
         ],
       }
     },
-    components: {
-        Modaldetail
-    },
+    methods:{
+        c1 (event){
+            this.show = !this.show
+            this.show1 = !this.show1
+        }
+    }
   }
 </script>
 
@@ -524,6 +537,7 @@ export default {
 .loui-3{
     font-size: 13px;
     text-align: right;
+    margin-right: 35px;
 }
 .card1{
     border-radius: 30px;

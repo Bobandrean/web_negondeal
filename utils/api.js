@@ -1,9 +1,7 @@
 import axios from 'axios'
 
-const host = process
+const host = "https://api-nnd.sitama.co.id"
 const baseUrl = `${host}/api/`
-
-console.log(host)
 
 class Api {
     async doGet(url, params) {

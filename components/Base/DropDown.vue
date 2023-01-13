@@ -1,13 +1,12 @@
 <template>
-    <v-menu open-on-hover>
+    <v-menu>
         <template v-slot:activator="{ props }">
             <v-btn color="primary" v-bind="props">
-                Dropdown
+                {{ label }}
             </v-btn>
         </template>
-
-        <v-list>
-            <v-list-item v-for="(item, index) in items" :key="index">
+        <v-list @click:select="handleSelect">
+            <v-list-item v-for="(item, index) in items" :key="index" :value="index">
                 <v-list-item-title>{{ item.text }}</v-list-item-title>
             </v-list-item>
         </v-list>
@@ -15,6 +14,9 @@
 </template>
 
 <script>
+
+import { defineEmits } from 'vue';
+
 export default {
     props: {
         items: {
@@ -49,6 +51,17 @@ export default {
             type: Boolean,
             default: false,
         },
+    },
+    setup(props, context) {
+
+        const handleSelect = (e) => {
+            context.emit('menuClick', e)
+        }
+
+
+        return {
+            handleSelect
+        }
     }
 }
 </script>

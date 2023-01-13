@@ -1,313 +1,5 @@
 <template>
-    <BaseDialog ref="test" class-name="px-5 py-8" :max-width="800">
-        <v-container>
-            <v-row>
-                <v-col align="center">
-                    <p>Silahkan Pilih Filter</p>
-                </v-col>
-            </v-row>
-            <v-row>
-                <v-card
-                class="mx-auto"
-                display="flex"
-                width="700"
-                height="400"
-                style="border-style: thin; border-color:black; border-width: 1px">
-                    <v-container>
-                        <v-row>
-                            <v-col md="4">
-                                <v-row>
-                                    <v-col md="12" align="center">
-                                        <p>Jenis Penjual</p>
-                                    </v-col>
-                                    <v-col md="12" align="center">
-                                        <p>Promo</p>
-                                    </v-col>
-                                    <v-col md="12" align="center">
-                                        <p>Jarak Tempuh</p>
-                                    </v-col>
-                                    <v-col md="12" align="center">
-                                        <p>Bahan Bakar</p>
-                                    </v-col>
-                                    <v-col md="12" align="center">
-                                        <p>Tipe Bodi</p>
-                                    </v-col>
-                                    <v-col md="12" align="center">
-                                        <p>Warna</p>
-                                    </v-col>
-                                    <v-col md="12" align="center">
-                                        <p>Jumlah Kursi</p>
-                                    </v-col>
-                                    <v-col md="12" align="center">
-                                        <p>Plat Nomor</p>
-                                    </v-col>
-                                    <v-col md="12" align="center">
-                                        <p>Cicilan</p>
-                                    </v-col>
-                                </v-row>
-                            </v-col>
-                            <v-divider vertical></v-divider>
-                                <v-col md="8" class="scrollable">
-                                    <v-row>
-                                        <v-col md="4" align="center">
-                                            <v-row>
-                                                <v-col>
-                                                    <v-avatar
-                                                     size="80"
-                                                    rounded="0"
-                                                     >
-                                                        <v-img src="https://cdn.vuetifyjs.com/images/cards/halcyon.png"></v-img>
-                                                    </v-avatar>
-                                                </v-col>
-                                                <v-col>
-                                                    <p>Tipe Bodi</p>
-                                                </v-col>
-                                            </v-row>
-                                        </v-col>
-                                        <v-col md="4" align="center">
-                                            <v-row>
-                                                <v-col>
-                                                    <v-avatar
-                                                     size="80"
-                                                    rounded="0"
-                                                     >
-                                                        <v-img src="https://cdn.vuetifyjs.com/images/cards/halcyon.png"></v-img>
-                                                    </v-avatar>
-                                                </v-col>
-                                                <v-col>
-                                                    <p>Tipe Bodi</p>
-                                                </v-col>
-                                            </v-row>
-                                        </v-col>
-                                        <v-col md="4" align="center">
-                                            <v-row>
-                                                <v-col>
-                                                    <v-avatar
-                                                     size="80"
-                                                    rounded="0"
-                                                     >
-                                                        <v-img src="https://cdn.vuetifyjs.com/images/cards/halcyon.png"></v-img>
-                                                    </v-avatar>
-                                                </v-col>
-                                                <v-col>
-                                                    <p>Tipe Bodi</p>
-                                                </v-col>
-                                            </v-row>
-                                        </v-col>
-                                        <v-col md="4" align="center">
-                                            <v-row>
-                                                <v-col>
-                                                    <v-avatar
-                                                     size="80"
-                                                    rounded="0"
-                                                     >
-                                                        <v-img src="https://cdn.vuetifyjs.com/images/cards/halcyon.png"></v-img>
-                                                    </v-avatar>
-                                                </v-col>
-                                                <v-col>
-                                                    <p>Tipe Bodi</p>
-                                                </v-col>
-                                            </v-row>
-                                        </v-col>
-                                        <v-col md="4" align="center">
-                                            <v-row>
-                                                <v-col>
-                                                    <v-avatar
-                                                     size="80"
-                                                    rounded="0"
-                                                     >
-                                                        <v-img src="https://cdn.vuetifyjs.com/images/cards/halcyon.png"></v-img>
-                                                    </v-avatar>
-                                                </v-col>
-                                                <v-col>
-                                                    <p>Tipe Bodi</p>
-                                                </v-col>
-                                            </v-row>
-                                        </v-col>
-                                        <v-col md="4" align="center">
-                                            <v-row>
-                                                <v-col>
-                                                    <v-avatar
-                                                     size="80"
-                                                    rounded="0"
-                                                     >
-                                                        <v-img src="https://cdn.vuetifyjs.com/images/cards/halcyon.png"></v-img>
-                                                    </v-avatar>
-                                                </v-col>
-                                                <v-col>
-                                                    <p>Tipe Bodi</p>
-                                                </v-col>
-                                            </v-row>
-                                        </v-col>
-                                        <v-col md="4" align="center">
-                                            <v-row>
-                                                <v-col>
-                                                    <v-avatar
-                                                     size="80"
-                                                    rounded="0"
-                                                     >
-                                                        <v-img src="https://cdn.vuetifyjs.com/images/cards/halcyon.png"></v-img>
-                                                    </v-avatar>
-                                                </v-col>
-                                                <v-col>
-                                                    <p>Tipe Bodi</p>
-                                                </v-col>
-                                            </v-row>
-                                        </v-col>
-                                        <v-col md="4" align="center">
-                                            <v-row>
-                                                <v-col>
-                                                    <v-avatar
-                                                     size="80"
-                                                    rounded="0"
-                                                     >
-                                                        <v-img src="https://cdn.vuetifyjs.com/images/cards/halcyon.png"></v-img>
-                                                    </v-avatar>
-                                                </v-col>
-                                                <v-col>
-                                                    <p>Tipe Bodi</p>
-                                                </v-col>
-                                            </v-row>
-                                        </v-col>
-                                    </v-row>
-                                </v-col>
-                        </v-row>
-                    </v-container>
-                </v-card>
-            <v-row style="margin-top:25px">
-                <v-col md="12" align="center">
-                    <BaseButton>Menampilan Mobil Impian</BaseButton>
-                </v-col>
-            </v-row>
-            </v-row>
-        </v-container>
-    </BaseDialog>
-    <BaseDialog ref="harga" class-name="px-5 py-8">
-        <v-container>
-            <v-row>
-                <v-col>
-                    <p>Harga</p>
-                </v-col>
-            </v-row>
-            <v-row no-gutters>
-                <v-col>
-                    <p>Harga rata-rata mobil CARRO adalah Rp 174,953,349</p>
-                </v-col>
-            </v-row>
-            <v-row>
-                <v-col>
-                    <v-range-slider
-    v-model="range"
-    :max="10"
-    :min="-10"
-    :step="1"
-    hide-details
-    class="align-center slider-color"
-  >
-                    </v-range-slider>
-                </v-col>
-            </v-row>
-            <v-row>
-                <v-col md="6" align="center">
-                    <v-text-field
-                        :model-value="range[0]"
-                        hide-details
-                        single-line
-                        type="number"
-                        variant="outlined"
-                        density="compact"
-                        style="width: 70px"
-                        @change="$set(range, 0, $event)"
-                    >
-                    </v-text-field>
-                </v-col>
-                <v-col md="6" align="center">
-                    <v-text-field
-                        :model-value="range[1]"
-                        hide-details
-                        single-line
-                        type="number"
-                        variant="outlined"
-                        style="width: 70px"
-                        density="compact"
-                        @change="$set(range, 1, $event)"
-                    >
-                    </v-text-field>
-                </v-col>
-            </v-row>
-            <v-divider style="margin-top:20px; margin-bottom:20px">
-            </v-divider>
-            <v-row>
-                <v-col md="6" align="center">
-                    <BaseButton>Hapus</BaseButton>
-                </v-col>
-                <v-col md="6" align="center">
-                    <BaseButton>Terapkan</BaseButton>
-                </v-col>
-            </v-row>
-        </v-container>
-    </BaseDialog>
-    <BaseDialog ref="tahun" class-name="px-5 py-8">
-        <v-container>
-            <v-row>
-                <v-col>
-                    <p>Tahun</p>
-                </v-col>
-            </v-row>
-            <v-row>
-                <v-col>
-                    <v-range-slider
-    v-model="range"
-    :max="10"
-    :min="-10"
-    :step="1"
-    hide-details
-    class="align-center slider-color"
-  >
-                    </v-range-slider>
-                </v-col>
-            </v-row>
-            <v-row>
-                <v-col md="6" align="center">
-                    <v-text-field
-                        :model-value="range[0]"
-                        hide-details
-                        single-line
-                        type="number"
-                        variant="outlined"
-                        density="compact"
-                        style="width: 70px"
-                        @change="$set(range, 0, $event)"
-                    >
-                    </v-text-field>
-                </v-col>
-                <v-col md="6" align="center">
-                    <v-text-field
-                        :model-value="range[1]"
-                        hide-details
-                        single-line
-                        type="number"
-                        variant="outlined"
-                        style="width: 70px"
-                        density="compact"
-                        @change="$set(range, 1, $event)"
-                    >
-                    </v-text-field>
-                </v-col>
-            </v-row>
-            <v-divider style="margin-top:20px; margin-bottom:20px">
-            </v-divider>
-            <v-row>
-                <v-col md="6" align="center">
-                    <BaseButton>Hapus</BaseButton>
-                </v-col>
-                <v-col md="6" align="center">
-                    <BaseButton>Terapkan</BaseButton>
-                </v-col>
-            </v-row>
-        </v-container>
-    </BaseDialog>
-    <BaseDialog ref="lokasi" class-name="px-5 py-8" :max-width="800">
+    <BaseDialog ref="lokasim" class-name="px-5 py-8" :max-width="800">
         <v-container>
             <v-row>
                 <v-col md="12" align="center">
@@ -371,7 +63,7 @@
             </v-row>
         </v-container>
     </BaseDialog>
-    <BaseDialog ref="daftar" class-name="px-5 py-8" :max-width="500">
+   <!-- <BaseDialog ref="daftar" class-name="px-5 py-8" :max-width="500">
         <v-container>
             <v-row>
                 <v-col md="12" align=center>
@@ -410,8 +102,8 @@
                 </v-col>
             </v-row>
         </v-container>
-    </BaseDialog>
-    <BaseDialog ref="login" class-name="px-5 py-8" :max-width="500">
+    </BaseDialog> -->
+   <!-- <BaseDialog ref="login" class-name="px-5 py-8" :max-width="500">
         <v-container>
             <v-row>
                 <v-col md="12" align=center>
@@ -452,7 +144,89 @@
                 </v-col>
             </v-row>
         </v-container>
-    </BaseDialog>
+    </BaseDialog> -->
+    <!--<BaseDialog ref="pesandetail" class-name="px-5 py-8" :max-width="500">
+        <v-container>
+            <v-row>
+                <v-col md="12" align=center>
+                <h6>Pilih Opsi Anda Untuk Melanjutkan</h6>
+                </v-col>
+            </v-row>
+            <v-row>
+                <v-card
+    width="400"
+    height="150"
+    class="mx-auto"
+    variant="outlined"
+  >
+            <v-row no-gutters>
+                 <v-col md="12">
+                    <p class="text-1">Pesan Mobil Ini Sekarang</p>
+                 </v-col>
+            </v-row>
+            <v-row no-gutters>
+                <v-col md="12">
+                    <p class="text-2">Biaya Pemesanan Dapat Dikembalikan 100%. Pesan Ke:<br></p>
+                    <p class="text-2">Menjamin Test Drive Anda<br></p>
+                    <p class="text-2">Amankan mobil ini hanya untuk Anda<br></p>
+                    <p class="text-2">Test drive dengan nyaman dari rumah Anda</p>
+                </v-col>
+            </v-row>
+            <v-row no-gutters>
+                <v-col md="12">
+                    <p class="text-3">Biaya Pemesanan : Rp2.500.000</p>
+                </v-col>
+            </v-row>
+          </v-card>
+          </v-row>
+          <v-row>
+          <v-card
+    width="400"
+    height="150"
+    class="mx-auto row-1"
+    variant="outlined"
+  >
+            <v-row no-gutters>
+                 <v-col md="12">
+                    <p class="text-1">Jadwalkan Test Drive</p>
+                 </v-col>
+            </v-row>
+            <v-row no-gutters>
+                <v-col md="12">
+                    <p class="text-2">DI CARSOME Experience Center<br></p>
+                    <p class="text-2">Sudah memenuhi vaksinasi yang lengkap<br></p>
+                    <p class="text-2">Mobil ini tetap tersedia untuk di pesan oleh pelanggan lain</p>
+                </v-col>
+            </v-row>
+            <v-row no-gutters>
+                <v-col md="12">
+                    <p class="text-4">Kami akan merekomendasikan mobil lain kepada Anda jika mobil ini telah dipesan</p>
+                </v-col>
+            </v-row>
+          </v-card>
+            </v-row>
+        <v-row>
+          <v-card
+    width="400"
+    height="100"
+    class="mx-auto row-1"
+    variant="outlined"
+  >
+            <v-row no-gutters>
+                 <v-col md="12">
+                    <p class="text-1">Meminta Panggilan</p>
+                 </v-col>
+            </v-row>
+            <v-row no-gutters>
+                <v-col md="12">
+                    <p class="text-2">Perlu informasi lebih lanjut ?<br></p>
+                    <p class="text-2">Pilih opsi ini dan kami akan segera menghubungi anda</p>
+                </v-col>
+            </v-row>
+          </v-card>
+            </v-row>
+        </v-container>
+    </BaseDialog> -->
 </template>
 
 <script>
@@ -470,5 +244,8 @@
   overflow-y: auto;
   max-height: 150px;
 }
+.row-1{
+    margin-top: 3%;
+  }
 </style>
 

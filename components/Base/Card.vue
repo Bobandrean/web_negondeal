@@ -1,5 +1,5 @@
 <template>
-  <v-card v-bind="$attrs" :loading="loading" :class="className" :width="width" max-width="1000">
+  <v-card v-bind="$attrs" :loading="loading" :class="className" :width="width">
     <slot></slot>
   </v-card>
 </template>
