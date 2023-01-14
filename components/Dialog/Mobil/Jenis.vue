@@ -147,7 +147,7 @@
                                             </v-row>
                                         </v-col>
                                     </v-row>
-                                    <v-row v-if="value == 'Plat Nomor'">
+                                    <v-row v-if="selected == 'Plat Nomor'">
                                         <v-col md="4" align="center">
                                             <v-row>
                                                 <v-col>

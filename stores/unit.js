@@ -23,7 +23,12 @@ export const useUnitStore = defineStore('unit', () => {
             min_year: payload.min_year ? payload.min_year : "",
             max_year: payload.max_year ? payload.max_year : "",
             merk: payload.merk ? payload.merk : "",
-            type: payload.type ? payload.type : ""
+            type: payload.type ? payload.type : "",
+            plat_nomor: payload.plat_nomor ? payload.plat_nomor : "",
+            bahan_bakar: payload.bahan_bakar ? payload.bahan_bakar : "",
+            warna: payload.warna ? payload.warna : "",
+            tipe_body: payload.tipe_body ? payload.tipe_body : "",
+            transmisi: payload.transmisi ? payload.transmisi : ""
         }
         try {
             const res = await unitServices.getUnit(query)

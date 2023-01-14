@@ -127,7 +127,12 @@ const search = reactive({
     min_year: '',
     max_year: '',
     merk: '',
-    type: ''
+    type: '',
+    plat_nomor: '',
+    bahan_bakar:'',
+    transmisi: '',
+    tipe_body: '',
+    warna: ''
 })
 
 const handleDataYear = (val) => {

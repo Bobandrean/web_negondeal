@@ -52,7 +52,7 @@
         <v-card-text>
             <v-row>
                 <v-col sm="6">
-                    Rp. {{ items?.harga }}
+                    Rp. {{ items?.harga.toLocaleString() }}
                 </v-col>
                 <v-col sm="6">
                     200.000/Bulan
