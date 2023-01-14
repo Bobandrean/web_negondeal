@@ -17,7 +17,7 @@
 
                 <BaseButton> Jual Mobil </BaseButton>
 
-                <BaseButton> Blog </BaseButton>
+                <BaseButton to="/hubungikami"> Blog </BaseButton>
                 <v-spacer></v-spacer>
                 <BaseButton> Lainnya </BaseButton>
                 <v-spacer></v-spacer>

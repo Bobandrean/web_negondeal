@@ -6,6 +6,7 @@
     <DialogRangeHarga ref="harga"></DialogRangeHarga>
     <DialogCariTahun ref="tahun" @dataYear="handleDataYear"></DialogCariTahun>
     <DialogMobilJenis ref="jenis"></DialogMobilJenis>
+    <DialogCarMerk ref="merk"></DialogCarMerk>
     <!-- End Modal -->
 
     <BaseCard>
@@ -22,9 +23,9 @@
 
         </v-row>
         <v-row>
+
             <v-col>
-                <BaseDropDown @menuClick="handleModal1" label="Merek & Jenis" :items="modal1">Merek & Jenis
-                </BaseDropDown>
+                <BaseButton @click="openMerk">Merk & Jenis</BaseButton>
             </v-col>
             <v-col>
                 <BaseButton @click="openHarga">Harga</BaseButton>
@@ -36,7 +37,7 @@
                 <BaseDropDown @menuClick="handleMenu" label="Lokasi" :items="lokasi">Lokasi</BaseDropDown>
             </v-col>
             <v-col>
-                <BaseButton>Filter Lainnya</BaseButton>
+                <BaseButton @click="openModal">Filter Lainnya</BaseButton>
             </v-col>
             <v-col>
                 <BaseButton to="/">Tampilkan Semua</BaseButton>
@@ -49,7 +50,8 @@
             <p>Menampilkan 471 Mobil</p>
         </v-col>
         <v-col md="2" no-gutters>
-            <BaseDropDown color="secondary" label="Sort By" :items="sort"> Sort By</BaseDropDown>
+            <BaseDropDown @menuClick="HandleSort" color="secondary" label="Sort By" :items="sort"> Sort By
+            </BaseDropDown>
         </v-col>
     </v-row>
     <v-row>
@@ -109,6 +111,7 @@ const unitStore = useUnitStore()
 const route = useRoute()
 const router = useRouter()
 
+const merk = ref("");
 const jenis = ref("");
 const harga = ref("");
 const tahun = ref("");
@@ -170,36 +173,35 @@ const clearSearch = () => {
     unitStore.getUnitService(clear);
 };
 
+
 const openModal = () => {
     jenis.value.$refs.jenis.open()
 };
-
 const openHarga = () => {
     harga.value.$refs.harga.open()
+};
+
+const openMerk = () => {
+    merk.value.$refs.merk.open()
 };
 
 const openTahun = () => {
     tahun.value.$refs.tahun.open()
 };
-
 const openLokasi = () => {
     lokasim.value.$refs.lokasim.open()
 };
-
 const openDetail = () => {
     test.value.$refs.pesandetail.open()
 };
-
 const lokasi = [
     { text: 'Semua Lokasi', value: 'all_location' },
     { text: 'Pilih Lokasi', value: 'pick_location' },
 ];
-
 const modal1 = [
     { text: 'Merek', value: 'pick_merek' },
     { text: 'Jenis', value: 'pick_jenis' },
 ];
-
 const sort = [
     { text: 'Harga Terendah - Tinggi', value: 'pick_desc' },
     { text: 'Harga Tinggi - Terendah', value: 'pick_asc' },
@@ -211,13 +213,24 @@ const fetchData = () => {
     const query = {}
 }
 
-const getUnit = computed(() => unitStore.getUnit())
 
+const getUnit = computed(() => unitStore.getUnit())
 onMounted(() => {
     unitStore.getUnitService('')
 })
 
+const sortHargaAsc = () => {
+    return this.getUnit.sort((a, b) => {
+        return a.harga.localeCompare(b.harga);
+    });
+}
 
+const HandleSort = (e) => {
+    if (e.id == 0) {
+        sortHargaAsc()
+        console.log("test")
+    }
+}
 const handleMenu = (e) => {
     if (e.id == 0) {
         console.log("buka modal semua lokasi")
@@ -225,13 +238,11 @@ const handleMenu = (e) => {
         openLokasi()
     }
 }
-
 const handleModal1 = (e) => {
     if (e.id == 0) {
-        console.log("buka modal semua lokasi")
+        openMerk()
     } else if (e.id == 1) {
         openModal()
     }
 }
-
 </script>
