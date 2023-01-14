@@ -12,7 +12,7 @@
               display="flex"
               width="700"
               height="350"
-              style="border-style: thin; border-color:black; border-width: 1px">
+              style="border-style: ya; border-color:black; border-width: 1px">
                   <v-container>
                       <v-row>
                               <v-col md="12">
