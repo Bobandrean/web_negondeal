@@ -25,7 +25,7 @@
                 <v-chip>{{ items?.tahun }}</v-chip>
                 <v-chip>{{ items?.transmisi }}</v-chip>
                 <v-chip>{{ items?.bahan_bakar }}</v-chip>
-                <v-chip>{{ items?.odometer }}</v-chip>
+                <v-chip>{{ items?.odometer }} KM</v-chip>
                 <v-chip>Jakarta</v-chip>
             </v-chip-group>
             <!-- <v-chip-group v-model="selection">
@@ -52,7 +52,7 @@
         <v-card-text>
             <v-row>
                 <v-col sm="6">
-                    Rp. {{ items?.harga }}
+                    Rp. {{ items?.harga.toLocaleString() }}
                 </v-col>
                 <v-col sm="6">
                     200.000/Bulan
