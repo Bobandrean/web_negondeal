@@ -10,9 +10,9 @@
                 <v-card class="mx-auto" display="flex" width="700" height="400"
                     style="border-style: thin; border-color:black; border-width: 1px">
                     <v-container>
-                        <v-row>
+                        <v-row v-model="selected">
                             <v-col md="4">
-                                <v-row v-model="selected">
+                                <v-row>
                                     <v-col v-for="item in test" :value="item" :key="item" md="12" align="center"
                                         style="cursor: pointer" @click="handleSelectItem(item)">
                                         <p>{{ item }}</p>
@@ -22,7 +22,7 @@
                             </v-col>
                             <v-divider vertical></v-divider>
                             <v-col md="8" class="scrollable">
-                                <v-row v-if="this.selected == 'Jenis Penjual'">
+                                <v-row v-if="SelectedValue.nama == 'Jenis Penjual'">
                                     <v-col md="4" align="center">
                                         <v-row>
                                             <v-col>
@@ -234,15 +234,28 @@ export default {
             test: ['Jenis Penjual', 'Promo', 'Jarak Tempuh', 'Bahan Bakar', 'Tipe Bodi', 'Warna', 'Jumlah Kursi', 'Plat Nomor']
         }
     },
-    methods: {
-        handleSelectItem(item) {
-            this.selected = item;
-            console.log(this.selected)
+    setup() {
+
+        const SelectedValue = reactive({
+            nama: ''
+
+        })
+
+        const handleSelectItem = (item) => {
+            SelectedValue.nama = item
+
+            console.log(SelectedValue)
+        }
+
+
+        return {
+            SelectedValue,
+            handleSelectItem
         }
     }
 }
-</script>
 
+</script>
 <style>
 .scrollable {
     overflow-y: auto;

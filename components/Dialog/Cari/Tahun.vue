@@ -25,6 +25,7 @@
                         </v-text-field>
                     </v-col>
                     <v-col md="6" align="center">
+                        {{ formValues }}
                         <v-text-field :v-model="formValues.max_year" :model-value="range[1]" hide-details single-line
                             type="number" variant="outlined" style="width: 150px" density="compact"
                             @change="$set(range, 1, $event)">
