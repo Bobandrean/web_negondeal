@@ -3,28 +3,23 @@
 
     <!-- Modal -->
     <DialogFilterLocation ref="lokasim"></DialogFilterLocation>
-    <DialogRangeHarga ref="harga"></DialogRangeHarga>
+    <DialogRangeHarga ref="price" @dataPrice="handleDataPrice"></DialogRangeHarga>
     <DialogCariTahun ref="tahun" @dataYear="handleDataYear"></DialogCariTahun>
     <DialogMobilJenis ref="jenis"></DialogMobilJenis>
+    <DialogCarMerk ref="merk"></DialogCarMerk>
     <!-- End Modal -->
 
     <BaseCard>
         <v-row>
             <v-col lg="12">
-
                 <BaseInput @keyup.enter="SearchHandle(search.name)" v-model="search.name"
                     placeholder="Cari Mobil Anda (Merek/Jenis)" type="text">
                 </BaseInput>
             </v-col>
         </v-row>
-        {{ result }}
-        <v-row v-if="query != null">
-
-        </v-row>
         <v-row>
             <v-col>
-                <BaseDropDown @menuClick="handleModal1" label="Merek & Jenis" :items="modal1">Merek & Jenis
-                </BaseDropDown>
+                <BaseButton @click="openMerk">Merk & Jenis</BaseButton>
             </v-col>
             <v-col>
                 <BaseButton @click="openHarga">Harga</BaseButton>
@@ -36,20 +31,28 @@
                 <BaseDropDown @menuClick="handleMenu" label="Lokasi" :items="lokasi">Lokasi</BaseDropDown>
             </v-col>
             <v-col>
-                <BaseButton>Filter Lainnya</BaseButton>
+                <BaseButton @click="openModal">Filter Lainnya</BaseButton>
             </v-col>
             <v-col>
                 <BaseButton to="/">Tampilkan Semua</BaseButton>
             </v-col>
         </v-row>
     </BaseCard>
+    <v-row>
+        <v-col class="mt-3" md="3">
+            <v-chip v-if="!!search.name">{{ search.name }}</v-chip>
+        </v-col>
+        <v-col class="mt-3" md="3">
+            <v-chip v-if="!!search.min_year">{{ search.min_year }}</v-chip>
+        </v-col>
+        </v-row>
     <v-divider class="ma-6"> </v-divider>
     <v-row>
         <v-col md="2" no-gutters align="center">
             <p>Menampilkan 471 Mobil</p>
         </v-col>
         <v-col md="2" no-gutters>
-            <BaseDropDown color="secondary" label="Sort By" :items="sort"> Sort By</BaseDropDown>
+            <BaseDropDown @menuClick="HandleSort" color="secondary" label="Sort By" :items="sort"> Sort By</BaseDropDown>
         </v-col>
     </v-row>
     <v-row>
@@ -99,6 +102,7 @@
 import { useCounterStore } from '@/stores/counter'
 import { useUnitStore } from '@/stores/unit'
 import { useRoute, useRouter } from 'vue-router';
+import { defineProps } from 'vue'
 
 
 definePageMeta({
@@ -110,10 +114,11 @@ const route = useRoute()
 const router = useRouter()
 
 const jenis = ref("");
-const harga = ref("");
+const price = ref("");
 const tahun = ref("");
 const lokasim = ref("");
 const result = ref("");
+const merk = ref("");
 
 const search = reactive({
     name: '',
@@ -128,6 +133,13 @@ const search = reactive({
 const handleDataYear = (val) => {
     search.min_year = val[0] ?? 0
     search.max_year = val[1] ?? 0
+
+    fetchDataSearch()
+}
+
+const handleDataPrice = (val) => {
+    search.min_price = val[0] ?? 0
+    search.max_price = val[1] ?? 0
 
     fetchDataSearch()
 }
@@ -158,6 +170,14 @@ const fetchDataSearch = async () => {
         query.max_year = search.max_year
     }
 
+    if (search.min_price !== "") {
+        query.min_price = search.min_price
+    }
+
+    if (search.max_price !== "") {
+        query.max_price = search.max_price
+    }
+
     await router.push({
         path: '/',
         query: query
@@ -175,7 +195,7 @@ const openModal = () => {
 };
 
 const openHarga = () => {
-    harga.value.$refs.harga.open()
+    price.value.$refs.price.open()
 };
 
 const openTahun = () => {
@@ -188,6 +208,10 @@ const openLokasi = () => {
 
 const openDetail = () => {
     test.value.$refs.pesandetail.open()
+};
+
+const openMerk = () => {
+    merk.value.$refs.merk.open()
 };
 
 const lokasi = [
@@ -211,7 +235,9 @@ const fetchData = () => {
     const query = {}
 }
 
-const getUnit = computed(() => unitStore.getUnit())
+const getUnit = computed(() => unitStore.getUnit());
+
+const testing = getUnit
 
 onMounted(() => {
     unitStore.getUnitService('')
@@ -228,10 +254,22 @@ const handleMenu = (e) => {
 
 const handleModal1 = (e) => {
     if (e.id == 0) {
-        console.log("buka modal semua lokasi")
+        openMerk()
     } else if (e.id == 1) {
         openModal()
     }
 }
 
+const sortHargaAsc = () => {
+        return this.car.sort((a, b) => {
+            return a.harga.localeCompare(b.harga);
+        });
+}
+
+const HandleSort = (e) =>{
+    if(e.id == 0){
+        sortHargaAsc()
+        console.log("test")
+    }
+}
 </script>

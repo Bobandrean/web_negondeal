@@ -1,33 +1,36 @@
 <template>
-    <BaseDialog ref="harga" class-name="px-5 py-8" :max-width="500">
+    <BaseDialog ref="price" class-name="px-5 py-8">
         <v-container>
-            <v-row>
-                <v-col>
-                    <p>Harga</p>
-                </v-col>
-            </v-row>
-            <v-row no-gutters>
+            <form @submit.prevent="handleSubmit(formValues.min_price, formValues.max_price)">
+
+                <v-row>
+                    <v-col>
+                        <p>Harga</p>
+                    </v-col>
+                </v-row>
+                <v-row no-gutters>
                 <v-col>
                     <p>Harga rata-rata mobil NegoNDeal adalah Rp 174,953,349</p>
                 </v-col>
-            </v-row>
-            <form @submit.prevent="handleSubmit">
+                </v-row>
+
                 <v-row>
+
                     <v-col>
-                        <v-range-slider v-model="range" :max="200000000" @update:modelValue="handleChangeRange" :min="0"
-                            :step="1" hide-details class="align-center slider-color">
+                        <v-range-slider v-model="range" :max="100000000" :min="10000" :step="1"
+                            @update:modelValue="handleChangeRange" hide-details class="align-center slider-color">
                         </v-range-slider>
                     </v-col>
                 </v-row>
                 <v-row>
                     <v-col md="6" align="center">
-                        <v-text-field v-model="formValues.min_harga" :model-value="range[0]" hide-details single-line
+                        <v-text-field :v-model="formValues.min_price" :model-value="range[0]" hide-details single-line
                             type="number" variant="outlined" density="compact" style="width: 150px"
                             @change="$set(range, 0, $event)">
                         </v-text-field>
                     </v-col>
                     <v-col md="6" align="center">
-                        <v-text-field v-model="formValues.max_harga" :model-value="range[1]" hide-details single-line
+                        <v-text-field :v-model="formValues.max_price" :model-value="range[1]" hide-details single-line
                             type="number" variant="outlined" style="width: 150px" density="compact"
                             @change="$set(range, 1, $event)">
                         </v-text-field>
@@ -44,42 +47,45 @@
                     </v-col>
                 </v-row>
             </form>
+
         </v-container>
     </BaseDialog>
 </template>
 
 <script>
 import { useUnitStore } from '@/stores/unit'
+import { defineEmits } from 'vue'
 
 export default {
     data() {
         return {
-            range: [1000000, 200000000],
+            range: [10000, 100000000],
         }
     },
-    setup() {
+    emits: {
+
+    },
+    setup(props, context) {
+        const router = useRouter()
         const unitStore = useUnitStore()
 
-
         const formValues = reactive({
-            max_price: 1000000,
-            min_price: 200000000,
-
+            min_price: 10000,
+            max_price: 100000,
         })
 
         const handleChangeRange = (val) => {
-            formValues.max_harga = val[0],
-                formValues.min_harga = val[1]
+            formValues.min_price = val[0],
+                formValues.max_price = val[1]
         }
 
         const harga = ref()
 
-        const handleSubmit = () => {
-            unitStore.getUnitService(formValues).then(() => {
-                harga.value.close()
-                unitStore.getUnitService('')
-            })
-        }
+        const handleSubmit = (val1, val2) => {
+            const price = [val1, val2]
+
+            context.emit('dataPrice', price)
+        };
 
         return {
             handleSubmit,
@@ -89,12 +95,8 @@ export default {
         }
     }
 }
-
-
 </script>
 
 <style>
-.v-slider-thumb__surface {
-    color: red !important;
-}
+
 </style>

@@ -34,26 +34,23 @@ export const useUnitStore = defineStore('unit', () => {
         }
     }
 
-    const getDetailUnit = () => {
-        return detailUnit.value
+    const getDetailUnit = computed(() => detailUnit.value)
+
+    const setDetailUnit = (data) => {
+        detailUnit.value = data
     }
 
-    const setDetailUnit = (value) => {
-        detailUnit.value = value
-    }
-
-    const getDetailUnitService = async () => {
-        console.log("test")
+    async function fetchDetailUnit(id) {
         try {
+
             const res = await unitServices.detailUnit({
                 id
             })
-            console.log(res)
             setDetailUnit(res.data)
+
         } catch (error) {
             console.error(error)
         }
-
     }
 
     return {
@@ -62,6 +59,6 @@ export const useUnitStore = defineStore('unit', () => {
         getUnitService,
         detailUnit,
         getDetailUnit,
-        getDetailUnitService
+        fetchDetailUnit
     }
 })

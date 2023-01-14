@@ -7,7 +7,7 @@
         <v-layout>
             <!-- <v-system-bar color="deep-purple darken-3"></v-system-bar> -->
 
-            <v-app-bar color="orange" prominent>
+            <v-app-bar color="#e77200" prominent>
                 <!-- <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon> -->
                 <v-btn variant="text" icon="mdi-magnify" to="/">Logo</v-btn>
 
