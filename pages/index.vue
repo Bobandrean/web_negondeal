@@ -17,6 +17,10 @@
                 </BaseInput>
             </v-col>
         </v-row>
+        {{ result }}
+        <v-row v-if="query != null">
+
+        </v-row>
         <v-row>
             <v-col>
                 <BaseButton @click="openMerk">Merk & Jenis</BaseButton>
@@ -52,7 +56,8 @@
             <p>Menampilkan 471 Mobil</p>
         </v-col>
         <v-col md="2" no-gutters>
-            <BaseDropDown @menuClick="HandleSort" color="secondary" label="Sort By" :items="sort"> Sort By</BaseDropDown>
+            <BaseDropDown @menuClick="HandleSort" color="secondary" label="Sort By" :items="sort"> Sort By
+            </BaseDropDown>
         </v-col>
     </v-row>
     <v-row>
@@ -102,7 +107,6 @@
 import { useCounterStore } from '@/stores/counter'
 import { useUnitStore } from '@/stores/unit'
 import { useRoute, useRouter } from 'vue-router';
-import { defineProps } from 'vue'
 
 
 definePageMeta({
@@ -240,10 +244,8 @@ const fetchData = () => {
     const query = {}
 }
 
-const getUnit = computed(() => unitStore.getUnit());
 
-const testing = getUnit
-
+const getUnit = computed(() => unitStore.getUnit())
 onMounted(() => {
     unitStore.getUnitService('')
 })
@@ -266,13 +268,13 @@ const handleModal1 = (e) => {
 }
 
 const sortHargaAsc = () => {
-        return this.car.sort((a, b) => {
-            return a.harga.localeCompare(b.harga);
-        });
+    return this.getUnit.sort((a, b) => {
+        return a.harga.localeCompare(b.harga);
+    });
 }
 
-const HandleSort = (e) =>{
-    if(e.id == 0){
+const HandleSort = (e) => {
+    if (e.id == 0) {
         sortHargaAsc()
         console.log("test")
     }
