@@ -5,7 +5,7 @@
     <DialogFilterLocation ref="lokasim"></DialogFilterLocation>
     <DialogRangeHarga ref="price" @dataPrice="handleDataPrice"></DialogRangeHarga>
     <DialogCariTahun ref="tahun" @dataYear="handleDataYear"></DialogCariTahun>
-    <DialogMobilJenis ref="jenis"></DialogMobilJenis>
+    <DialogMobilJenis ref="jenis" @dataJenis="handleDataJenis"></DialogMobilJenis>
     <DialogCarMerk ref="merk" @dataBodi="handleDataTipeBody"></DialogCarMerk>
     <!-- End Modal -->
 
@@ -49,7 +49,7 @@
         <v-col class="mt-3" md="3">
             <v-chip v-if="!!search.min_year">{{ search.min_year }}</v-chip>
         </v-col>
-        </v-row>
+    </v-row>
     <v-divider class="ma-6"> </v-divider>
     <v-row>
         <v-col md="2" no-gutters align="center">
@@ -133,14 +133,19 @@ const search = reactive({
     merk: '',
     type: '',
     plat_nomor: '',
-    bahan_bakar:'',
+    bahan_bakar: '',
     transmisi: '',
     tipe_body: '',
     warna: ''
 })
 
-const handleDataTipeBody = (val) => {
-    search.tipe_body = val
+const handleDataJenis = (val) => {
+    search.plat_nomor = val.platnomor ? val.platnomor : ""// setelah ? itu pilihan yes or no
+    search.bahan_bakar = val.bahan_bakar ? val.bahan_bakar : ""
+    search.warna = val.warna ? val.warna : ""
+    search.tipe_body = val.bodi ? val.bodi : ""
+    search.transmisi = val.transmisi ? val.transmisi : ""
+
 
     fetchDataSearch()
 }
@@ -148,6 +153,8 @@ const handleDataTipeBody = (val) => {
 const handleDataYear = (val) => {
     search.min_year = val[0] ?? 0
     search.max_year = val[1] ?? 0
+
+    console.log(val, "emit masuk")
 
     fetchDataSearch()
 }
@@ -195,6 +202,22 @@ const fetchDataSearch = async () => {
 
     if (search.tipe_body !== "") {
         query.tipe_body = search.tipe_body
+    }
+
+    if (search.bahan_bakar !== ""){
+        query.bahan_bakar = search.bahan_bakar
+    }
+
+    if (search.transmisi != ""){
+        query.transmisi = search.transmisi
+    }
+
+    if (search.plat_nomor != ""){
+        query.plat_nomor = search.plat_nomor
+    }
+
+    if (search.warna != ""){
+        query.warna = search.warna
     }
 
     await router.push({
@@ -253,6 +276,7 @@ const sort = [
 const fetchData = () => {
     const query = {}
 }
+
 
 
 const getUnit = computed(() => unitStore.getUnit())
