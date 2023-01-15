@@ -72,7 +72,7 @@ export default {
 
         const handleChangeRange = (val) => {
             formValues.min_year = val[0],
-                formValues.max_year = val[1]
+            formValues.max_year = val[1]
         }
 
         const tahun = ref()

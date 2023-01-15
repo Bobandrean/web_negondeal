@@ -24,7 +24,8 @@ export const useUnitStore = defineStore('unit', () => {
             min_year: payload.min_year ? payload.min_year : "",
             max_year: payload.max_year ? payload.max_year : "",
             merk: payload.merk ? payload.merk : "",
-            type: payload.type ? payload.type : ""
+            type: payload.type ? payload.type : "",
+            tipe_body: payload.tipe_body ? payload.tipe_body : ""
         }
         try {
             const res = await unitServices.getUnit(query)

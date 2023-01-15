@@ -6,7 +6,7 @@
     <DialogRangeHarga ref="price" @dataPrice="handleDataPrice"></DialogRangeHarga>
     <DialogCariTahun ref="tahun" @dataYear="handleDataYear"></DialogCariTahun>
     <DialogMobilJenis ref="jenis"></DialogMobilJenis>
-    <DialogCarMerk ref="merk"></DialogCarMerk>
+    <DialogCarMerk ref="merk" @dataBodi="handleDataTipeBody"></DialogCarMerk>
     <!-- End Modal -->
 
     <BaseCard>
@@ -139,6 +139,12 @@ const search = reactive({
     warna: ''
 })
 
+const handleDataTipeBody = (val) => {
+    search.tipe_body = val
+
+    fetchDataSearch()
+}
+
 const handleDataYear = (val) => {
     search.min_year = val[0] ?? 0
     search.max_year = val[1] ?? 0
@@ -185,6 +191,10 @@ const fetchDataSearch = async () => {
 
     if (search.max_price !== "") {
         query.max_price = search.max_price
+    }
+
+    if (search.tipe_body !== "") {
+        query.tipe_body = search.tipe_body
     }
 
     await router.push({
