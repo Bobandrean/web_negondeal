@@ -2,7 +2,7 @@
 
 
     <!-- Modal -->
-    <DialogFilterLocation :items="getProvince" ref="lokasim"></DialogFilterLocation>
+    <DialogFilterLocation  ref="lokasim" @dataLokasi = "handleDataLokasi"></DialogFilterLocation>
     <DialogRangeHarga ref="price" @dataPrice="handleDataPrice"></DialogRangeHarga>
     <DialogCariTahun ref="tahun" @dataYear="handleDataYear"></DialogCariTahun>
     <DialogMobilJenis ref="jenis" @dataJenis="handleDataJenis"></DialogMobilJenis>
@@ -120,14 +120,16 @@ const lokasim = ref("");
 const result = ref("");
 const merk = ref("");
 
+
 const lokasiStore = useLokasiStore()
         
-        const getProvince = computed(() => lokasiStore.getProvince())
+const getProvince = computed(() => lokasiStore.getProvince())
         
 
-        onMounted(() => {
-        lokasiStore.fetchLokasi('')
+ onMounted(() => {lokasiStore.fetchLokasi('')
 })
+
+
 
 const search = reactive({
     name: '',
@@ -141,8 +143,17 @@ const search = reactive({
     bahan_bakar: '',
     transmisi: '',
     tipe_body: '',
-    warna: ''
+    warna: '',
+    provinsi: ''
 })
+
+const handleDataLokasi = (val) => {
+    search.provinsi = val.provinsi ? val.provinsi : ""
+
+    console.log(val, "emit masuk")
+
+    fetchDataSearch()
+}
 
 const handleDataJenis = (val) => {
     search.plat_nomor = val.platnomor ? val.platnomor : ""// setelah ? itu pilihan yes or no
@@ -223,6 +234,10 @@ const fetchDataSearch = async () => {
 
     if (search.warna != ""){
         query.warna = search.warna
+    }
+
+    if(search.provinsi != ""){
+        query.provinsi = search.provinsi
     }
 
     await router.push({

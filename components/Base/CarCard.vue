@@ -7,8 +7,12 @@
         <v-img @click="handleDetail(items?.id)" cover height="250" :src="items?.unit_photo?.[0]?.path"></v-img>
 
         <v-card-item>
-            <v-card-title ><p style="font-size:17px">{{ items?.nama }}</p>
-            </v-card-title>
+            
+                <v-col md="12" >
+                <p style="font-size:17px">{{ items?.nama }}</p>
+                </v-col>
+                
+            
         </v-card-item>
 
         <div class="px-4">
@@ -41,14 +45,15 @@
         </div>
         <v-card-text>
             <v-row>
+                <v-col sm="12">
+                    Rp. {{ items?.harga.toLocaleString() }} (Cash)
+                </v-col>
+
                 <v-col sm="6">
-                    Rp. {{ items?.harga.toLocaleString() }}
+                    Rp.135.000.000(Cash)
                 </v-col>
                 <v-col sm="6">
                     200.000/Bulan
-                </v-col>
-                <v-col sm="12">
-                    Rp.135.000.000(Cash)
                 </v-col>
             </v-row>
         </v-card-text>

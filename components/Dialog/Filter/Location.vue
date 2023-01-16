@@ -1,6 +1,7 @@
 <template>
     <BaseDialog ref="lokasim" class-name="px-5 py-8" :max-width="800">
         <v-container>
+            <form @submit.prevent="handleSubmit(SelectedValue)">
             <v-row>
                 <v-col md="12" align="center">
                     <p>Silahkan Pilih Lokasi</p>
@@ -25,10 +26,10 @@
             <v-row>
                 <v-col md="12" align="center">
                     <p>Atau Cari Berdasarkan Provinsi</p>
-                    {{ itemsp }} 
+                    {{ SelectedValue.province }} 
                 </v-col>
                 <v-col md="12" align="center">
-                    <v-select v-model="SelectedValue.province" @change="handleSelectItem()" :items="getProvince" label="Provinsi" item-title="name" item-value="id"></v-select>
+                    <v-select v-model="SelectedValue.province" @change="handleSelectItem(val)" :items="getProvince" label="Provinsi" item-title="name" item-value="name"></v-select>
                 </v-col>
             </v-row>
             <v-row >
@@ -38,66 +39,53 @@
             </v-row>
             <v-row>
                 <v-col md="12" align="center">
-                    <BaseButton>Menampilkan Mobil Impian</BaseButton>
+                    <BaseButton type="submit">Menampilkan Mobil Impian</BaseButton>
                 </v-col>
             </v-row>
+        </form>
         </v-container>
     </BaseDialog>
 
 </template>
-<script>
-import { defineProps } from 'vue'
-import { useLokasiStore } from '@/stores/lokasi'
-import { defineEmits } from 'vue'
-  export default {
-    data () {
-      return {
-        provinsi: [
-                    {nama: 'Banten', id: '1'},
-                    {nama: 'Jakarta', id: '2'}
-                ]
-      }
-    },
-    setup(props, context) {
-        const router = useRouter()
 
-        const SelectedValue = reactive({
+<script>
+
+</script>
+
+<script setup>
+import { useCounterStore } from '@/stores/counter'
+import { useLokasiStore } from '@/stores/lokasi'
+import { useRoute, useRouter } from 'vue-router';
+import { defineEmits } from 'vue'
+
+const counterStore = useCounterStore()
+const lokasiStore = useLokasiStore()
+const route = useRoute()
+const router = useRouter()
+const emit  = defineEmits(['dataLokasi'])
+        
+const getProvince = computed(() => lokasiStore.getProvince())
+        
+
+ onMounted(() => {lokasiStore.fetchLokasi('')
+})
+
+const SelectedValue = reactive({
             province: '',
 
         })
 
-        const handleSelectItem = () => {
-            SelectedValue.province = province
+        const handleSelectItem = (val) => {
+            SelectedValue.province = val
 
         }
 
         const handleSubmit = () => {
 
-            context.emit('dataJenis', SelectedValue)
-
-            console.log(context)
-
+            emit('dataLokasi', SelectedValue)
+            console.log(SelectedValue)
         };
 
-        return {
-            SelectedValue,
-            handleSelectItem,
-            handleSubmit,
-        }
-    }
-  }
-  defineProps({
-    itemsp: {
-        type: Object,
-        default: () => { },
-    },
-})
-</script>
-
-<script setup>
-
-
-        
 </script>
 
 <style>

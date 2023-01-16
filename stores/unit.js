@@ -29,7 +29,8 @@ export const useUnitStore = defineStore('unit', () => {
             plat_nomor: payload.plat_nomor ? payload.plat_nomor : "",
             warna: payload.warna ? payload.warna : "",
             transmisi: payload.transmisi ? payload.transmisi : "",
-            bahan_bakar: payload.bahan_bakar ? payload.bahan_bakar : ""
+            bahan_bakar: payload.bahan_bakar ? payload.bahan_bakar : "",
+            provinsi: payload.provinsi ? payload.provinsi : ""
         }
         try {
             const res = await unitServices.getUnit(query)
