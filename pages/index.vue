@@ -105,6 +105,7 @@ import { useCounterStore } from '@/stores/counter'
 import { useUnitStore } from '@/stores/unit'
 import { useRoute, useRouter } from 'vue-router';
 import { useLokasiStore } from '@/stores/lokasi'
+import {useMerkStore} from '@/stores/merk'
 definePageMeta({
     layout: "default",
 });
@@ -120,16 +121,15 @@ const lokasim = ref("");
 const result = ref("");
 const merk = ref("");
 
-
-const lokasiStore = useLokasiStore()
-        
-const getProvince = computed(() => lokasiStore.getProvince())
-        
-
- onMounted(() => {lokasiStore.fetchLokasi('')
+const MerkStore = useMerkStore()
+const getMerk = computed(() => MerkStore.getMerk())
+onMounted(() => {MerkStore.fetchMerk('')
 })
 
-
+const lokasiStore = useLokasiStore()
+const getProvince = computed(() => lokasiStore.getProvince())
+ onMounted(() => {lokasiStore.fetchLokasi('')
+})
 
 const search = reactive({
     name: '',
