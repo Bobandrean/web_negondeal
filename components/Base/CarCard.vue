@@ -7,48 +7,38 @@
         <v-img @click="handleDetail(items?.id)" cover height="250" :src="items?.unit_photo?.[0]?.path"></v-img>
 
         <v-card-item>
-            <v-card-title>{{ items?.nama }}</v-card-title>
-
-            <v-card-subtitle>
-                <span class="mr-1">NND Cerfified</span>
-
-                <v-icon color="error" icon="mdi-fire-circle" size="small"></v-icon>
-            </v-card-subtitle>
+            <v-card-title ><p style="font-size:17px">{{ items?.nama }}</p>
+            </v-card-title>
         </v-card-item>
 
-
-
-        <v-divider class="mx-4 mb-1"></v-divider>
-
         <div class="px-4">
-            <v-chip-group column v-model="selection">
-                <v-chip>{{ items?.tahun }}</v-chip>
-                <v-chip>{{ items?.transmisi }}</v-chip>
-                <v-chip>{{ items?.bahan_bakar }}</v-chip>
-                <v-chip>{{ items?.odometer }} KM</v-chip>
-                <v-chip>Jakarta</v-chip>
-            </v-chip-group>
-            <!-- <v-chip-group v-model="selection">
-                <v-row>
-                    <v-col sm="3" align="center">
-                        <v-chip>{{ items?.tahun }}</v-chip>
-                    </v-col>
-                    <v-col sm="3" align="center">
-                        <v-chip>{{ items?.transmisi }}</v-chip>
-                    </v-col>
-                    <v-col sm="4" align="center">
-                        <v-chip>{{ items?.bahan_bakar }}</v-chip>
-                    </v-col>
-                    <v-col sm="4" align="center">
-                        <v-chip style="max-width:350px">{{ items?.odometer }}</v-chip>
-                    </v-col>
-                    <v-col sm="4" align="center">
-                        <v-chip>Jakarta</v-chip>
-                    </v-col>
-                </v-row>
-            </v-chip-group> -->
+            <v-card
+                class="mx-auto card1"
+                width:200
+                height="75px"
+            >
+            <v-row no-gutters>
+                <v-col md="5" class="ml-5 mt-3" @mouseover="showByIndex = i" @mouseout="showByIndex = null" style="cursor:pointer">
+            <span class="mr-1" style="font-size:16px">NND Cerfified</span>
+            <v-icon color="error" icon="mdi-fire-circle" size="small"></v-icon>
+                 </v-col>
+            </v-row>
+            <v-row no-gutters>
+                <v-col md="12" class="ml-5">
+                    <p class="pb-2 cardtext">{{ items?.tahun }} | {{ items?.odometer }} KM | {{ items?.transmisi }} | Jakarta</p>
+                </v-col>
+            </v-row>
+            </v-card>
+            <div class="boxtext" v-show="showByIndex === i">
+                <v-card
+                    class="mx-auto"
+                    max-width="350px"
+                    height="55px"
+                    >
+                    Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum
+                    </v-card>
+            </div>
         </div>
-        <v-divider></v-divider>
         <v-card-text>
             <v-row>
                 <v-col sm="6">
@@ -64,6 +54,15 @@
         </v-card-text>
     </v-card>
 </template>
+<script>
+export default {
+    data() {
+        return {
+            showByIndex: null
+        }
+    },
+}
+</script>
 
 <script setup>
 import { defineProps } from 'vue'
@@ -84,3 +83,21 @@ defineProps({
     },
 })
 </script>
+
+<style>
+   .card1{
+    border-radius: 20px;
+  background: white;
+}
+
+.boxtext{
+    position: absolute;
+  left: 145px;
+  top: 320px;
+  z-index: 1;
+}
+
+.cardtext{
+    font-size:12px;
+}
+</style>

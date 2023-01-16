@@ -23,37 +23,17 @@
                 </v-col>
             </v-row>
             <v-row>
-                <v-col md="6" align="center">
+                <v-col md="12" align="center">
                     <p>Atau Cari Berdasarkan Provinsi</p>
+                    {{ itemsp }} 
+                </v-col>
+                <v-col md="12" align="center">
+                    <v-select v-model="SelectedValue.province" @change="handleSelectItem()" :items="getProvince" label="Provinsi" item-title="name" item-value="id"></v-select>
                 </v-col>
             </v-row>
             <v-row >
                 <v-col md="12" align="center">
-                    <v-card
-                class="mx-auto"
-                display="flex"
-                width="700"
-                height="150"
-                style="border-style: thin; border-color:black; border-width: 1px">
-                    <v-container>
-                        <v-row class="scrollable">
-                            <v-col
-                                 v-for="n in 20"
-                                :key="n"
-                                cols="12"
-                                sm="4"
-                            >
-                                <v-card
-                                 class="pa-2"
-                                outlined
-                                tile
-                                >
-                                     One of three columns
-                                </v-card>
-                             </v-col>
-                        </v-row>
-                    </v-container>
-                </v-card>
+
                 </v-col>
             </v-row>
             <v-row>
@@ -65,15 +45,59 @@
     </BaseDialog>
 
 </template>
-
 <script>
+import { defineProps } from 'vue'
+import { useLokasiStore } from '@/stores/lokasi'
+import { defineEmits } from 'vue'
   export default {
     data () {
       return {
-        range: [-5, 5],
+        provinsi: [
+                    {nama: 'Banten', id: '1'},
+                    {nama: 'Jakarta', id: '2'}
+                ]
       }
     },
+    setup(props, context) {
+        const router = useRouter()
+
+        const SelectedValue = reactive({
+            province: '',
+
+        })
+
+        const handleSelectItem = () => {
+            SelectedValue.province = province
+
+        }
+
+        const handleSubmit = () => {
+
+            context.emit('dataJenis', SelectedValue)
+
+            console.log(context)
+
+        };
+
+        return {
+            SelectedValue,
+            handleSelectItem,
+            handleSubmit,
+        }
+    }
   }
+  defineProps({
+    itemsp: {
+        type: Object,
+        default: () => { },
+    },
+})
+</script>
+
+<script setup>
+
+
+        
 </script>
 
 <style>

@@ -125,7 +125,6 @@
                                     </v-row>
                                 </v-col>
                             </v-row>
-                            {{ SelectedValue }}
                         </v-container>
                     </v-card>
                     <v-row style="margin-top:25px">

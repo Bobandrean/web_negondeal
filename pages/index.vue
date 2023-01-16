@@ -2,7 +2,7 @@
 
 
     <!-- Modal -->
-    <DialogFilterLocation ref="lokasim"></DialogFilterLocation>
+    <DialogFilterLocation :items="getProvince" ref="lokasim"></DialogFilterLocation>
     <DialogRangeHarga ref="price" @dataPrice="handleDataPrice"></DialogRangeHarga>
     <DialogCariTahun ref="tahun" @dataYear="handleDataYear"></DialogCariTahun>
     <DialogMobilJenis ref="jenis" @dataJenis="handleDataJenis"></DialogMobilJenis>
@@ -18,9 +18,6 @@
             </v-col>
         </v-row>
         {{ result }}
-        <v-row v-if="query != null">
-
-        </v-row>
         <v-row>
             <v-col>
                 <BaseButton @click="openMerk">Merk & Jenis</BaseButton>
@@ -107,8 +104,7 @@
 import { useCounterStore } from '@/stores/counter'
 import { useUnitStore } from '@/stores/unit'
 import { useRoute, useRouter } from 'vue-router';
-
-
+import { useLokasiStore } from '@/stores/lokasi'
 definePageMeta({
     layout: "default",
 });
@@ -123,6 +119,15 @@ const tahun = ref("");
 const lokasim = ref("");
 const result = ref("");
 const merk = ref("");
+
+const lokasiStore = useLokasiStore()
+        
+        const getProvince = computed(() => lokasiStore.getProvince())
+        
+
+        onMounted(() => {
+        lokasiStore.fetchLokasi('')
+})
 
 const search = reactive({
     name: '',
@@ -277,9 +282,9 @@ const fetchData = () => {
     const query = {}
 }
 
-
-
 const getUnit = computed(() => unitStore.getUnit())
+
+
 onMounted(() => {
     unitStore.getUnitService('')
 })
@@ -301,16 +306,14 @@ const handleModal1 = (e) => {
     }
 }
 
-const sortHargaAsc = () => {
-    return this.getUnit.sort((a, b) => {
-        return a.harga.localeCompare(b.harga);
-    });
+const sortingHarga = () =>{
+    sortUnit.sort()
 }
 
 const HandleSort = (e) => {
     if (e.id == 0) {
         sortHargaAsc()
-        console.log("test")
+        console.log(a.harga)
     }
 }
 </script>
