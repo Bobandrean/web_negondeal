@@ -13,11 +13,12 @@ export const useLokasiStore = defineStore('provinsi', () => {
         return city.value
     }
 
-    const setCity = () => {
+    const setCity = (data) => {
         city.value = data
     }
 
     async function fetchCity(payload) {
+        console.log(payload, "storefetch")
         try {
 
             const res = await lokasiServices.getCity(payload)
@@ -33,7 +34,7 @@ export const useLokasiStore = defineStore('provinsi', () => {
         return district.value
     }
 
-    const setDistrct = () => {
+    const setDistrict = (data) => {
         district.value = data
     }
 
@@ -42,7 +43,7 @@ export const useLokasiStore = defineStore('provinsi', () => {
 
             const res = await lokasiServices.getDistrict()
 
-            setDistrct(res.data)
+            setDistrict(res.data)
 
         } catch (error) {
             console.error(error)

@@ -146,9 +146,15 @@ const search = reactive({
     transmisi: '',
     tipe_body: '',
     warna: '',
-    provinsi: ''
+    provinsi: '',
+    highest: ''
 })
 
+const handleHargaTinggi = () => {
+    search.highest = "HargaTinggi"
+
+    fetchDataSearch()
+}
 const handleDataLokasi = (val) => {
     search.provinsi = val.provinsi ? val.provinsi : ""
 
@@ -242,6 +248,10 @@ const fetchDataSearch = async () => {
         query.provinsi = search.provinsi
     }
 
+    if (search.highest != "") {
+        query.highest = search.highest
+    }
+
     await router.push({
         path: '/',
         query: query
@@ -329,8 +339,7 @@ const sortingHarga = () => {
 
 const HandleSort = (e) => {
     if (e.id == 0) {
-        sortHargaAsc()
-        console.log(a.harga)
+        handleHargaTinggi()
     }
 }
 </script>

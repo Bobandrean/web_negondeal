@@ -24,15 +24,15 @@
                 <v-row>
                     <v-col md="12" align="center">
                         <p>Atau Cari Berdasarkan Provinsi</p>
-                        {{ SelectedValue }}
+                        {{ SelectedValue }}{{ getCity }}
                     </v-col>
                     <v-col md="12" align="center">
-                        <v-select v-model="SelectedValue.provinsi" @change="handleCity(val)" :items="getProvince"
-                            label="Provinsi" item-title="name" item-value="id"></v-select>
+                        <v-select v-model="SelectedValue.provinsi" @update:model-value="handleCity()"
+                            :items="getProvince" label="Provinsi" item-title="name" item-value="id"></v-select>
                     </v-col>
                     <v-col md="12" align="center">
-                        <v-select v-model="SelectedValue.city" @change="handleCity()" :items="city" label="Kota"
-                            item-title="name" item-value="id"></v-select>
+                        <v-select v-model="SelectedValue.city" :items="getCity" label="Kota" item-title="name"
+                            item-value="id"></v-select>
                     </v-col>
                 </v-row>
                 <v-row>
@@ -68,7 +68,7 @@ const router = useRouter()
 const emit = defineEmits(['dataLokasi'])
 
 const getProvince = computed(() => lokasiStore.getProvince())
-const city = computed(() => lokasiStore.getCity())
+const getCity = computed(() => lokasiStore.getCity())
 const district = computed(() => lokasiStore.getDistrict())
 
 
@@ -83,19 +83,15 @@ const SelectedValue = reactive({
 
 })
 
-const handleSelectItem = (val) => {
-    SelectedValue.provinsi = val
 
-}
-
-const handleCity = (val) => {
+const handleCity = async () => {
+    console.log("sukses merubah")
     const payload = {
-        province_id: val
+        province_id: SelectedValue.provinsi
     }
     console.log(payload)
-    onMounted(() => {
-        lokasiStore.fetchCity(payload)
-    })
+    await lokasiStore.fetchCity(payload)
+
 }
 
 const handleSubmit = () => {
