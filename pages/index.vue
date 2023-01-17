@@ -1,118 +1,119 @@
 <template>
+  <!-- Modal -->
+  <DialogFilterLocation
+    ref="lokasim"
+    @dataLokasi="handleDataLokasi"
+  ></DialogFilterLocation>
+  <DialogRangeHarga ref="price" @dataPrice="handleDataPrice"></DialogRangeHarga>
+  <DialogCariTahun ref="tahun" @dataYear="handleDataYear"></DialogCariTahun>
+  <DialogMobilJenis ref="jenis" @dataJenis="handleDataJenis"></DialogMobilJenis>
+  <DialogCarMerk ref="merk" @dataBodi="handleDataTipeBody"></DialogCarMerk>
+  <!-- End Modal -->
 
-
-    <!-- Modal -->
-    <DialogFilterLocation ref="lokasim" @dataLokasi="handleDataLokasi"></DialogFilterLocation>
-    <DialogRangeHarga ref="price" @dataPrice="handleDataPrice"></DialogRangeHarga>
-    <DialogCariTahun ref="tahun" @dataYear="handleDataYear"></DialogCariTahun>
-    <DialogMobilJenis ref="jenis" @dataJenis="handleDataJenis"></DialogMobilJenis>
-    <DialogCarMerk ref="merk" @dataBodi="handleDataTipeBody"></DialogCarMerk>
-    <!-- End Modal -->
-
+  <BaseCard>
+    <v-row>
+      <v-col lg="12">
+        <BaseInput
+          @keyup.enter="SearchHandle(search.name)"
+          v-model="search.name"
+          placeholder="Cari Mobil Anda (Merek/Jenis)"
+          type="text"
+        >
+        </BaseInput>
+      </v-col>
+    </v-row>
+    {{ result }}
+    <div style="display: flex; flex-wrap: wrap; gap: 10px">
+      <BaseButton @click="openMerk">Merk & Jenis</BaseButton>
+      <BaseButton @click="openHarga">Harga</BaseButton>
+      <BaseButton @click="openTahun">Tahun</BaseButton>
+      <BaseDropDown @menuClick="handleMenu" label="Lokasi" :items="lokasi"
+        >Lokasi</BaseDropDown
+      >
+      <BaseButton @click="openModal">Filter Lainnya</BaseButton>
+      <BaseButton to="/">Tampilkan Semua</BaseButton>
+    </div>
+  </BaseCard>
+  <v-row>
+    <v-col class="mt-3" md="3">
+      <v-chip v-if="!!search.name">{{ search.name }}</v-chip>
+    </v-col>
+    <v-col class="mt-3" md="3">
+      <v-chip v-if="!!search.min_year">{{ search.min_year }}</v-chip>
+    </v-col>
+  </v-row>
+  <v-divider class="ma-6"> </v-divider>
+  <v-row>
+    <v-col md="2" no-gutters align="center">
+      <p>Menampilkan 471 Mobil</p>
+    </v-col>
+    <v-col md="2" no-gutters>
+      <BaseDropDown
+        @menuClick="HandleSort"
+        color="secondary"
+        label="Sort By"
+        :items="sort"
+      >
+        Sort By
+      </BaseDropDown>
+    </v-col>
+  </v-row>
+  <v-row>
+    <v-col md="4" v-for="car in getUnit" :key="car.id">
+      <BaseCarCard :items="car"></BaseCarCard>
+    </v-col>
+  </v-row>
+  <v-divider class="ma-6"> </v-divider>
+  <v-row>
+    <v-col md="4">
+      <BaseCarCard></BaseCarCard>
+    </v-col>
+    <v-col md="4">
+      <BaseCarCard></BaseCarCard>
+    </v-col>
+    <v-col md="4">
+      <BaseCarCard></BaseCarCard>
+    </v-col>
+  </v-row>
+  <v-row>
     <BaseCard>
-        <v-row>
-            <v-col lg="12">
-                <BaseInput @keyup.enter="SearchHandle(search.name)" v-model="search.name"
-                    placeholder="Cari Mobil Anda (Merek/Jenis)" type="text">
-                </BaseInput>
-            </v-col>
-        </v-row>
-        {{ result }}
-        <v-row>
-            <v-col>
-                <BaseButton @click="openMerk">Merk & Jenis</BaseButton>
-            </v-col>
-            <v-col>
-                <BaseButton @click="openHarga">Harga</BaseButton>
-            </v-col>
-            <v-col>
-                <BaseButton @click="openTahun">Tahun</BaseButton>
-            </v-col>
-            <v-col>
-                <BaseDropDown @menuClick="handleMenu" label="Lokasi" :items="lokasi">Lokasi</BaseDropDown>
-            </v-col>
-            <v-col>
-                <BaseButton @click="openModal">Filter Lainnya</BaseButton>
-            </v-col>
-            <v-col>
-                <BaseButton to="/">Tampilkan Semua</BaseButton>
-            </v-col>
-        </v-row>
+      <v-row>
+        <v-col md="12">
+          <h2>Belum menemukan yang Anda cari?</h2>
+        </v-col>
+        <v-col md="12">
+          Ketik mobil yang Anda cari di kotak berikut, Kami akan menghubungi
+          Anda apabila stock telah tersedia
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col md="6">
+          <BaseInput placeholder=""></BaseInput>
+        </v-col>
+        <v-col md="6">
+          <BaseInput></BaseInput>
+        </v-col>
+        <v-col md="12">
+          <BaseButton>Kirim</BaseButton>
+        </v-col>
+      </v-row>
     </BaseCard>
-    <v-row>
-        <v-col class="mt-3" md="3">
-            <v-chip v-if="!!search.name">{{ search.name }}</v-chip>
-        </v-col>
-        <v-col class="mt-3" md="3">
-            <v-chip v-if="!!search.min_year">{{ search.min_year }}</v-chip>
-        </v-col>
-    </v-row>
-    <v-divider class="ma-6"> </v-divider>
-    <v-row>
-        <v-col md="2" no-gutters align="center">
-            <p>Menampilkan 471 Mobil</p>
-        </v-col>
-        <v-col md="2" no-gutters>
-            <BaseDropDown @menuClick="HandleSort" color="secondary" label="Sort By" :items="sort"> Sort By
-            </BaseDropDown>
-        </v-col>
-    </v-row>
-    <v-row>
-        <v-col md="4" v-for="car in getUnit" :key="car.id">
-            <BaseCarCard :items="car"></BaseCarCard>
-        </v-col>
-    </v-row>
-    <v-divider class="ma-6"> </v-divider>
-    <v-row>
-        <v-col md="4">
-            <BaseCarCard></BaseCarCard>
-        </v-col>
-        <v-col md="4">
-            <BaseCarCard></BaseCarCard>
-        </v-col>
-        <v-col md="4">
-            <BaseCarCard></BaseCarCard>
-        </v-col>
-    </v-row>
-    <v-row>
-        <BaseCard>
-            <v-row>
-                <v-col md="12">
-                    <h2>Belum menemukan yang Anda cari?</h2>
-                </v-col>
-                <v-col md="12">
-                    Ketik mobil yang Anda cari di kotak berikut, Kami akan menghubungi
-                    Anda apabila stock telah tersedia
-                </v-col>
-            </v-row>
-            <v-row>
-                <v-col md="6">
-                    <BaseInput placeholder=""></BaseInput>
-                </v-col>
-                <v-col md="6">
-                    <BaseInput></BaseInput>
-                </v-col>
-                <v-col md="12">
-                    <BaseButton>Kirim</BaseButton>
-                </v-col>
-            </v-row>
-        </BaseCard>
-    </v-row>
+  </v-row>
 </template>
 
 <script setup>
-import { useCounterStore } from '@/stores/counter'
-import { useUnitStore } from '@/stores/unit'
-import { useRoute, useRouter } from 'vue-router';
-import { useLokasiStore } from '@/stores/lokasi'
-import { useMerkStore } from '@/stores/merk'
+import { useCounterStore } from "@/stores/counter";
+import { useUnitStore } from "@/stores/unit";
+import { useRoute, useRouter } from "vue-router";
+import { useLokasiStore } from "@/stores/lokasi";
+import { useMerkStore } from "@/stores/merk";
 definePageMeta({
-    layout: "default",
+  layout: "default",
 });
-const counterStore = useCounterStore()
-const unitStore = useUnitStore()
-const route = useRoute()
-const router = useRouter()
+const counterStore = useCounterStore();
+const unitStore = useUnitStore();
+const route = useRoute();
+const router = useRouter();
 
 const jenis = ref("");
 const price = ref("");
@@ -121,225 +122,221 @@ const lokasim = ref("");
 const result = ref("");
 const merk = ref("");
 
-const MerkStore = useMerkStore()
-const getMerk = computed(() => MerkStore.getMerk())
+const MerkStore = useMerkStore();
+const getMerk = computed(() => MerkStore.getMerk());
 onMounted(() => {
-    MerkStore.fetchMerk('')
-})
+  MerkStore.fetchMerk("");
+});
 
-const lokasiStore = useLokasiStore()
-const getProvince = computed(() => lokasiStore.getProvince())
+const lokasiStore = useLokasiStore();
+const getProvince = computed(() => lokasiStore.getProvince());
 onMounted(() => {
-    lokasiStore.fetchLokasi('')
-})
+  lokasiStore.fetchLokasi("");
+});
 
 const search = reactive({
-    name: '',
-    min_price: '',
-    max_price: '',
-    min_year: '',
-    max_year: '',
-    merk: '',
-    type: '',
-    plat_nomor: '',
-    bahan_bakar: '',
-    transmisi: '',
-    tipe_body: '',
-    warna: '',
-    provinsi: '',
-    highest: ''
-})
+  name: "",
+  min_price: "",
+  max_price: "",
+  min_year: "",
+  max_year: "",
+  merk: "",
+  type: "",
+  plat_nomor: "",
+  bahan_bakar: "",
+  transmisi: "",
+  tipe_body: "",
+  warna: "",
+  provinsi: "",
+  highest: "",
+});
 
 const handleHargaTinggi = () => {
-    search.highest = "HargaTinggi"
+  search.highest = "HargaTinggi";
 
-    fetchDataSearch()
-}
+  fetchDataSearch();
+};
 const handleDataLokasi = (val) => {
-    search.provinsi = val.provinsi ? val.provinsi : ""
+  search.provinsi = val.provinsi ? val.provinsi : "";
 
-    console.log(val, "emit masuk")
+  console.log(val, "emit masuk");
 
-    fetchDataSearch()
-}
+  fetchDataSearch();
+};
 
 const handleDataJenis = (val) => {
-    search.plat_nomor = val.platnomor ? val.platnomor : ""// setelah ? itu pilihan yes or no
-    search.bahan_bakar = val.bahan_bakar ? val.bahan_bakar : ""
-    search.warna = val.warna ? val.warna : ""
-    search.tipe_body = val.bodi ? val.bodi : ""
-    search.transmisi = val.transmisi ? val.transmisi : ""
+  search.plat_nomor = val.platnomor ? val.platnomor : ""; // setelah ? itu pilihan yes or no
+  search.bahan_bakar = val.bahan_bakar ? val.bahan_bakar : "";
+  search.warna = val.warna ? val.warna : "";
+  search.tipe_body = val.bodi ? val.bodi : "";
+  search.transmisi = val.transmisi ? val.transmisi : "";
 
-
-    fetchDataSearch()
-}
+  fetchDataSearch();
+};
 
 const handleDataYear = (val) => {
-    search.min_year = val[0] ?? 0
-    search.max_year = val[1] ?? 0
+  search.min_year = val[0] ?? 0;
+  search.max_year = val[1] ?? 0;
 
-    console.log(val, "emit masuk")
+  console.log(val, "emit masuk");
 
-    fetchDataSearch()
-}
+  fetchDataSearch();
+};
 
 const handleDataPrice = (val) => {
-    search.min_price = val[0] ?? 0
-    search.max_price = val[1] ?? 0
+  search.min_price = val[0] ?? 0;
+  search.max_price = val[1] ?? 0;
 
-    fetchDataSearch()
-}
+  fetchDataSearch();
+};
 
 const searchResult = () => {
-    result = route.query
-}
+  result = route.query;
+};
 
 const SearchHandle = (val) => {
+  search.name = val;
 
-    search.name = val
-
-    fetchDataSearch()
+  fetchDataSearch();
 };
 
 const fetchDataSearch = async () => {
-    const query = {}
+  const query = {};
 
-    if (search.name !== "") {
-        query.name = search.name
-    }
+  if (search.name !== "") {
+    query.name = search.name;
+  }
 
-    if (search.min_year !== "") {
-        query.min_year = search.min_year
-    }
+  if (search.min_year !== "") {
+    query.min_year = search.min_year;
+  }
 
-    if (search.max_year !== "") {
-        query.max_year = search.max_year
-    }
+  if (search.max_year !== "") {
+    query.max_year = search.max_year;
+  }
 
-    if (search.min_price !== "") {
-        query.min_price = search.min_price
-    }
+  if (search.min_price !== "") {
+    query.min_price = search.min_price;
+  }
 
-    if (search.max_price !== "") {
-        query.max_price = search.max_price
-    }
+  if (search.max_price !== "") {
+    query.max_price = search.max_price;
+  }
 
-    if (search.tipe_body !== "") {
-        query.tipe_body = search.tipe_body
-    }
+  if (search.tipe_body !== "") {
+    query.tipe_body = search.tipe_body;
+  }
 
-    if (search.bahan_bakar !== "") {
-        query.bahan_bakar = search.bahan_bakar
-    }
+  if (search.bahan_bakar !== "") {
+    query.bahan_bakar = search.bahan_bakar;
+  }
 
-    if (search.transmisi != "") {
-        query.transmisi = search.transmisi
-    }
+  if (search.transmisi != "") {
+    query.transmisi = search.transmisi;
+  }
 
-    if (search.plat_nomor != "") {
-        query.plat_nomor = search.plat_nomor
-    }
+  if (search.plat_nomor != "") {
+    query.plat_nomor = search.plat_nomor;
+  }
 
-    if (search.warna != "") {
-        query.warna = search.warna
-    }
+  if (search.warna != "") {
+    query.warna = search.warna;
+  }
 
-    if (search.provinsi != "") {
-        query.provinsi = search.provinsi
-    }
+  if (search.provinsi != "") {
+    query.provinsi = search.provinsi;
+  }
 
-    if (search.highest != "") {
-        query.highest = search.highest
-    }
+  if (search.highest != "") {
+    query.highest = search.highest;
+  }
 
-    await router.push({
-        path: '/',
-        query: query
-    })
+  await router.push({
+    path: "/",
+    query: query,
+  });
 
-    unitStore.getUnitService(route.query)
-}
+  unitStore.getUnitService(route.query);
+};
 
 const clearSearch = () => {
-    unitStore.getUnitService(clear);
+  unitStore.getUnitService(clear);
 };
 
 const openModal = () => {
-    jenis.value.$refs.jenis.open()
+  jenis.value.$refs.jenis.open();
 };
 
 const openHarga = () => {
-    price.value.$refs.price.open()
+  price.value.$refs.price.open();
 };
 
 const openTahun = () => {
-    tahun.value.$refs.tahun.open()
+  tahun.value.$refs.tahun.open();
 };
 
 const openLokasi = () => {
-    lokasim.value.$refs.lokasim.open()
+  lokasim.value.$refs.lokasim.open();
 };
 
 const openDetail = () => {
-    test.value.$refs.pesandetail.open()
+  test.value.$refs.pesandetail.open();
 };
 
 const openMerk = () => {
-    merk.value.$refs.merk.open()
+  merk.value.$refs.merk.open();
 };
 
 const lokasi = [
-    { text: 'Semua Lokasi', value: 'all_location' },
-    { text: 'Pilih Lokasi', value: 'pick_location' },
+  { text: "Semua Lokasi", value: "all_location" },
+  { text: "Pilih Lokasi", value: "pick_location" },
 ];
 
 const modal1 = [
-    { text: 'Merek', value: 'pick_merek' },
-    { text: 'Jenis', value: 'pick_jenis' },
+  { text: "Merek", value: "pick_merek" },
+  { text: "Jenis", value: "pick_jenis" },
 ];
 
 const sort = [
-    { text: 'Harga Terendah - Tinggi', value: 'pick_desc' },
-    { text: 'Harga Tinggi - Terendah', value: 'pick_asc' },
-    { text: 'Jarak Tempuh Terendah', value: 'pick_jarak_asc' },
-    { text: 'Tahun Terkini - Terlampau', value: 'pick_tahun_asc' },
+  { text: "Harga Terendah - Tinggi", value: "pick_desc" },
+  { text: "Harga Tinggi - Terendah", value: "pick_asc" },
+  { text: "Jarak Tempuh Terendah", value: "pick_jarak_asc" },
+  { text: "Tahun Terkini - Terlampau", value: "pick_tahun_asc" },
 ];
 
 const fetchData = () => {
-    const query = {}
-}
+  const query = {};
+};
 
-const getUnit = computed(() => unitStore.getUnit())
-
+const getUnit = computed(() => unitStore.getUnit());
 
 onMounted(() => {
-    unitStore.getUnitService('')
-})
-
+  unitStore.getUnitService("");
+});
 
 const handleMenu = (e) => {
-    if (e.id == 0) {
-        console.log("buka modal semua lokasi")
-    } else if (e.id == 1) {
-        openLokasi()
-    }
-}
+  if (e.id == 0) {
+    console.log("buka modal semua lokasi");
+  } else if (e.id == 1) {
+    openLokasi();
+  }
+};
 
 const handleModal1 = (e) => {
-    if (e.id == 0) {
-        openMerk()
-    } else if (e.id == 1) {
-        openModal()
-    }
-}
+  if (e.id == 0) {
+    openMerk();
+  } else if (e.id == 1) {
+    openModal();
+  }
+};
 
 const sortingHarga = () => {
-    sortUnit.sort()
-}
+  sortUnit.sort();
+};
 
 const HandleSort = (e) => {
-    if (e.id == 0) {
-        handleHargaTinggi()
-    }
-}
+  if (e.id == 0) {
+    handleHargaTinggi();
+  }
+};
 </script>
