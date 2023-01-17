@@ -144,11 +144,11 @@ const search = reactive({
     transmisi: '',
     tipe_body: '',
     warna: '',
-    provinsi: ''
+    Provinsi: ''
 })
 
 const handleDataLokasi = (val) => {
-    search.provinsi = val.provinsi ? val.provinsi : ""
+    search.Provinsi = val.Provinsi ? val.Provinsi : ""
 
     console.log(val, "emit masuk")
 
@@ -236,8 +236,8 @@ const fetchDataSearch = async () => {
         query.warna = search.warna
     }
 
-    if(search.provinsi != ""){
-        query.provinsi = search.provinsi
+    if(search.Provinsi != ""){
+        query.Provinsi = search.Provinsi
     }
 
     await router.push({

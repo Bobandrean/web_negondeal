@@ -26,10 +26,10 @@
             <v-row>
                 <v-col md="12" align="center">
                     <p>Atau Cari Berdasarkan Provinsi</p>
-                    {{ SelectedValue.province }} 
+                    {{ SelectedValue.Provinsi }} 
                 </v-col>
                 <v-col md="12" align="center">
-                    <v-select v-model="SelectedValue.province" @change="handleSelectItem(val)" :items="getProvince" label="Provinsi" item-title="name" item-value="name"></v-select>
+                    <v-select v-model="SelectedValue.Provinsi" @change="handleSelectItem(val)" :items="getProvince" label="Provinsi" item-title="name" item-value="id"></v-select>
                 </v-col>
             </v-row>
             <v-row >
@@ -71,12 +71,12 @@ const getProvince = computed(() => lokasiStore.getProvince())
 })
 
 const SelectedValue = reactive({
-            province: '',
+            Provinsi: '',
 
         })
 
         const handleSelectItem = (val) => {
-            SelectedValue.province = val
+            SelectedValue.Provinsi = val
 
         }
 
