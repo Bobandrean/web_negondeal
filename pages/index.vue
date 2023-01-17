@@ -6,7 +6,7 @@
     <DialogRangeHarga ref="price" @dataPrice="handleDataPrice"></DialogRangeHarga>
     <DialogCariTahun ref="tahun" @dataYear="handleDataYear"></DialogCariTahun>
     <DialogMobilJenis ref="jenis" @dataJenis="handleDataJenis"></DialogMobilJenis>
-    <DialogCarMerk ref="merk" @dataBodi="handleDataTipeBody"></DialogCarMerk>
+    <DialogCarMerk ref="merk" @dataMerk="handleDataMerk"></DialogCarMerk>
     <!-- End Modal -->
 
     <BaseCard>
@@ -87,7 +87,7 @@
             </v-row>
             <v-row>
                 <v-col md="6">
-                    
+                    <BaseInput placeholder=""></BaseInput>
                 </v-col>
                 <v-col md="6">
                     <BaseInput></BaseInput>
@@ -113,7 +113,6 @@ const counterStore = useCounterStore()
 const unitStore = useUnitStore()
 const route = useRoute()
 const router = useRouter()
-
 const jenis = ref("");
 const price = ref("");
 const tahun = ref("");
@@ -121,192 +120,183 @@ const lokasim = ref("");
 const result = ref("");
 const merk = ref("");
 
-const MerkStore = useMerkStore()
-const getMerk = computed(() => MerkStore.getMerk())
-onMounted(() => {
-    MerkStore.fetchMerk('')
-})
-
 const lokasiStore = useLokasiStore()
 const getProvince = computed(() => lokasiStore.getProvince())
 onMounted(() => {
     lokasiStore.fetchLokasi('')
 })
-
 const search = reactive({
     name: '',
     min_price: '',
     max_price: '',
     min_year: '',
     max_year: '',
-    merk: '',
-    type: '',
     plat_nomor: '',
     bahan_bakar: '',
     transmisi: '',
     tipe_body: '',
     warna: '',
-    provinsi: ''
+    provinsi: '',
+    kota: '',
+    kecamatan: '',
+    highest: '',
+    lowest: '',
+    merk_id: '',
+    tipe_mobil: ''
 })
 
-const handleDataLokasi = (val) => {
-    search.provinsi = val.provinsi ? val.provinsi : ""
+const handleHargaTinggi = () => {
+    search.highest = "HargaTinggi"
+    fetchDataSearch()
+}
 
-    console.log(val, "emit masuk")
+const handleHargaRendah = () => {
+    search.lowest = "HargaRendah"
+    fetchDataSearch()
+}
+
+const handleDataMerk = (val) => {
+    search.merk_id = val.merk_id ? val.merk_id : ""
+    search.tipe_mobil = val.tipe_mobil ? val.tipe_mobil : ""
+    console.log(val,"merk dan type masuk")
 
     fetchDataSearch()
 }
 
+const handleDataLokasi = (val) => {
+    search.provinsi = val.provinsi ? val.provinsi : ""
+    search.kota = val.kota ? val.kota : ""
+    search.kecamatan = val.kecamatan ? val.kecamatan : ""
+    console.log(val, "emit masuk")
+    fetchDataSearch()
+}
 const handleDataJenis = (val) => {
     search.plat_nomor = val.platnomor ? val.platnomor : ""// setelah ? itu pilihan yes or no
     search.bahan_bakar = val.bahan_bakar ? val.bahan_bakar : ""
     search.warna = val.warna ? val.warna : ""
     search.tipe_body = val.bodi ? val.bodi : ""
     search.transmisi = val.transmisi ? val.transmisi : ""
-
-
     fetchDataSearch()
 }
-
 const handleDataYear = (val) => {
     search.min_year = val[0] ?? 0
     search.max_year = val[1] ?? 0
-
     console.log(val, "emit masuk")
-
     fetchDataSearch()
 }
-
 const handleDataPrice = (val) => {
     search.min_price = val[0] ?? 0
     search.max_price = val[1] ?? 0
-
     fetchDataSearch()
 }
-
 const searchResult = () => {
     result = route.query
 }
-
 const SearchHandle = (val) => {
-
     search.name = val
-
     fetchDataSearch()
 };
-
 const fetchDataSearch = async () => {
     const query = {}
-
     if (search.name !== "") {
         query.name = search.name
     }
-
     if (search.min_year !== "") {
         query.min_year = search.min_year
     }
-
     if (search.max_year !== "") {
         query.max_year = search.max_year
     }
-
     if (search.min_price !== "") {
         query.min_price = search.min_price
     }
-
     if (search.max_price !== "") {
         query.max_price = search.max_price
     }
-
     if (search.tipe_body !== "") {
         query.tipe_body = search.tipe_body
     }
-
     if (search.bahan_bakar !== "") {
         query.bahan_bakar = search.bahan_bakar
     }
-
     if (search.transmisi != "") {
         query.transmisi = search.transmisi
     }
-
     if (search.plat_nomor != "") {
         query.plat_nomor = search.plat_nomor
     }
-
     if (search.warna != "") {
         query.warna = search.warna
     }
-
     if (search.provinsi != "") {
         query.provinsi = search.provinsi
     }
-
+    if (search.kota != "") {
+        query.kota = search.kota
+    }
+    if (search.kecamatan != "") {
+        query.kecamatan = search.kecamatan
+    }
+    if (search.lowest != "") {
+        query.lowest = search.lowest
+    }
+    if (search.highest != "") {
+        query.highest = search.highest
+    }
+    if (search.merk_id != "") {
+        query.merk_id = search.merk_id
+    }
+    if (search.tipe_mobil != "") {
+        query.tipe_mobil = search.tipe_mobil
+    }
     await router.push({
         path: '/',
         query: query
     })
-
     unitStore.getUnitService(route.query)
 }
-
 const clearSearch = () => {
     unitStore.getUnitService(clear);
 };
-
 const openModal = () => {
     jenis.value.$refs.jenis.open()
 };
-
 const openHarga = () => {
     price.value.$refs.price.open()
 };
-
 const openTahun = () => {
     tahun.value.$refs.tahun.open()
 };
-
 const openLokasi = () => {
     lokasim.value.$refs.lokasim.open()
 };
-
 const openDetail = () => {
     test.value.$refs.pesandetail.open()
 };
-
 const openMerk = () => {
     merk.value.$refs.merk.open()
 };
-
 const lokasi = [
     { text: 'Semua Lokasi', value: 'all_location' },
     { text: 'Pilih Lokasi', value: 'pick_location' },
 ];
-
 const modal1 = [
     { text: 'Merek', value: 'pick_merek' },
     { text: 'Jenis', value: 'pick_jenis' },
 ];
-
 const sort = [
     { text: 'Harga Terendah - Tinggi', value: 'pick_desc' },
     { text: 'Harga Tinggi - Terendah', value: 'pick_asc' },
     { text: 'Jarak Tempuh Terendah', value: 'pick_jarak_asc' },
     { text: 'Tahun Terkini - Terlampau', value: 'pick_tahun_asc' },
 ];
-
 const fetchData = () => {
     const query = {}
 }
-
 const getUnit = computed(() => unitStore.getUnit())
-
-
 onMounted(() => {
     unitStore.getUnitService('')
 })
-
-
 const handleMenu = (e) => {
     if (e.id == 0) {
         console.log("buka modal semua lokasi")
@@ -314,7 +304,6 @@ const handleMenu = (e) => {
         openLokasi()
     }
 }
-
 const handleModal1 = (e) => {
     if (e.id == 0) {
         openMerk()
@@ -322,15 +311,14 @@ const handleModal1 = (e) => {
         openModal()
     }
 }
-
 const sortingHarga = () => {
     sortUnit.sort()
 }
-
 const HandleSort = (e) => {
     if (e.id == 0) {
-        sortHargaAsc()
-        console.log(a.harga)
+        handleHargaTinggi()
+    } else if(e.id == 1) {
+        handleHargaRendah()
     }
 }
 </script>

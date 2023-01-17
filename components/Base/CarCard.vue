@@ -29,7 +29,7 @@
             </v-row>
             <v-row no-gutters>
                 <v-col md="12" class="ml-5">
-                    <p class="pb-2 cardtext">{{ items?.tahun }} | {{ items?.odometer }} KM | {{ items?.transmisi }} | Jakarta</p>
+                    <p class="pb-2 cardtext">{{ items?.tahun }} | {{ items?.odometer }} KM | {{ items?.transmisi }} | {{items?.Provinsi}}</p>
                 </v-col>
             </v-row>
             </v-card>
