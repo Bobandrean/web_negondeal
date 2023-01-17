@@ -11,7 +11,8 @@
     <BaseCard>
         <v-row>
             <v-col lg="12">
-                <BaseInput @keyup="getData" v-model="search" placeholder="Cari Mobil Anda (Merek/Jenis)" type="text">
+                <BaseInput @keyup.enter="SearchHandle" v-model="search.name" placeholder="Cari Mobil Anda (Merek/Jenis)"
+                    type="text">
                 </BaseInput>
             </v-col>
         </v-row>
@@ -101,6 +102,20 @@ const jenis = ref("");
 const harga = ref("");
 const tahun = ref("");
 const lokasim = ref("");
+
+const search = reactive({
+    name: '',
+    min_price: '',
+    max_price: '',
+    min_year: '',
+    max_year: '',
+    merk: '',
+    type: ''
+})
+
+const SearchHandle = () => {
+    unitStore.getUnitService(search)
+};
 
 const openModal = () => {
     jenis.value.$refs.jenis.open()

@@ -73,6 +73,8 @@ const router = useRouter();
 
 const handleDetail = async (id) => {
     await router.push(`/detail/${id}`);
+
+    window.location.reload()
 };
 
 defineProps({
