@@ -21,7 +21,7 @@ export const useLokasiStore = defineStore('provinsi', () => {
         try {
 
             const res = await lokasiServices.getCity(payload)
-
+            console.log(payload)
             setCity(res.data)
 
         } catch (error) {

@@ -16,7 +16,7 @@ export const useMerkStore = defineStore('merk', () => {
 
     async function fetchMerk() {
         const request = {
-            assettype: 'MOBIL'
+            assettype: "MOBIL"
         }
         try {
             const res = await merkServices.getMerk(request)

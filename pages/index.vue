@@ -87,7 +87,7 @@
             </v-row>
             <v-row>
                 <v-col md="6">
-                    <BaseInput placeholder=""></BaseInput>
+                    
                 </v-col>
                 <v-col md="6">
                     <BaseInput></BaseInput>
@@ -146,11 +146,11 @@ const search = reactive({
     transmisi: '',
     tipe_body: '',
     warna: '',
-    Provinsi: ''
+    provinsi: ''
 })
 
 const handleDataLokasi = (val) => {
-    search.Provinsi = val.Provinsi ? val.Provinsi : ""
+    search.provinsi = val.provinsi ? val.provinsi : ""
 
     console.log(val, "emit masuk")
 
@@ -238,13 +238,8 @@ const fetchDataSearch = async () => {
         query.warna = search.warna
     }
 
-<<<<<<< HEAD
-    if(search.Provinsi != ""){
-        query.Provinsi = search.Provinsi
-=======
     if (search.provinsi != "") {
         query.provinsi = search.provinsi
->>>>>>> 14ea17b661116e57dd7a6e0fdbfa61fd7032f6ab
     }
 
     await router.push({

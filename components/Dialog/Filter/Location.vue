@@ -2,40 +2,6 @@
     <BaseDialog ref="lokasim" class-name="px-5 py-8" :max-width="800">
         <v-container>
             <form @submit.prevent="handleSubmit(SelectedValue)">
-<<<<<<< HEAD
-            <v-row>
-                <v-col md="12" align="center">
-                    <p>Silahkan Pilih Lokasi</p>
-                </v-col>
-            </v-row>
-            <v-row no-gutters>
-                <v-col md="12" align="center">
-                    <p>Anda Dapat Memilih lebih dari 1 lokasi</p>
-                </v-col>
-            </v-row>
-            <v-row>
-                <v-col md="4" align="center">
-                    <p style="margin-top:20px"> Cari Lokasi</p>
-                </v-col>
-                <v-col md="8">
-                    <v-text-field
-            placeholder="Contoh : Bandung Karawang"
-            prepend-inner-icon="mdi-magnify"
-          ></v-text-field>
-                </v-col>
-            </v-row>
-            <v-row>
-                <v-col md="12" align="center">
-                    <p>Atau Cari Berdasarkan Provinsi</p>
-                    {{ SelectedValue.Provinsi }} 
-                </v-col>
-                <v-col md="12" align="center">
-                    <v-select v-model="SelectedValue.Provinsi" @change="handleSelectItem(val)" :items="getProvince" label="Provinsi" item-title="name" item-value="id"></v-select>
-                </v-col>
-            </v-row>
-            <v-row >
-                <v-col md="12" align="center">
-=======
                 <v-row>
                     <v-col md="12" align="center">
                         <p>Silahkan Pilih Lokasi</p>
@@ -58,10 +24,10 @@
                 <v-row>
                     <v-col md="12" align="center">
                         <p>Atau Cari Berdasarkan Provinsi</p>
-                        {{ SelectedValue }}
+                        {{ SelectedValue }} {{ payload }}
                     </v-col>
                     <v-col md="12" align="center">
-                        <v-select v-model="SelectedValue.provinsi" @change="handleCity(val)" :items="getProvince"
+                        <v-select v-model="SelectedValue.provinsi" @change="handleCity()" :items="getProvince"
                             label="Provinsi" item-title="name" item-value="id"></v-select>
                     </v-col>
                     <v-col md="12" align="center">
@@ -71,7 +37,6 @@
                 </v-row>
                 <v-row>
                     <v-col md="12" align="center">
->>>>>>> 14ea17b661116e57dd7a6e0fdbfa61fd7032f6ab
 
                     </v-col>
                 </v-row>
@@ -112,29 +77,24 @@ onMounted(() => {
 })
 
 const SelectedValue = reactive({
-<<<<<<< HEAD
-            Provinsi: '',
-=======
     provinsi: '',
     city: '',
     district: ''
->>>>>>> 14ea17b661116e57dd7a6e0fdbfa61fd7032f6ab
 
 })
 
-<<<<<<< HEAD
-        const handleSelectItem = (val) => {
-            SelectedValue.Provinsi = val
-=======
 const handleSelectItem = (val) => {
     SelectedValue.provinsi = val
->>>>>>> 14ea17b661116e57dd7a6e0fdbfa61fd7032f6ab
-
-}
-
-const handleCity = (val) => {
     const payload = {
         province_id: val
+    }
+    console.log(val)
+    lokasiStore.fetchCity(payload)
+}
+
+const handleCity = () => {
+    const payload = {
+        province_id: SelectedValue.provinsi
     }
     console.log(payload)
     onMounted(() => {
@@ -146,6 +106,7 @@ const handleSubmit = () => {
 
     emit('dataLokasi', SelectedValue)
     console.log(SelectedValue)
+    console.log(payload)
 };
 
 </script>
