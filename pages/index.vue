@@ -2,7 +2,7 @@
 
 
     <!-- Modal -->
-    <DialogFilterLocation  ref="lokasim" @dataLokasi = "handleDataLokasi"></DialogFilterLocation>
+    <DialogFilterLocation ref="lokasim" @dataLokasi="handleDataLokasi"></DialogFilterLocation>
     <DialogRangeHarga ref="price" @dataPrice="handleDataPrice"></DialogRangeHarga>
     <DialogCariTahun ref="tahun" @dataYear="handleDataYear"></DialogCariTahun>
     <DialogMobilJenis ref="jenis" @dataJenis="handleDataJenis"></DialogMobilJenis>
@@ -105,7 +105,7 @@ import { useCounterStore } from '@/stores/counter'
 import { useUnitStore } from '@/stores/unit'
 import { useRoute, useRouter } from 'vue-router';
 import { useLokasiStore } from '@/stores/lokasi'
-import {useMerkStore} from '@/stores/merk'
+import { useMerkStore } from '@/stores/merk'
 definePageMeta({
     layout: "default",
 });
@@ -123,12 +123,14 @@ const merk = ref("");
 
 const MerkStore = useMerkStore()
 const getMerk = computed(() => MerkStore.getMerk())
-onMounted(() => {MerkStore.fetchMerk('')
+onMounted(() => {
+    MerkStore.fetchMerk('')
 })
 
 const lokasiStore = useLokasiStore()
 const getProvince = computed(() => lokasiStore.getProvince())
- onMounted(() => {lokasiStore.fetchLokasi('')
+onMounted(() => {
+    lokasiStore.fetchLokasi('')
 })
 
 const search = reactive({
@@ -220,23 +222,23 @@ const fetchDataSearch = async () => {
         query.tipe_body = search.tipe_body
     }
 
-    if (search.bahan_bakar !== ""){
+    if (search.bahan_bakar !== "") {
         query.bahan_bakar = search.bahan_bakar
     }
 
-    if (search.transmisi != ""){
+    if (search.transmisi != "") {
         query.transmisi = search.transmisi
     }
 
-    if (search.plat_nomor != ""){
+    if (search.plat_nomor != "") {
         query.plat_nomor = search.plat_nomor
     }
 
-    if (search.warna != ""){
+    if (search.warna != "") {
         query.warna = search.warna
     }
 
-    if(search.provinsi != ""){
+    if (search.provinsi != "") {
         query.provinsi = search.provinsi
     }
 
@@ -321,7 +323,7 @@ const handleModal1 = (e) => {
     }
 }
 
-const sortingHarga = () =>{
+const sortingHarga = () => {
     sortUnit.sort()
 }
 

@@ -15,10 +15,12 @@ export const useMerkStore = defineStore('merk', () => {
     }
 
     async function fetchMerk() {
+        const request = {
+            assettype: 'MOBIL'
+        }
         try {
-
-            const res = await merkServices.getMerk()
-
+            const res = await merkServices.getMerk(request)
+            console.log(res)
             setMerk(res.data)
 
         } catch (error) {
