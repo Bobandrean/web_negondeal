@@ -7,31 +7,20 @@
                         <p>Silahkan Pilih Lokasi</p>
                     </v-col>
                 </v-row>
-                <v-row no-gutters>
-                    <v-col md="12" align="center">
-                        <p>Anda Dapat Memilih lebih dari 1 lokasi</p>
-                    </v-col>
-                </v-row>
-                <v-row>
-                    <v-col md="4" align="center">
-                        <p style="margin-top:20px"> Cari Lokasi</p>
-                    </v-col>
-                    <v-col md="8">
-                        <v-text-field placeholder="Contoh : Bandung Karawang"
-                            prepend-inner-icon="mdi-magnify"></v-text-field>
-                    </v-col>
-                </v-row>
                 <v-row>
                     <v-col md="12" align="center">
-                        <p>Atau Cari Berdasarkan Provinsi</p>
-                        {{ SelectedValue }}{{ getCity }}
+                        {{ SelectedValue }}
                     </v-col>
                     <v-col md="12" align="center">
                         <v-select v-model="SelectedValue.provinsi" @update:model-value="handleCity()"
                             :items="getProvince" label="Provinsi" item-title="name" item-value="id"></v-select>
                     </v-col>
                     <v-col md="12" align="center">
-                        <v-select v-model="SelectedValue.city" :items="getCity" label="Kota" item-title="name"
+                        <v-select v-model="SelectedValue.kota" @update:model-value="handleDistrict()" :items="getCity" label="Kota" item-title="name"
+                            item-value="id"></v-select>
+                    </v-col>
+                    <v-col md="12" align="center">
+                        <v-select v-model="SelectedValue.kecamatan" :items="getDistrict" label="Kecamatan" item-title="name"
                             item-value="id"></v-select>
                     </v-col>
                 </v-row>
@@ -52,7 +41,6 @@
 </template>
 
 <script>
-
 </script>
 
 <script setup>
@@ -60,30 +48,22 @@ import { useCounterStore } from '@/stores/counter'
 import { useLokasiStore } from '@/stores/lokasi'
 import { useRoute, useRouter } from 'vue-router';
 import { defineEmits } from 'vue'
-
 const counterStore = useCounterStore()
 const lokasiStore = useLokasiStore()
 const route = useRoute()
 const router = useRouter()
 const emit = defineEmits(['dataLokasi'])
-
 const getProvince = computed(() => lokasiStore.getProvince())
 const getCity = computed(() => lokasiStore.getCity())
-const district = computed(() => lokasiStore.getDistrict())
-
-
+const getDistrict = computed(() => lokasiStore.getDistrict())
 onMounted(() => {
     lokasiStore.fetchLokasi('')
 })
-
 const SelectedValue = reactive({
     provinsi: '',
-    city: '',
-    district: ''
-
+    kota: '',
+    kecamatan: ''
 })
-
-
 const handleCity = async () => {
     console.log("sukses merubah")
     const payload = {
@@ -91,15 +71,21 @@ const handleCity = async () => {
     }
     console.log(payload)
     await lokasiStore.fetchCity(payload)
+}
 
+const handleDistrict = async () => {
+    console.log("sukses merubah kota")
+    const payload = {
+        city_id: SelectedValue.kota
+    }
+    console.log(payload)
+    await lokasiStore.fetchDistrict(payload)
 }
 
 const handleSubmit = () => {
-
     emit('dataLokasi', SelectedValue)
     console.log(SelectedValue)
 };
-
 </script>
 
 <style>
@@ -107,9 +93,7 @@ const handleSubmit = () => {
     overflow-y: auto;
     max-height: 150px;
 }
-
 .row-1 {
     margin-top: 3%;
 }
 </style>
-

@@ -5,6 +5,7 @@ import {
 
 export const useMerkStore = defineStore('merk', () => {
     const merk = ref([])
+    const brand = ref([])
 
 
     const getMerk = () => {
@@ -16,11 +17,10 @@ export const useMerkStore = defineStore('merk', () => {
 
     async function fetchMerk() {
         const request = {
-            assettype: 'MOBIL'
+            assettype: "MOBIL"
         }
         try {
             const res = await merkServices.getMerk(request)
-            console.log(res)
             setMerk(res.data)
 
         } catch (error) {
@@ -28,9 +28,29 @@ export const useMerkStore = defineStore('merk', () => {
         }
     }
 
+    const getBrand = () => {
+        return brand.value
+    }
+
+    const setBrand = (data) => {
+        brand.value = data
+    }
+
+    async function fetchBrand(payload) {
+        try {
+            const res = await merkServices.getBrand(payload)
+            setBrand(res.data)
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
     return {
         merk,
+        brand,
         getMerk,
-        fetchMerk
+        getBrand,
+        fetchMerk,
+        fetchBrand
     }
 })

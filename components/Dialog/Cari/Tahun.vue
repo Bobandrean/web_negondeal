@@ -25,7 +25,6 @@
                         </v-text-field>
                     </v-col>
                     <v-col md="6" align="center">
-                        {{ formValues }}
                         <v-text-field :v-model="formValues.max_year" :model-value="range[1]" hide-details single-line
                             type="number" variant="outlined" style="width: 150px" density="compact"
                             @change="$set(range, 1, $event)">
@@ -72,7 +71,7 @@ export default {
 
         const handleChangeRange = (val) => {
             formValues.min_year = val[0],
-            formValues.max_year = val[1]
+                formValues.max_year = val[1]
         }
 
         const tahun = ref()

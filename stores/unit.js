@@ -23,15 +23,18 @@ export const useUnitStore = defineStore('unit', () => {
             max_price: payload.max_price ? payload.max_price : "",
             min_year: payload.min_year ? payload.min_year : "",
             max_year: payload.max_year ? payload.max_year : "",
-            merk: payload.merk ? payload.merk : "",
-            type: payload.type ? payload.type : "",
             tipe_body: payload.tipe_body ? payload.tipe_body : "",
             plat_nomor: payload.plat_nomor ? payload.plat_nomor : "",
             warna: payload.warna ? payload.warna : "",
             transmisi: payload.transmisi ? payload.transmisi : "",
             bahan_bakar: payload.bahan_bakar ? payload.bahan_bakar : "",
             provinsi: payload.provinsi ? payload.provinsi : "",
-            highest: payload.highest ? payload.highest : ""
+            kota: payload.kota ? payload.kota : "",
+            kecamatan: payload.kecamatan ? payload.kecamatan : "",
+            highest: payload.highest ? payload.highest : "",
+            lowest: payload.lowest ? payload.lowest : "",
+            merk: payload.merk_id ? payload.merk_id : "",
+            type: payload.tipe_mobil ? payload.tipe_mobil : ""
         }
         try {
             const res = await unitServices.getUnit(query)

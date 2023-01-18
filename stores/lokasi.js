@@ -38,10 +38,10 @@ export const useLokasiStore = defineStore('provinsi', () => {
         district.value = data
     }
 
-    async function fetchDistrict() {
+    async function fetchDistrict(payload) {
         try {
 
-            const res = await lokasiServices.getDistrict()
+            const res = await lokasiServices.getDistrict(payload)
 
             setDistrict(res.data)
 

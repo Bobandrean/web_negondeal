@@ -11,13 +11,6 @@ class LokasiServices {
   }
 
   async getCity(payload) {
-
-    const res = await api.doGet(`v1/getprovince`, payload)
-    // console.debug('GET FETCH', res)
-    return res
-  }
-
-  async getCity(payload) {
     return await api.doPost('v1/getcity', payload)
       .then((res) => res)
       .catch((err) => err)

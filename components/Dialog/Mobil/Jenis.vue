@@ -8,31 +8,18 @@
           </v-col>
         </v-row>
         <v-row>
-          <v-card
-            class="mx-auto"
-            display="flex"
-            width="700"
-            height="400"
-            style="border-style: thin; border-color: black; border-width: 1px"
-          >
+          <v-card class="mx-auto" display="flex" width="700" height="400"
+            style="border-style: thin; border-color: black; border-width: 1px">
             <v-container>
               <v-row>
                 <v-col md="4">
                   <v-row>
-                    <v-col
-                      v-for="item in list"
-                      :value="item"
-                      :key="item"
-                      md="12"
-                      align="center"
-                      style="cursor: pointer"
+                    <v-col v-for="item in list" :value="item" :key="item" md="12" align="center" style="cursor: pointer"
                       :style="
                         SelectedValue.nama == item
                           ? 'background-color: #e0e0e0'
                           : ''
-                      "
-                      @click="handleSelectItem(item)"
-                    >
+                      " @click="handleSelectItem(item)">
                       <p>{{ item }}</p>
                     </v-col>
                   </v-row>
@@ -40,21 +27,16 @@
                 <v-divider vertical></v-divider>
                 <v-col md="8" class="scrollable">
                   <v-row v-if="SelectedValue.nama == 'Tipe Bodi'">
-                    <v-col
-                      v-for="list in bodi"
-                      :value="list"
-                      :key="list"
-                      style="cursor: pointer"
-                      @click="handleSelectTipe(list)"
-                      md="4"
-                      align="center"
-                    >
+                    <v-col v-for="list in bodi" :value="list" :key="list" style="cursor: pointer"
+                      @click="handleSelectTipe(list)" md="4" align="center" :style="
+                        SelectedValue.bodi == list
+                          ? 'background-color: #e0e0e0'
+                          : ''
+                      ">
                       <v-row>
                         <v-col>
                           <v-avatar size="80" rounded="0">
-                            <v-img
-                              src="https://cdn.vuetifyjs.com/images/cards/halcyon.png"
-                            ></v-img>
+                            <v-img src="https://cdn.vuetifyjs.com/images/cards/halcyon.png"></v-img>
                           </v-avatar>
                         </v-col>
                         <v-col>
@@ -64,21 +46,16 @@
                     </v-col>
                   </v-row>
                   <v-row v-if="SelectedValue.nama == 'Plat Nomor'">
-                    <v-col
-                      v-for="list in plat_nomor"
-                      :value="list"
-                      :key="list"
-                      style="cursor: pointer"
-                      @click="handleSelectPlatNomor(list)"
-                      md="4"
-                      align="center"
-                    >
+                    <v-col v-for="list in plat_nomor" :value="list" :key="list" style="cursor: pointer"
+                      @click="handleSelectPlatNomor(list)" md="4" align="center" :style="
+                        SelectedValue.platnomor == list
+                          ? 'background-color: #e0e0e0'
+                          : ''
+                      ">
                       <v-row>
                         <v-col>
                           <v-avatar size="80" rounded="0">
-                            <v-img
-                              src="https://cdn.vuetifyjs.com/images/cards/halcyon.png"
-                            ></v-img>
+                            <v-img src="https://cdn.vuetifyjs.com/images/cards/halcyon.png"></v-img>
                           </v-avatar>
                         </v-col>
                         <v-col>
@@ -88,21 +65,16 @@
                     </v-col>
                   </v-row>
                   <v-row v-if="SelectedValue.nama == 'Bahan Bakar'">
-                    <v-col
-                      v-for="list in bahanbakar"
-                      :value="list"
-                      :key="list"
-                      style="cursor: pointer"
-                      @click="handleSelectBahanBakar(list)"
-                      md="4"
-                      align="center"
-                    >
+                    <v-col v-for="list in bahanbakar" :value="list" :key="list" style="cursor: pointer"
+                      @click="handleSelectBahanBakar(list)" md="4" align="center" :style="
+                        SelectedValue.bahan_bakar == list
+                          ? 'background-color: #e0e0e0'
+                          : ''
+                      ">
                       <v-row>
                         <v-col>
                           <v-avatar size="80" rounded="0">
-                            <v-img
-                              src="https://cdn.vuetifyjs.com/images/cards/halcyon.png"
-                            ></v-img>
+                            <v-img src="https://cdn.vuetifyjs.com/images/cards/halcyon.png"></v-img>
                           </v-avatar>
                         </v-col>
                         <v-col>
@@ -112,21 +84,16 @@
                     </v-col>
                   </v-row>
                   <v-row v-if="SelectedValue.nama == 'Transmisi'">
-                    <v-col
-                      v-for="list in transmisi"
-                      :value="list"
-                      :key="list"
-                      style="cursor: pointer"
-                      @click="handleSelectTransmisi(list)"
-                      md="4"
-                      align="center"
-                    >
+                    <v-col v-for="list in transmisi" :value="list" :key="list" style="cursor: pointer"
+                      @click="handleSelectTransmisi(list)" md="4" align="center" :style="
+                        SelectedValue.transmisi == list
+                          ? 'background-color: #e0e0e0'
+                          : ''
+                      ">
                       <v-row>
                         <v-col>
                           <v-avatar size="80" rounded="0">
-                            <v-img
-                              src="https://cdn.vuetifyjs.com/images/cards/halcyon.png"
-                            ></v-img>
+                            <v-img src="https://cdn.vuetifyjs.com/images/cards/halcyon.png"></v-img>
                           </v-avatar>
                         </v-col>
                         <v-col>
@@ -136,21 +103,16 @@
                     </v-col>
                   </v-row>
                   <v-row v-if="SelectedValue.nama == 'Warna'">
-                    <v-col
-                      v-for="list in warna"
-                      :value="list"
-                      :key="list"
-                      style="cursor: pointer"
-                      @click="handleSelectWarna(list)"
-                      md="4"
-                      align="center"
-                    >
+                    <v-col v-for="list in warna" :value="list" :key="list" style="cursor: pointer"
+                      @click="handleSelectWarna(list)" md="4" align="center" :style="
+                        SelectedValue.warna == list
+                          ? 'background-color: #e0e0e0'
+                          : ''
+                      ">
                       <v-row>
                         <v-col>
                           <v-avatar size="80" rounded="0">
-                            <v-img
-                              src="https://cdn.vuetifyjs.com/images/cards/halcyon.png"
-                            ></v-img>
+                            <v-img src="https://cdn.vuetifyjs.com/images/cards/halcyon.png"></v-img>
                           </v-avatar>
                         </v-col>
                         <v-col>
@@ -160,21 +122,12 @@
                     </v-col>
                   </v-row>
                   <v-row v-if="SelectedValue.nama == 'Jumlah Kursi'">
-                    <v-col
-                      v-for="list in tempat_duduk"
-                      :value="list"
-                      :key="list"
-                      style="cursor: pointer"
-                      @click="handleSelectTipe(list)"
-                      md="4"
-                      align="center"
-                    >
+                    <v-col v-for="list in tempat_duduk" :value="list" :key="list" style="cursor: pointer"
+                      @click="handleSelectTipe(list)" md="4" align="center">
                       <v-row>
                         <v-col md="12">
                           <v-avatar size="80" rounded="0">
-                            <v-img
-                              src="https://cdn.vuetifyjs.com/images/cards/halcyon.png"
-                            ></v-img>
+                            <v-img src="https://cdn.vuetifyjs.com/images/cards/halcyon.png"></v-img>
                           </v-avatar>
                         </v-col>
                         <v-col>
@@ -197,7 +150,7 @@
     </v-container>
   </BaseDialog>
 </template>
-
+  
 <script>
 import { useUnitStore } from "@/stores/unit";
 import { defineEmits } from "vue";
@@ -245,7 +198,6 @@ export default {
   setup(props, context) {
     const router = useRouter();
     const unitStore = useUnitStore();
-
     const SelectedValue = reactive({
       nama: "",
       bodi: "",
@@ -254,44 +206,34 @@ export default {
       transmisi: "",
       warna: "",
     });
-
     const handleSelectItem = (item) => {
       SelectedValue.nama = item;
-
       console.log(SelectedValue);
     };
-
     const handleSelectBahanBakar = (list) => {
       SelectedValue.bahan_bakar = list;
       console.log(SelectedValue.bahan_bakar);
     };
-
     const handleSelectPlatNomor = (list) => {
       SelectedValue.platnomor = list;
       console.log(SelectedValue.platnomor);
     };
-
     const handleSelectTransmisi = (list) => {
       SelectedValue.transmisi = list;
       console.log(SelectedValue.transmisi);
     };
-
     const handleSelectWarna = (list) => {
       SelectedValue.warna = list;
       console.log(SelectedValue.warna);
     };
-
     const handleSelectTipe = (list) => {
       SelectedValue.bodi = list;
       console.log(SelectedValue.bodi);
     };
-
     const handleSubmit = () => {
       context.emit("dataJenis", SelectedValue);
-
       console.log(context);
     };
-
     return {
       SelectedValue,
       handleSelectItem,
