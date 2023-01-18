@@ -9,7 +9,7 @@
                 </v-row>
                 <v-row>
                     <v-col md="12" align="center">
-                        {{ SelectedValue }} {{  }}
+                        {{ SelectedValue }}
                     </v-col>
                     <v-col md="12" align="center">
                         <v-select v-model="SelectedValue.merk_id" @update:model-value="handleMerk()" :items="getMerk" label="Merk" item-title="brand" item-value="brand"></v-select>
