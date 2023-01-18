@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      name: "nuxt-php-framework",
+      name: "web-negondeal",
       exec_mode: "cluster",
       instances: "max",
       script: "./.output/server/index.mjs",
