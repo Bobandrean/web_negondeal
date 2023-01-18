@@ -9,13 +9,13 @@
                 </v-row>
                 <v-row>
                     <v-col md="12" align="center">
-                        {{ SelectedValue }}
                     </v-col>
                     <v-col md="12" align="center">
-                        <v-select v-model="SelectedValue.merk_id" @update:model-value="handleMerk()" :items="getMerk" label="Merk" item-title="brand" item-value="brand"></v-select>
+                        <v-select v-model="SelectedValue.merk_id" @update:model-value="handleMerk()" :items="getMerk"
+                            label="Merk" item-title="brand" item-value="brand"></v-select>
                     </v-col>
                     <v-col md="12" align="center">
-                        <v-select v-model="SelectedValue.tipe_mobil"  :items="getBrand" label="Brand" item-title="types"
+                        <v-select v-model="SelectedValue.tipe_mobil" :items="getBrand" label="Brand" item-title="types"
                             item-value="types"></v-select>
                     </v-col>
                 </v-row>
@@ -31,7 +31,7 @@
                 </v-row>
             </form>
         </v-container>
-  </BaseDialog>
+    </BaseDialog>
 </template>
 
 <script setup>
@@ -73,8 +73,8 @@ const handleSubmit = () => {
 </script>
 
 <style>
-  .scrollable{
-overflow-y: auto;
-max-height: 300px;
+.scrollable {
+    overflow-y: auto;
+    max-height: 300px;
 }
 </style>
