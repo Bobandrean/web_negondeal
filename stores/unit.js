@@ -24,7 +24,14 @@ export const useUnitStore = defineStore('unit', () => {
             min_year: payload.min_year ? payload.min_year : "",
             max_year: payload.max_year ? payload.max_year : "",
             merk: payload.merk ? payload.merk : "",
-            type: payload.type ? payload.type : ""
+            type: payload.type ? payload.type : "",
+            tipe_body: payload.tipe_body ? payload.tipe_body : "",
+            plat_nomor: payload.plat_nomor ? payload.plat_nomor : "",
+            warna: payload.warna ? payload.warna : "",
+            transmisi: payload.transmisi ? payload.transmisi : "",
+            bahan_bakar: payload.bahan_bakar ? payload.bahan_bakar : "",
+            provinsi: payload.provinsi ? payload.provinsi : "",
+            highest: payload.highest ? payload.highest : ""
         }
         try {
             const res = await unitServices.getUnit(query)
@@ -35,27 +42,25 @@ export const useUnitStore = defineStore('unit', () => {
         }
     }
 
-    const getDetailUnit = () => {
-        return detailUnit.value
+    const getDetailUnit = computed(() => detailUnit.value)
+
+    const setDetailUnit = (data) => {
+        detailUnit.value = data
     }
 
-    const setDetailUnit = (value) => {
-        detailUnit.value = value
-    }
-
-    const getDetailUnitService = async () => {
-        console.log("test")
+    async function fetchDetailUnit(id) {
         try {
+
             const res = await unitServices.detailUnit({
                 id
             })
-            console.log(res)
             setDetailUnit(res.data)
+
         } catch (error) {
             console.error(error)
         }
-
     }
+
 
     return {
         unit,
@@ -63,6 +68,6 @@ export const useUnitStore = defineStore('unit', () => {
         getUnitService,
         detailUnit,
         getDetailUnit,
-        getDetailUnitService
+        fetchDetailUnit
     }
 })

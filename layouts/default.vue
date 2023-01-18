@@ -18,7 +18,8 @@
 
                 <BaseButton> Jual Mobil </BaseButton>
 
-                <BaseButton> Blog </BaseButton>
+                <BaseButton to="/hubungikami"> Blog </BaseButton>
+                <v-spacer></v-spacer>
                 <BaseButton> Lainnya </BaseButton>
                 <v-spacer></v-spacer>
                 <BaseDropDown @menuClick="handleAkun" class="justify-end" label="Akun" :items="akun"></BaseDropDown>

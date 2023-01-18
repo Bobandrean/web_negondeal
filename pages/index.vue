@@ -1,25 +1,25 @@
 <template>
-
-
-    <!-- Modal -->
-    <DialogFilterLocation ref="lokasim"></DialogFilterLocation>
-    <DialogRangeHarga ref="harga"></DialogRangeHarga>
-    <DialogCariTahun ref="tahun"></DialogCariTahun>
-    <DialogMobilJenis ref="jenis"></DialogMobilJenis>
-    <!-- End Modal -->
+  <!-- Modal -->
+  <DialogFilterLocation
+    ref="lokasim"
+    @dataLokasi="handleDataLokasi"
+  ></DialogFilterLocation>
+  <DialogRangeHarga ref="price" @dataPrice="handleDataPrice"></DialogRangeHarga>
+  <DialogCariTahun ref="tahun" @dataYear="handleDataYear"></DialogCariTahun>
+  <DialogMobilJenis ref="jenis" @dataJenis="handleDataJenis"></DialogMobilJenis>
+  <DialogCarMerk ref="merk" @dataBodi="handleDataTipeBody"></DialogCarMerk>
+  <!-- End Modal -->
 
     <BaseCard>
         <v-row>
             <v-col lg="12">
-                <BaseInput @keyup.enter="SearchHandle" v-model="search.name" placeholder="Cari Mobil Anda (Merek/Jenis)"
-                    type="text">
+                <BaseInput @keyup="getData" v-model="search" placeholder="Cari Mobil Anda (Merek/Jenis)" type="text">
                 </BaseInput>
             </v-col>
         </v-row>
         <v-row>
             <v-col>
-                <BaseDropDown @menuClick="handleModal1" label="Merek & Jenis" :items="modal1">Merek & Jenis
-                </BaseDropDown>
+                <BaseDropDown @menuClick="handleModal1" label="Merek & Jenis" :items="modal1">Merek & Jenis</BaseDropDown>
             </v-col>
             <v-col>
                 <BaseButton @click="openHarga">Harga</BaseButton>
@@ -30,9 +30,9 @@
             <v-col>
                 <BaseDropDown @menuClick="handleMenu" label="Lokasi" :items="lokasi">Lokasi</BaseDropDown>
             </v-col>
-            <v-col>
+            <v-col> 
                 <BaseButton>Filter Lainnya</BaseButton>
-            </v-col>
+             </v-col>
             <v-col>
                 <BaseButton>Reset filter</BaseButton>
             </v-col>
@@ -91,93 +91,99 @@
 </template>
 
 <script setup>
-import { useCounterStore } from '@/stores/counter'
-import { useUnitStore } from '@/stores/unit'
-
+import { useCounterStore } from "@/stores/counter";
+import { useUnitStore } from "@/stores/unit";
+import { useRoute, useRouter } from "vue-router";
+import { useLokasiStore } from "@/stores/lokasi";
+import { useMerkStore } from "@/stores/merk";
 definePageMeta({
-    layout: "default",
+  layout: "default",
 });
+const counterStore = useCounterStore();
+const unitStore = useUnitStore();
+const route = useRoute();
+const router = useRouter();
 
 const jenis = ref("");
-const harga = ref("");
+const price = ref("");
 const tahun = ref("");
 const lokasim = ref("");
 
-const search = reactive({
-    name: '',
-    min_price: '',
-    max_price: '',
-    min_year: '',
-    max_year: '',
-    merk: '',
-    type: ''
-})
-
-const SearchHandle = () => {
-    unitStore.getUnitService(search)
-};
-
 const openModal = () => {
-    jenis.value.$refs.jenis.open()
+  jenis.value.$refs.jenis.open();
 };
 
 const openHarga = () => {
-    harga.value.$refs.harga.open()
+  price.value.$refs.price.open();
 };
 
 const openTahun = () => {
-    tahun.value.$refs.tahun.open()
+  tahun.value.$refs.tahun.open();
 };
 
 const openLokasi = () => {
-    lokasim.value.$refs.lokasim.open()
+  lokasim.value.$refs.lokasim.open();
 };
 
 const openDetail = () => {
-    test.value.$refs.pesandetail.open()
+  test.value.$refs.pesandetail.open();
+};
+
+const openMerk = () => {
+  merk.value.$refs.merk.open();
 };
 
 const lokasi = [
-    { text: 'Semua Lokasi', value: 'all_location' },
-    { text: 'Pilih Lokasi', value: 'pick_location' },
+  { text: "Semua Lokasi", value: "all_location" },
+  { text: "Pilih Lokasi", value: "pick_location" },
 ];
 
 const modal1 = [
-    { text: 'Merek', value: 'pick_merek' },
-    { text: 'Jenis', value: 'pick_jenis' },
+  { text: "Merek", value: "pick_merek" },
+  { text: "Jenis", value: "pick_jenis" },
 ];
 
 const sort = [
-    { text: 'Harga Terendah - Tinggi', value: 'pick_desc' },
-    { text: 'Harga Tinggi - Terendah', value: 'pick_asc' },
-    { text: 'Jarak Tempuh Terendah', value: 'pick_jarak_asc' },
-    { text: 'Tahun Terkini - Terlampau', value: 'pick_tahun_asc' },
+  { text: "Harga Terendah - Tinggi", value: "pick_desc" },
+  { text: "Harga Tinggi - Terendah", value: "pick_asc" },
+  { text: "Jarak Tempuh Terendah", value: "pick_jarak_asc" },
+  { text: "Tahun Terkini - Terlampau", value: "pick_tahun_asc" },
 ];
 
-const counterStore = useCounterStore()
-const unitStore = useUnitStore()
+const fetchData = () => {
+  const query = {};
+};
 
-const getUnit = computed(() => unitStore.getUnit())
+const getUnit = computed(() => unitStore.getUnit());
 
 onMounted(() => {
-    unitStore.getUnitService()
+    unitStore.getUnitService('')
 })
 
 
 const handleMenu = (e) => {
-    if (e.id == 0) {
-        console.log("buka modal semua lokasi")
-    } else if (e.id == 1) {
-        openLokasi()
-    }
-}
+  if (e.id == 0) {
+    console.log("buka modal semua lokasi");
+  } else if (e.id == 1) {
+    openLokasi();
+  }
+};
 
 const handleModal1 = (e) => {
-    if (e.id == 0) {
-        console.log("buka modal semua lokasi")
-    } else if (e.id == 1) {
-        openModal()
-    }
-}
+  if (e.id == 0) {
+    openMerk();
+  } else if (e.id == 1) {
+    openModal();
+  }
+};
 
+const sortingHarga = () => {
+  sortUnit.sort();
+};
+
+const HandleSort = (e) => {
+  if (e.id == 0) {
+    handleHargaTinggi();
+  }
+};
 </script>
