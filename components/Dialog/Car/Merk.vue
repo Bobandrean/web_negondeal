@@ -9,13 +9,12 @@
                 </v-row>
                 <v-row>
                     <v-col md="12" align="center">
-                        {{ SelectedValue }}
                     </v-col>
                     <v-col md="12" align="center">
-                        <v-select v-model="SelectedValue.merk_id" @update:model-value="handleMerk()" :items="getMerk" label="Merk" item-title="brand" item-value="brand"></v-select>
+                        <v-select v-model="SelectedValue.merk" @update:model-value="handleMerk()" :items="getMerk" label="Merk" item-title="brand" item-value="brand"></v-select>
                     </v-col>
                     <v-col md="12" align="center">
-                        <v-select v-model="SelectedValue.tipe_mobil"  :items="getBrand" label="Brand" item-title="types"
+                        <v-select v-model="SelectedValue.type"  :items="getBrand" label="Brand" item-title="types"
                             item-value="types"></v-select>
                     </v-col>
                 </v-row>
@@ -51,15 +50,15 @@ onMounted(() => {
     MerkStore.fetchMerk('')
 })
 const SelectedValue = reactive({
-    merk_id: '',
-    tipe_mobil: ''
+    merk: '',
+    type: ''
 })
 
 const handleMerk = async () => {
     console.log("sukses merubah")
     const payload = {
         assettype: "MOBIL",
-        brand: SelectedValue.merk_id
+        brand: SelectedValue.merk
     }
     console.log(payload)
     await MerkStore.fetchBrand(payload)

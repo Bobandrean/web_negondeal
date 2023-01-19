@@ -46,13 +46,13 @@
         <v-card-text>
             <v-row>
                 <v-col sm="12">
-                    Rp. {{ items?.harga.toLocaleString() }} (Cash)
+                    <p style="font-size:18px">Rp. {{ items?.harga.toLocaleString() }} (Cash)</p>
                 </v-col>
 
-                <v-col sm="6">
-                    Rp.135.000.000(Cash)
+                <v-col md="6">
+                    Rp.135.000.000
                 </v-col>
-                <v-col sm="6">
+                <v-col md="6" align="center">
                     200.000/Bulan
                 </v-col>
             </v-row>

@@ -46,6 +46,15 @@
         <v-col class="mt-3" md="3">
             <v-chip v-if="!!search.min_year">{{ search.min_year }}</v-chip>
         </v-col>
+        <v-col class="mt-3" md="3">
+            <v-chip v-if="!!search.provinsi">{{ search.provinsi }}</v-chip>
+        </v-col>
+        <v-col class="mt-3" md="3">
+            <v-chip v-if="!!search.merk">{{ search.merk }}</v-chip>
+        </v-col>
+        <v-col class="mt-3" md="3">
+            <v-chip v-if="!!search.type">{{ search.type }}</v-chip>
+        </v-col>
     </v-row>
     <v-divider class="ma-6"> </v-divider>
     <v-row>
@@ -106,6 +115,7 @@ import { useUnitStore } from '@/stores/unit'
 import { useRoute, useRouter } from 'vue-router';
 import { useLokasiStore } from '@/stores/lokasi'
 import { useMerkStore } from '@/stores/merk'
+import { useAuthStore } from '~~/stores/auth'
 definePageMeta({
     layout: "default",
 });
@@ -120,7 +130,10 @@ const lokasim = ref("");
 const result = ref("");
 const merk = ref("");
 
+const authStore = useAuthStore();
+const isUser = computed(() => authStore.getIsUser);
 const lokasiStore = useLokasiStore()
+
 const getProvince = computed(() => lokasiStore.getProvince())
 onMounted(() => {
     lokasiStore.fetchLokasi('')
@@ -141,8 +154,8 @@ const search = reactive({
     kecamatan: '',
     highest: '',
     lowest: '',
-    merk_id: '',
-    tipe_mobil: ''
+    merk: '',
+    type: ''
 })
 
 const handleHargaTinggi = () => {
@@ -156,8 +169,8 @@ const handleHargaRendah = () => {
 }
 
 const handleDataMerk = (val) => {
-    search.merk_id = val.merk_id ? val.merk_id : ""
-    search.tipe_mobil = val.tipe_mobil ? val.tipe_mobil : ""
+    search.merk = val.merk ? val.merk : ""
+    search.type = val.type ? val.type : ""
     console.log(val,"merk dan type masuk")
 
     fetchDataSearch()
@@ -243,11 +256,11 @@ const fetchDataSearch = async () => {
     if (search.highest != "") {
         query.highest = search.highest
     }
-    if (search.merk_id != "") {
-        query.merk_id = search.merk_id
+    if (search.merk != "") {
+        query.merk = search.merk
     }
-    if (search.tipe_mobil != "") {
-        query.tipe_mobil = search.tipe_mobil
+    if (search.type != "") {
+        query.type = search.type
     }
     await router.push({
         path: '/',
