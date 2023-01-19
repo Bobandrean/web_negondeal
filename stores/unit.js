@@ -33,8 +33,13 @@ export const useUnitStore = defineStore('unit', () => {
             kecamatan: payload.kecamatan ? payload.kecamatan : "",
             highest: payload.highest ? payload.highest : "",
             lowest: payload.lowest ? payload.lowest : "",
+<<<<<<< HEAD
             merk: payload.merk ? payload.merk : "",
             type: payload.type ? payload.type : ""
+=======
+            merk: payload.merk_id ? payload.merk_id : "",
+            type: payload.tipe_mobil ? payload.tipe_mobil : ""
+>>>>>>> ea0e7517e710646338b258f60e68bd9ca11e8510
         }
         try {
             const res = await unitServices.getUnit(query)
