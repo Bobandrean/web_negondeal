@@ -539,9 +539,4 @@
   .scrollable {
     overflow-y: auto;
   }
-
-  .botbar {
-    display: fixed;
-    bottom: 0;
-}
   </style>

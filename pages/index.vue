@@ -35,7 +35,7 @@
                 <BaseButton @click="openModal">Filter Lainnya</BaseButton>
             </v-col>
             <v-col>
-                <BaseButton to="/">Tampilkan Semua</BaseButton>
+                <BaseButton @click="clearSearch">Reset filter</BaseButton>
             </v-col>
         </v-row>
     </BaseCard>
@@ -96,13 +96,13 @@
             </v-row>
             <v-row>
                 <v-col md="6">
-                    <BaseInput placeholder=""></BaseInput>
+                    <BaseInput placeholder="pisahkan dengan koma (.) untuk kata kunci lebih dari satu"></BaseInput>
                 </v-col>
                 <v-col md="6">
-                    <BaseInput></BaseInput>
+                    <BaseInput placeholder="No Hp Anda"></BaseInput>
                 </v-col>
-                <v-col md="12">
-                    <BaseButton>Kirim</BaseButton>
+                <v-col md="12" align="center">
+                    <BaseButton>Beritahu Saya</BaseButton>
                 </v-col>
             </v-row>
         </BaseCard>
@@ -115,7 +115,6 @@ import { useUnitStore } from '@/stores/unit'
 import { useRoute, useRouter } from 'vue-router';
 import { useLokasiStore } from '@/stores/lokasi'
 import { useMerkStore } from '@/stores/merk'
-import { useAuthStore } from '~~/stores/auth'
 definePageMeta({
     layout: "default",
 });
@@ -130,14 +129,15 @@ const lokasim = ref("");
 const result = ref("");
 const merk = ref("");
 
-const authStore = useAuthStore();
-const isUser = computed(() => authStore.getIsUser);
 const lokasiStore = useLokasiStore()
 
 const getProvince = computed(() => lokasiStore.getProvince())
 onMounted(() => {
     lokasiStore.fetchLokasi('')
 })
+
+
+
 const search = reactive({
     name: '',
     min_price: '',
@@ -268,8 +268,9 @@ const fetchDataSearch = async () => {
     })
     unitStore.getUnitService(route.query)
 }
-const clearSearch = () => {
-    unitStore.getUnitService(clear);
+const clearSearch = async () => {
+    await router.push("/")
+    window.location.reload()
 };
 const openModal = () => {
     jenis.value.$refs.jenis.open()
