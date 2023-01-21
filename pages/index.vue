@@ -41,6 +41,14 @@
             </v-col>
         </v-row>
     </BaseCard>
+    <v-row>
+        <v-col class="mt-3" md="3">
+            <v-chip v-if="!!search.name">{{ search.name }}</v-chip>
+        </v-col>
+        <v-col class="mt-3" md="3">
+            <v-chip v-if="!!search.min_year">{{ search.min_year }}</v-chip>
+        </v-col>
+    </v-row>
     <v-divider class="ma-6"> </v-divider>
     <v-row>
         <v-col md="2" no-gutters align="center">
@@ -94,11 +102,11 @@
 </template>
 
 <script setup>
-import { useCounterStore } from "@/stores/counter";
-import { useUnitStore } from "@/stores/unit";
-import { useRoute, useRouter } from "vue-router";
-import { useLokasiStore } from "@/stores/lokasi";
-import { useMerkStore } from "@/stores/merk";
+import { useCounterStore } from '@/stores/counter'
+import { useUnitStore } from '@/stores/unit'
+import { useRoute, useRouter } from 'vue-router';
+import { useLokasiStore } from '@/stores/lokasi'
+import { useMerkStore } from '@/stores/merk'
 definePageMeta({
     layout: "default",
 });
@@ -116,7 +124,9 @@ const lokasim = ref("");
 const result = ref("");
 const merk = ref("");
 
+
 const lokasiStore = useLokasiStore()
+
 const getProvince = computed(() => lokasiStore.getProvince())
 onMounted(() => {
     lokasiStore.fetchLokasi('')
@@ -137,8 +147,8 @@ const search = reactive({
     kecamatan: '',
     highest: '',
     lowest: '',
-    merk_id: '',
-    tipe_mobil: ''
+    merk: '',
+    type: ''
 })
 
 const handleHargaTinggi = () => {
@@ -240,11 +250,11 @@ const fetchDataSearch = async () => {
     if (search.highest != "") {
         query.highest = search.highest
     }
-    if (search.merk_id != "") {
-        query.merk_id = search.merk_id
+    if (search.merk != "") {
+        query.merk = search.merk
     }
-    if (search.tipe_mobil != "") {
-        query.tipe_mobil = search.tipe_mobil
+    if (search.type != "") {
+        query.type = search.type
     }
     await router.push({
         path: '/',

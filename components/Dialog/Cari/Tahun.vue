@@ -20,13 +20,13 @@
                 <v-row>
                     <v-col md="6" align="center">
                         <v-text-field :v-model="formValues.min_year" :model-value="range[0]" hide-details single-line
-                            type="number" variant="outlined" density="compact" style="width: 150px"
+                            type="number" variant="outlined" density="compact" disabled style="width: 150px"
                             @change="$set(range, 0, $event)">
                         </v-text-field>
                     </v-col>
                     <v-col md="6" align="center">
                         <v-text-field :v-model="formValues.max_year" :model-value="range[1]" hide-details single-line
-                            type="number" variant="outlined" style="width: 150px" density="compact"
+                            type="number" variant="outlined" disabled style="width: 150px" density="compact"
                             @change="$set(range, 1, $event)">
                         </v-text-field>
                     </v-col>
