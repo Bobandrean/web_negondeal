@@ -66,11 +66,17 @@
             </BaseDropDown>
         </v-col>
     </v-row>
+    {{page}} {{ getUnit.length/perPage }} {{ startIndex }}
     <v-row>
-        <v-col md="4" v-for="car in getUnit" :key="car.id">
+        <v-col md="4" v-for="car in getUnit.slice(startIndex, perPage)" :key="car.id">
             <BaseCarCard :items="car"></BaseCarCard>
         </v-col>
     </v-row>
+    <v-pagination
+      v-model="page"
+      :length="Math.ceil(getUnit.length/perPage)"
+      circle
+    ></v-pagination>
     <v-divider class="ma-6"> </v-divider>
     <v-row>
         <v-col md="4">
@@ -109,6 +115,8 @@
     </v-row>
 </template>
 
+
+
 <script setup>
 import { useCounterStore } from '@/stores/counter'
 import { useUnitStore } from '@/stores/unit'
@@ -128,6 +136,8 @@ const tahun = ref("");
 const lokasim = ref("");
 const result = ref("");
 const merk = ref("");
+const page = ref("1");
+const perPage = ref("6");
 
 const lokasiStore = useLokasiStore()
 
@@ -135,8 +145,6 @@ const getProvince = computed(() => lokasiStore.getProvince())
 onMounted(() => {
     lokasiStore.fetchLokasi('')
 })
-
-
 
 const search = reactive({
     name: '',
@@ -157,6 +165,10 @@ const search = reactive({
     merk: '',
     type: ''
 })
+
+const paginatedData = () => {
+    startIndex =  (page - 1) * perPage
+}
 
 const handleHargaTinggi = () => {
     search.highest = "HargaTinggi"
