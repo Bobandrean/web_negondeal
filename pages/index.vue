@@ -58,11 +58,17 @@
             <BaseDropDown color="secondary" label="Sort By" :items="sort"> Sort By</BaseDropDown>
         </v-col>
     </v-row>
+    {{page}} {{ getUnit.length/perPage }} {{ startIndex }}
     <v-row>
-        <v-col md="4" v-for="car in getUnit" :key="car.id">
+        <v-col md="4" v-for="car in getUnit.slice(startIndex, perPage)" :key="car.id">
             <BaseCarCard :items="car"></BaseCarCard>
         </v-col>
     </v-row>
+    <v-pagination
+      v-model="page"
+      :length="Math.ceil(getUnit.length/perPage)"
+      circle
+    ></v-pagination>
     <v-divider class="ma-6"> </v-divider>
     <v-row>
         <v-col md="4">
@@ -88,18 +94,20 @@
             </v-row>
             <v-row>
                 <v-col md="6">
-                    <BaseInput placeholder=""></BaseInput>
+                    <BaseInput placeholder="pisahkan dengan koma (.) untuk kata kunci lebih dari satu"></BaseInput>
                 </v-col>
                 <v-col md="6">
-                    <BaseInput></BaseInput>
+                    <BaseInput placeholder="No Hp Anda"></BaseInput>
                 </v-col>
-                <v-col md="12">
-                    <BaseButton>Kirim</BaseButton>
+                <v-col md="12" align="center">
+                    <BaseButton>Beritahu Saya</BaseButton>
                 </v-col>
             </v-row>
         </BaseCard>
     </v-row>
 </template>
+
+
 
 <script setup>
 import { useCounterStore } from '@/stores/counter'
@@ -123,7 +131,8 @@ const lokasim = ref("");
 
 const result = ref("");
 const merk = ref("");
-
+const page = ref("1");
+const perPage = ref("6");
 
 const lokasiStore = useLokasiStore()
 
@@ -131,6 +140,7 @@ const getProvince = computed(() => lokasiStore.getProvince())
 onMounted(() => {
     lokasiStore.fetchLokasi('')
 })
+
 const search = reactive({
     name: '',
     min_price: '',
@@ -150,6 +160,10 @@ const search = reactive({
     merk: '',
     type: ''
 })
+
+const paginatedData = () => {
+    startIndex =  (page - 1) * perPage
+}
 
 const handleHargaTinggi = () => {
     search.highest = "HargaTinggi"

@@ -8,10 +8,16 @@
         <v-layout>
             <!-- <v-system-bar color="deep-purple darken-3"></v-system-bar> -->
 
+<<<<<<< HEAD
             <v-app-bar color="orange">
 
                 <v-btn variant="text" icon="mdi-magnify" to="/">Logo</v-btn>
 
+=======
+            <v-app-bar color="orange" prominent>
+                <!-- <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon> -->
+                <v-btn variant="text" icon="mdi-magnify" @click="goToIndex" to="/">Logo</v-btn>
+>>>>>>> 79e83573ec1b93936d735f9dfb2bf8b39948fe52
                 <BaseButton color="black" to="/"> Beli Mobil</BaseButton>
 
                 <BaseButton to="/detail"> NND Showroom</BaseButton>
@@ -21,7 +27,7 @@
                 <BaseButton> Blog </BaseButton>
                 <BaseDropDown class="justify-end" label="Lainnya" :items="lainnya"></BaseDropDown>
                 <v-spacer></v-spacer>
-                <BaseDropDown @menuClick="handleAkun" class="justify-end" label="Akun" :items="akun"></BaseDropDown>
+                <BaseDropBar @menuClick="handleAkun" class="justify-end" label="Akun" :list="akun"></BaseDropBar>
 
             </v-app-bar>
 
@@ -66,6 +72,11 @@ const openDaftar = () => {
 
 const openLogin = () => {
     login.value.$refs.login.open()
+};
+
+const goToIndex = async () => {
+    await router.push("/")
+    window.location.reload()
 };
 
 const akun = [

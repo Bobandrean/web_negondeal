@@ -48,12 +48,15 @@
 </template>
 
 <script setup>
+import { useAuthStore } from '@/stores/auth'
 
 const daftar = ref("");
-
+const login = ref("");
+const authStore = useAuthStore();
 
 const openDaftar = () => {
     daftar.value.$refs.daftar.open()
+    login.value.close()
 };
 
 const formValues = reactive({
@@ -61,6 +64,10 @@ const formValues = reactive({
     password: "",
 });
 
+
+</script>
+
+<script>
 
 </script>
 
