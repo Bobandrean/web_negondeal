@@ -22,8 +22,9 @@ class AuthServices {
         const formData = new FormData()
         formData.append('email', payload.email)
         formData.append('password', payload.password)
+        formData.append('c_password', payload.c_password)
 
-        const res = await api.doPost(`v1/blog/create`, formData)
+        const res = await api.doPost(`v1/create_customer`, formData)
         return res
     }
 }

@@ -8,17 +8,10 @@
         <v-layout>
             <!-- <v-system-bar color="deep-purple darken-3"></v-system-bar> -->
 
-<<<<<<< HEAD
-            <v-app-bar color="orange">
-
-                <v-btn variant="text" icon="mdi-magnify" to="/">Logo</v-btn>
-
-=======
             <v-app-bar color="orange" prominent>
                 <!-- <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon> -->
-                <v-btn variant="text" icon="mdi-magnify" @click="goToIndex" to="/">Logo</v-btn>
->>>>>>> 79e83573ec1b93936d735f9dfb2bf8b39948fe52
-                <BaseButton color="black" to="/"> Beli Mobil</BaseButton>
+                <v-btn icon="mdi-magnify" @click="goToIndex">Logo</v-btn>
+                <BaseButton> Beli Mobil</BaseButton>
 
                 <BaseButton to="/detail"> NND Showroom</BaseButton>
 
@@ -61,8 +54,11 @@
 </template>
 
 <script setup>
+import { useRoute, useRouter } from 'vue-router';
 import { defineProps } from 'vue'
 
+const route = useRoute()
+const router = useRouter()
 const daftar = ref("");
 const login = ref("");
 
@@ -77,6 +73,7 @@ const openLogin = () => {
 const goToIndex = async () => {
     await router.push("/")
     window.location.reload()
+    console.log("test")
 };
 
 const akun = [
