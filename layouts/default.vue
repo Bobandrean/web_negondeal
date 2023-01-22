@@ -3,25 +3,24 @@
     <DialogUserRegister ref="daftar"></DialogUserRegister>
     <DialogAkunLogin ref="login"></DialogAkunLogin>
     <!-- End Modal -->
+
     <v-card>
         <v-layout>
             <!-- <v-system-bar color="deep-purple darken-3"></v-system-bar> -->
 
             <v-app-bar color="#e77200" prominent>
                 <!-- <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon> -->
-                <v-btn variant="text" icon="mdi-magnify" to="/">Logo</v-btn>
+                <v-btn icon="mdi-magnify" @click="goToIndex">Logo</v-btn>
+                <BaseButton> Beli Mobil</BaseButton>
 
-                <BaseButton color="black" to="/"> Beli Mobil</BaseButton>
-
-                <BaseButton to="/detail"> NND Certified</BaseButton>
+                <BaseButton to="/detail"> NND Showroom</BaseButton>
 
                 <BaseButton> Jual Mobil </BaseButton>
 
                 <BaseButton> Blog </BaseButton>
+                <BaseDropDown class="justify-end" label="Lainnya" :items="lainnya"></BaseDropDown>
                 <v-spacer></v-spacer>
-                <BaseButton> Lainnya </BaseButton>
-                <v-spacer></v-spacer>
-                <BaseDropDown @menuClick="handleAkun" class="justify-end" label="Akun" :items="akun"></BaseDropDown>
+                <BaseDropBar @menuClick="handleAkun" class="justify-end" label="Akun" :list="akun"></BaseDropBar>
 
             </v-app-bar>
 
@@ -38,7 +37,7 @@
                 <v-footer color="primary lighten-1" padless>
                     <v-row justify="center" no-gutters>
                         <v-btn v-for="link in links" :key="link" color="white" text rounded class="my-2">
-                            {{ link }}
+
                         </v-btn>
                         <v-col class="primary lighten-2 py-4 text-center white--text" cols="12">
                             {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
@@ -55,8 +54,11 @@
 </template>
 
 <script setup>
+import { useRoute, useRouter } from 'vue-router';
 import { defineProps } from 'vue'
 
+const route = useRoute()
+const router = useRouter()
 const daftar = ref("");
 const login = ref("");
 
@@ -68,10 +70,22 @@ const openLogin = () => {
     login.value.$refs.login.open()
 };
 
+const goToIndex = async () => {
+    await router.push("/")
+    window.location.reload()
+};
+
 const akun = [
     { text: 'Login', value: 'pick_login' },
     { text: 'Daftar', value: 'pick_daftar' },
 ];
+
+const lainnya = [
+    { text: 'tentang NND', value: '' },
+    { text: 'FAQ', value: '' },
+    { text: 'Cara Membeli', value: '' },
+    { text: 'Hubungi Kami', value: '' }
+]
 
 const handleAkun = (e) => {
     if (e.id == 0) {

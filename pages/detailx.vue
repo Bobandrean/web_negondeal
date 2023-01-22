@@ -457,41 +457,41 @@ export default {
 
 <style scoped>
 .text--primary {
-     border-radius: 20px;
-     background-color: gray;
-     width: 150px;
-     text-align: center;
- }
+    border-radius: 20px;
+    background-color: gray;
+    width: 150px;
+    text-align: center;
+}
 
- .loui {
-     text-align: center;
-     margin-bottom: 15%;
-     margin-top: 5%
- }
+.loui {
+    text-align: center;
+    margin-bottom: 15%;
+    margin-top: 5%
+}
 
- .loui-1 {
-     font-size: 13px;
-     text-align: center;
-     margin-bottom: 15%;
-     margin-top: 55%
- }
+.loui-1 {
+    font-size: 13px;
+    text-align: center;
+    margin-bottom: 15%;
+    margin-top: 55%
+}
 
- .loui-2 {
-     font-size: 15px;
-     text-align: left;
-     margin-left: 15%;
- }
+.loui-2 {
+    font-size: 15px;
+    text-align: left;
+    margin-left: 15%;
+}
 
- .loui-3 {
-     font-size: 13px;
-     text-align: right;
-     margin-right: 35px;
- }
+.loui-3 {
+    font-size: 13px;
+    text-align: right;
+    margin-right: 35px;
+}
 
- .card1 {
-     border-radius: 30px;
-     background: white;
-     box-shadow: 15px 15px 30px #bebebe,
-         -15px -15px 30px #ffffff;
- }
+.card1 {
+    border-radius: 30px;
+    background: white;
+    box-shadow: 15px 15px 30px #bebebe,
+        -15px -15px 30px #ffffff;
+}
 </style>

@@ -1,5 +1,9 @@
 <template>
+<<<<<<< HEAD
    <BaseDialog ref="pesandetail" class-name="px-5 py-8" :max-width="500">
+=======
+       <BaseDialog ref="pesandetail" class-name="px-5 py-8" :max-width="500">
+>>>>>>> d43397357a2282ae2ad0ca2a4ec3f5b20446ba36
         <v-container>
             <v-row>
                 <v-col md="12" align=center>

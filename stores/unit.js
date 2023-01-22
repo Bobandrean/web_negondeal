@@ -16,12 +16,23 @@ export const useUnitStore = defineStore('unit', () => {
     }
 
     const getUnitService = async (payload) => {
+        console.log(payload.name, "check")
         const query = {
             name: payload.name ? payload.name : "",
             min_price: payload.min_price ? payload.min_price : "",
             max_price: payload.max_price ? payload.max_price : "",
             min_year: payload.min_year ? payload.min_year : "",
             max_year: payload.max_year ? payload.max_year : "",
+            tipe_body: payload.tipe_body ? payload.tipe_body : "",
+            plat_nomor: payload.plat_nomor ? payload.plat_nomor : "",
+            warna: payload.warna ? payload.warna : "",
+            transmisi: payload.transmisi ? payload.transmisi : "",
+            bahan_bakar: payload.bahan_bakar ? payload.bahan_bakar : "",
+            provinsi: payload.provinsi ? payload.provinsi : "",
+            kota: payload.kota ? payload.kota : "",
+            kecamatan: payload.kecamatan ? payload.kecamatan : "",
+            highest: payload.highest ? payload.highest : "",
+            lowest: payload.lowest ? payload.lowest : "",
             merk: payload.merk ? payload.merk : "",
             type: payload.type ? payload.type : "",
             plat_nomor: payload.plat_nomor ? payload.plat_nomor : "",
@@ -57,6 +68,7 @@ export const useUnitStore = defineStore('unit', () => {
             console.error(error)
         }
     }
+
 
     return {
         unit,
