@@ -73,7 +73,6 @@ const openLogin = () => {
 const goToIndex = async () => {
     await router.push("/")
     window.location.reload()
-    console.log("test")
 };
 
 const akun = [

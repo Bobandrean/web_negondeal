@@ -55,12 +55,11 @@
             <p>Menampilkan 471 Mobil</p>
         </v-col>
         <v-col md="2" no-gutters>
-            <BaseDropDown color="secondary" label="Sort By" :items="sort"> Sort By</BaseDropDown>
+            <BaseDropDown  @menuClick="HandleSort" color="secondary" label="Sort By" :items="sort"> Sort By</BaseDropDown>
         </v-col>
     </v-row>
-    {{page}} {{ getUnit.length/perPage }} {{ startIndex }}
     <v-row>
-        <v-col md="4" v-for="car in getUnit.slice(startIndex, perPage)" :key="car.id">
+        <v-col md="4" v-for="car in getUnit.slice((page - 1) * perPage, page * perPage)" :key="car.id">
             <BaseCarCard :items="car"></BaseCarCard>
         </v-col>
     </v-row>
@@ -158,11 +157,14 @@ const search = reactive({
     highest: '',
     lowest: '',
     merk: '',
-    type: ''
+    type: '',
+    startIndex: page - '1' * perPage,
+
 })
 
 const paginatedData = () => {
-    startIndex =  (page - 1) * perPage
+    startIndex =  page - 1 * perPage,
+    endIndex = page * perPage;
 }
 
 const handleHargaTinggi = () => {
@@ -341,6 +343,7 @@ const sortingHarga = () => {
 const HandleSort = (e) => {
     if (e.id == 0) {
         handleHargaTinggi()
+        console.log("test")
     } else if (e.id == 1) {
         handleHargaRendah()
     }

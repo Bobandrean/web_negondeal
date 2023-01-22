@@ -144,7 +144,7 @@
               </v-row>
               <v-row style="margin-top: 30px">
                 <v-col md="6" align="center">
-                  <BaseButton to="/inspeksi">Lihat Selengkapnya</BaseButton>
+                  <BaseButton @click="goToInspeksi(getDetailUnit?.id)">Lihat Selengkapnya</BaseButton>
                 </v-col>
                 <v-col md="6" align="center">
                   <BaseButton @click="openDetail">Download Laporan Inspeksi</BaseButton>
@@ -436,9 +436,11 @@ import { ref } from "vue";
 import { useCounterStore } from "@/stores/counter";
 import { useUnitStore } from "@/stores/unit";
 import { useRoute } from "vue-router";
+import { useRouter } from "vue-router";
 definePageMeta({
   layout: "default",
 });
+const router = useRouter();
 const route = useRoute();
 const pesandetail = ref("");
 const detailActive = ref(0);
@@ -454,6 +456,10 @@ onMounted(() => {
 });
 const selectedPhoto = (index) => {
   detailActive.value = index;
+};
+const goToInspeksi = async (id) => {
+    await router.push("/inspeksi/${id}")
+    window.location.reload()
 };
 const item = [
   { src: "https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg" },
