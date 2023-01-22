@@ -12,7 +12,6 @@
                 <v-col>
                     <p>Harga rata-rata mobil NegoNDeal adalah Rp 174,953,349</p>
                 </v-col>
-<<<<<<< HEAD
                 </v-row>
 
                 <v-row>
@@ -49,38 +48,6 @@
                 </v-row>
             </form>
 
-=======
-            </v-row>
-            <v-row>
-                <v-col>
-                    <v-range-slider v-model="range" :max="10" :min="-10" :step="1" hide-details
-                        class="align-center slider-color">
-                    </v-range-slider>
-                </v-col>
-            </v-row>
-            <v-row>
-                <v-col md="6" align="center">
-                    <v-text-field :model-value="range[0]" hide-details single-line type="number" variant="outlined"
-                        density="compact" style="width: 70px" @change="$set(range, 0, $event)">
-                    </v-text-field>
-                </v-col>
-                <v-col md="6" align="center">
-                    <v-text-field :model-value="range[1]" hide-details single-line type="number" variant="outlined"
-                        style="width: 70px" density="compact" @change="$set(range, 1, $event)">
-                    </v-text-field>
-                </v-col>
-            </v-row>
-            <v-divider style="margin-top:20px; margin-bottom:20px">
-            </v-divider>
-            <v-row>
-                <v-col md="6" align="center">
-                    <BaseButton>Hapus</BaseButton>
-                </v-col>
-                <v-col md="6" align="center">
-                    <BaseButton>Terapkan</BaseButton>
-                </v-col>
-            </v-row>
->>>>>>> d43397357a2282ae2ad0ca2a4ec3f5b20446ba36
         </v-container>
     </BaseDialog>
 </template>
@@ -92,7 +59,6 @@ import { defineEmits } from 'vue'
 export default {
     data() {
         return {
-<<<<<<< HEAD
             range: [10000, 100000000],
         }
     },
@@ -128,11 +94,6 @@ export default {
             harga
         }
     }
-=======
-            range: [-5, 5],
-        }
-    },
->>>>>>> d43397357a2282ae2ad0ca2a4ec3f5b20446ba36
 }
 </script>
 

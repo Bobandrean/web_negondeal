@@ -16,34 +16,6 @@
         </v-card-item>
 
         <div class="px-4">
-<<<<<<< HEAD
-            <v-chip-group column v-model="selection">
-                <v-chip>{{ items?.tahun }}</v-chip>
-                <v-chip>{{ items?.transmisi }}</v-chip>
-                <v-chip>{{ items?.bahan_bakar }}</v-chip>
-                <v-chip>{{ items?.odometer }} KM</v-chip>
-                <v-chip>Jakarta</v-chip>
-            </v-chip-group>
-            <!-- <v-chip-group v-model="selection">
-                <v-row>
-                    <v-col sm="3" align="center">
-                        <v-chip>{{ items?.tahun }}</v-chip>
-                    </v-col>
-                    <v-col sm="3" align="center">
-                        <v-chip>{{ items?.transmisi }}</v-chip>
-                    </v-col>
-                    <v-col sm="4" align="center">
-                        <v-chip>{{ items?.bahan_bakar }}</v-chip>
-                    </v-col>
-                    <v-col sm="4" align="center">
-                        <v-chip style="max-width:350px">{{ items?.odometer }}</v-chip>
-                    </v-col>
-                    <v-col sm="4" align="center">
-                        <v-chip>Jakarta</v-chip>
-                    </v-col>
-                </v-row>
-            </v-chip-group> -->
-=======
             <v-card
                 class="mx-auto card1"
                 width:200
@@ -70,19 +42,9 @@
                     Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum
                     </v-card>
             </div>
->>>>>>> d43397357a2282ae2ad0ca2a4ec3f5b20446ba36
         </div>
         <v-card-text>
             <v-row>
-<<<<<<< HEAD
-                <v-col sm="6">
-                    Rp. {{ items?.harga.toLocaleString() }}
-                </v-col>
-                <v-col sm="6">
-                    200.000/Bulan
-                </v-col>
-=======
->>>>>>> d43397357a2282ae2ad0ca2a4ec3f5b20446ba36
                 <v-col sm="12">
                     <p style="font-size:18px">Rp. {{ items?.harga.toLocaleString() }} (Cash)</p>
                 </v-col>

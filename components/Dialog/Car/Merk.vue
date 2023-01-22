@@ -1,55 +1,5 @@
 <template>
     <BaseDialog ref="merk" class-name="px-5 py-8" :max-width="450">
-<<<<<<< HEAD
-      <v-container>
-          <v-row>
-              <v-col align="center">
-                  <p>All Brand And Model</p>
-              </v-col>
-          </v-row>
-          <v-row>
-              <v-card
-              class="mx-auto"
-              display="flex"
-              width="700"
-              height="350"
-              style="border-style: thin; border-color:black; border-width: 1px">
-                  <v-container>
-                      <v-row>
-                              <v-col md="12">
-                                <v-expansion-panels max-width="100" class="mt-4 scrollable">
-                                    <v-expansion-panel
-                                        v-for="i in 7"
-                                        :key="i"
-                                        title="Item"
-                                        text="Lorem ipsum dolor sit amet,."
-                                    >
-                                    </v-expansion-panel>
-                                </v-expansion-panels>
-                              </v-col>
-                      </v-row>
-                  </v-container>
-              </v-card>
-          <v-row style="margin-top:25px">
-              <v-col md="12" align="center">
-                  <BaseButton>Menampilan Mobil Impian</BaseButton>
-              </v-col>
-          </v-row>
-          </v-row>
-      </v-container>
-  </BaseDialog>
-</template>
-
-<script>
-export default {
-}
-</script>
-
-<style>
-  .scrollable{
-overflow-y: auto;
-max-height: 300px;
-=======
         <v-container>
             <form @submit.prevent="handleSubmit(SelectedValue)">
                 <v-row>
@@ -125,6 +75,5 @@ const handleSubmit = () => {
 .scrollable {
     overflow-y: auto;
     max-height: 300px;
->>>>>>> d43397357a2282ae2ad0ca2a4ec3f5b20446ba36
 }
 </style>

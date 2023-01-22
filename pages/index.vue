@@ -1,23 +1,11 @@
 <template>
-
-
-
     <!-- Modal -->
-<<<<<<< HEAD
-    <DialogFilterLocation ref="lokasim"></DialogFilterLocation>
-    <DialogRangeHarga ref="price" @dataPrice="handleDataPrice"></DialogRangeHarga>
-    <DialogCariTahun ref="tahun" @dataYear="handleDataYear"></DialogCariTahun>
-    <DialogMobilJenis ref="jenis"></DialogMobilJenis>
-    <DialogCarMerk ref="merk"></DialogCarMerk>
-=======
     <DialogFilterLocation ref="lokasim" @dataLokasi="handleDataLokasi"></DialogFilterLocation>
     <DialogRangeHarga ref="price" @dataPrice="handleDataPrice"></DialogRangeHarga>
     <DialogCariTahun ref="tahun" @dataYear="handleDataYear"></DialogCariTahun>
     <DialogMobilJenis ref="jenis" @dataJenis="handleDataJenis"></DialogMobilJenis>
     <DialogCarMerk ref="merk" @dataMerk="handleDataMerk"></DialogCarMerk>
->>>>>>> d43397357a2282ae2ad0ca2a4ec3f5b20446ba36
     <!-- End Modal -->
-
 
     <BaseCard>
         <v-row>
@@ -55,22 +43,14 @@
         <v-col class="mt-3" md="3">
             <v-chip v-if="!!search.min_year">{{ search.min_year }}</v-chip>
         </v-col>
-<<<<<<< HEAD
-        </v-row>
-=======
     </v-row>
->>>>>>> d43397357a2282ae2ad0ca2a4ec3f5b20446ba36
     <v-divider class="ma-6"> </v-divider>
     <v-row>
         <v-col md="2" no-gutters align="center">
             <p>Menampilkan {{ getUnit.length }} Mobil</p>
         </v-col>
         <v-col md="2" no-gutters>
-<<<<<<< HEAD
-            <BaseDropDown @menuClick="HandleSort" color="secondary" label="Sort By" :items="sort"> Sort By</BaseDropDown>
-=======
             <BaseDropDown  @menuClick="HandleSort" color="secondary" label="Sort By" :items="sort"> Sort By</BaseDropDown>
->>>>>>> d43397357a2282ae2ad0ca2a4ec3f5b20446ba36
         </v-col>
     </v-row>
     <v-row no-gutters>
@@ -135,14 +115,8 @@
 import { useCounterStore } from '@/stores/counter'
 import { useUnitStore } from '@/stores/unit'
 import { useRoute, useRouter } from 'vue-router';
-<<<<<<< HEAD
-import { defineProps } from 'vue'
-
-
-=======
 import { useLokasiStore } from '@/stores/lokasi'
 import { useMerkStore } from '@/stores/merk'
->>>>>>> d43397357a2282ae2ad0ca2a4ec3f5b20446ba36
 definePageMeta({
     layout: "default",
 });
@@ -159,8 +133,6 @@ const lokasim = ref("");
 
 const result = ref("");
 const merk = ref("");
-<<<<<<< HEAD
-=======
 const page = ref("1");
 const perPage = ref("6");
 
@@ -170,7 +142,6 @@ const getProvince = computed(() => lokasiStore.getProvince())
 onMounted(() => {
     lokasiStore.fetchLokasi('')
 })
->>>>>>> d43397357a2282ae2ad0ca2a4ec3f5b20446ba36
 
 const search = reactive({
     name: '',
@@ -190,16 +161,8 @@ const search = reactive({
     lowest: '',
     merk: '',
     type: '',
-<<<<<<< HEAD
-    plat_nomor: '',
-    bahan_bakar:'',
-    transmisi: '',
-    tipe_body: '',
-    warna: ''
-=======
     startIndex: page - '1' * perPage,
 
->>>>>>> d43397357a2282ae2ad0ca2a4ec3f5b20446ba36
 })
 
 const paginatedData = () => {
@@ -251,17 +214,6 @@ const handleDataPrice = (val) => {
     search.max_price = val[1] ?? 0
     fetchDataSearch()
 }
-<<<<<<< HEAD
-
-const handleDataPrice = (val) => {
-    search.min_price = val[0] ?? 0
-    search.max_price = val[1] ?? 0
-
-    fetchDataSearch()
-}
-
-=======
->>>>>>> d43397357a2282ae2ad0ca2a4ec3f5b20446ba36
 const searchResult = () => {
     result = route.query
 }
@@ -281,17 +233,6 @@ const fetchDataSearch = async () => {
     if (search.max_year !== "") {
         query.max_year = search.max_year
     }
-<<<<<<< HEAD
-
-    if (search.min_price !== "") {
-        query.min_price = search.min_price
-    }
-
-    if (search.max_price !== "") {
-        query.max_price = search.max_price
-    }
-
-=======
     if (search.min_price !== "") {
         query.min_price = search.min_price
     }
@@ -334,7 +275,6 @@ const fetchDataSearch = async () => {
     if (search.type != "") {
         query.type = search.type
     }
->>>>>>> d43397357a2282ae2ad0ca2a4ec3f5b20446ba36
     await router.push({
         path: '/',
         query: query
@@ -349,11 +289,7 @@ const openModal = () => {
     jenis.value.$refs.jenis.open();
 };
 const openHarga = () => {
-<<<<<<< HEAD
-    price.value.$refs.price.open()
-=======
     price.value.$refs.price.open();
->>>>>>> d43397357a2282ae2ad0ca2a4ec3f5b20446ba36
 };
 const openTahun = () => {
     tahun.value.$refs.tahun.open();
@@ -367,14 +303,6 @@ const openDetail = () => {
 const openMerk = () => {
     merk.value.$refs.merk.open();
 };
-<<<<<<< HEAD
-
-const openMerk = () => {
-    merk.value.$refs.merk.open()
-};
-
-=======
->>>>>>> d43397357a2282ae2ad0ca2a4ec3f5b20446ba36
 const lokasi = [
     { text: "Semua Lokasi", value: "all_location" },
     { text: "Pilih Lokasi", value: "pick_location" },
@@ -393,15 +321,7 @@ const fetchData = () => {
 
     const query = {}
 }
-<<<<<<< HEAD
-
-const getUnit = computed(() => unitStore.getUnit());
-
-const testing = getUnit
-
-=======
 const getUnit = computed(() => unitStore.getUnit())
->>>>>>> d43397357a2282ae2ad0ca2a4ec3f5b20446ba36
 onMounted(() => {
     unitStore.getUnitService('')
 })
@@ -420,19 +340,6 @@ const handleModal1 = (e) => {
         openModal()
     }
 }
-<<<<<<< HEAD
-
-const sortHargaAsc = () => {
-        return this.car.sort((a, b) => {
-            return a.harga.localeCompare(b.harga);
-        });
-}
-
-const HandleSort = (e) =>{
-    if(e.id == 0){
-        sortHargaAsc()
-        console.log("test")
-=======
 const sortingHarga = () => {
     sortUnit.sort()
 }
@@ -442,7 +349,6 @@ const HandleSort = (e) => {
         console.log("test")
     } else if (e.id == 1) {
         handleHargaRendah()
->>>>>>> d43397357a2282ae2ad0ca2a4ec3f5b20446ba36
     }
 }
 </script>
