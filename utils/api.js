@@ -1,66 +1,97 @@
-import axios from 'axios'
+import axios from "axios";
 
-const host = "https://api-nnd.sitama.co.id"
-const baseUrl = `${host}/api/`
+const host = "https://api-nnd.sitama.co.id";
+const baseUrl = `${host}/api/`;
 
-class Api {
-    async doGet(url, params) {
-        return await axios
-            .get(baseUrl + url, params)
-            .then((res) => res.data)
-            .catch((err) => err)
-    }
+let accessToken = null;
 
-    async doPost(url, params) {
-        return await axios
-            .post(baseUrl + url, params)
-            .then((res) => res.data)
-            .catch((error) => {
-                throw error
-            })
-    }
-
-    async doPut(url, params) {
-        return await axios
-            .put(baseUrl + url, params)
-            .then((res) => res.data)
-            .catch((error) => {
-                throw error
-            })
-    }
-
-    async doDelete(url, params) {
-        return await axios
-            .delete(baseUrl + url, params)
-            .then((res) => res.data)
-            .catch((error) => {
-                throw error
-            })
-    }
-
-    async doGetBlob(url, params) {
-        return await axios
-            .post(baseUrl + url, params, {
-                responseType: 'blob'
-            })
-            .then((res) => res.data)
-            .catch((error) => {
-                throw error
-            })
-    }
-
-    async doPostMultipart(url, params) {
-        return await axios
-            .post(baseUrl + url, params, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            })
-            .then((res) => res.data)
-            .catch((error) => {
-                throw error
-            })
-    }
+if (process.client) {
+  const getAccessToken = localStorage.getItem("access_token");
+  if (getAccessToken) {
+    accessToken = getAccessToken;
+  }
 }
 
-export default new Api()
+console.log("accessToken", accessToken);
+
+class Api {
+  async doGet(url) {
+    return await axios
+      .get(baseUrl + url, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+      .then((res) => res.data)
+      .catch((err) => err);
+  }
+
+  async doPost(url, params) {
+    return await axios
+      .post(baseUrl + url, params, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+      .then((res) => res.data)
+      .catch((error) => {
+        throw error;
+      });
+  }
+
+  async doPut(url, params) {
+    return await axios
+      .put(baseUrl + url, params, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+      .then((res) => res.data)
+      .catch((error) => {
+        throw error;
+      });
+  }
+
+  async doDelete(url, params) {
+    return await axios
+      .delete(baseUrl + url, params, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+      .then((res) => res.data)
+      .catch((error) => {
+        throw error;
+      });
+  }
+
+  async doGetBlob(url, params) {
+    return await axios
+      .post(baseUrl + url, params, {
+        responseType: "blob",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+      .then((res) => res.data)
+      .catch((error) => {
+        throw error;
+      });
+  }
+
+  async doPostMultipart(url, params) {
+    return await axios
+      .post(baseUrl + url, params, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+      .then((res) => res.data)
+      .catch((error) => {
+        throw error;
+      });
+  }
+}
+
+export default new Api();
