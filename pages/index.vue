@@ -52,15 +52,23 @@
     <v-divider class="ma-6"> </v-divider>
     <v-row>
         <v-col md="2" no-gutters align="center">
-            <p>Menampilkan 471 Mobil</p>
+            <p>Menampilkan {{ getUnit.length }} Mobil</p>
         </v-col>
         <v-col md="2" no-gutters>
             <BaseDropDown  @menuClick="HandleSort" color="secondary" label="Sort By" :items="sort"> Sort By</BaseDropDown>
         </v-col>
     </v-row>
-    <v-row>
-        <v-col md="4" v-for="car in getUnit.slice((page - 1) * perPage, page * perPage)" :key="car.id">
+    <v-row no-gutters>
+        <v-col md="4" v-for="car, i  in getUnit.slice((page - 1) * perPage, page * perPage)" :key="i">
+            <v-sheet>
             <BaseCarCard :items="car"></BaseCarCard>
+                <v-col v-if=" i == car" align="center">
+                    <v-sheet>
+            <p>Mudahnya Membeli Mobil Bekas di Nego N Deal</p>
+        </v-sheet>
+                </v-col>
+            </v-sheet>
+
         </v-col>
     </v-row>
     <v-pagination

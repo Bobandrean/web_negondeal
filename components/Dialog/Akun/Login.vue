@@ -25,7 +25,7 @@
                 </v-row>
                 <v-row>
                     <p>Belum Punya akun?</p>
-                    <p @click="openDaftar">Daftar</p>
+                    <p style="cursor:pointer" @click="openDaftar">Daftar</p>
                 </v-row>
                 <v-row>
                     <v-col md="12" align="center">

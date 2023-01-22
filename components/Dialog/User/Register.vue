@@ -1,6 +1,5 @@
 <template>
     <!-- Modal -->
-
     <!-- End Modal -->
     <BaseDialog ref="daftar" class-name="px-5 py-8" :max-width="500">
         <v-container>
@@ -8,7 +7,6 @@
                 <v-col md="12" align=center>
                     <p>Daftar Akun (Sign Up)</p>
                 </v-col>
-                {{ formValues }}
             </v-row>
             <v-form v-model="valid" @submit.prevent="handleSubmit">
                 <v-row>

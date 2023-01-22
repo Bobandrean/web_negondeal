@@ -399,7 +399,6 @@
         </v-row>
       </v-col>
     </v-row>
-
     <v-row>
       <p>Mobil Lain Dari Penjual Ini</p>
     </v-row>
