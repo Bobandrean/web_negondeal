@@ -1,7 +1,4 @@
 <template>
-
-
-
     <!-- Modal -->
     <DialogFilterLocation ref="lokasim" @dataLokasi="handleDataLokasi"></DialogFilterLocation>
     <DialogRangeHarga ref="price" @dataPrice="handleDataPrice"></DialogRangeHarga>
@@ -9,7 +6,6 @@
     <DialogMobilJenis ref="jenis" @dataJenis="handleDataJenis"></DialogMobilJenis>
     <DialogCarMerk ref="merk" @dataMerk="handleDataMerk"></DialogCarMerk>
     <!-- End Modal -->
-
 
     <BaseCard>
         <v-row>
@@ -21,8 +17,7 @@
         </v-row>
         <v-row>
             <v-col>
-                <BaseDropDown @menuClick="handleModal1" label="Merek & Jenis" :items="modal1">Merek & Jenis
-                </BaseDropDown>
+                <BaseButton @click="openMerk">Merk & Jenis</BaseButton>
             </v-col>
             <v-col>
                 <BaseButton @click="openHarga">Harga</BaseButton>
@@ -34,7 +29,7 @@
                 <BaseDropDown @menuClick="handleMenu" label="Lokasi" :items="lokasi">Lokasi</BaseDropDown>
             </v-col>
             <v-col>
-                <BaseButton>Filter Lainnya</BaseButton>
+                <BaseButton @click="openModal">Filter Lainnya</BaseButton>
             </v-col>
             <v-col>
                 <BaseButton @click="clearSearch">Reset filter</BaseButton>
@@ -42,11 +37,29 @@
         </v-row>
     </BaseCard>
     <v-row>
-        <v-col class="mt-3" md="3">
-            <v-chip v-if="!!search.name">{{ search.name }}</v-chip>
+        <v-col class="mt-3" md="3" v-if="!!search.name">
+            <div class="absolute" style="right: 0; top: -10px">
+            <v-btn text icon color="red lighten-2" @click="clearFilter">
+              <v-icon>mdi-close</v-icon>
+              </v-btn>
+              </div>
+            <v-chip >{{ search.name }}</v-chip>
         </v-col>
-        <v-col class="mt-3" md="3">
-            <v-chip v-if="!!search.min_year">{{ search.min_year }}</v-chip>
+        <v-col class="mt-3" md="3" v-if="!!search.merk">
+            <div class="absolute" style="right: 0; top: -10px">
+            <v-btn text icon color="red lighten-2" @click="clearMerk">
+              <v-icon>mdi-close</v-icon>
+              </v-btn>
+              </div>
+            <v-chip >{{ search.merk }}</v-chip>
+        </v-col>
+        <v-col class="mt-3" md="3" v-if="!!search.min_year">
+            <div class="absolute" style="right: 0; top: -10px">
+            <v-btn text icon color="red lighten-2" @click="close">
+              <v-icon>mdi-close</v-icon>
+              </v-btn>
+              </div>
+            <v-chip >{{ search.min_year }}</v-chip>
         </v-col>
     </v-row>
     <v-divider class="ma-6"> </v-divider>
@@ -58,19 +71,13 @@
             <BaseDropDown  @menuClick="HandleSort" color="secondary" label="Sort By" :items="sort"> Sort By</BaseDropDown>
         </v-col>
     </v-row>
-    <v-row no-gutters>
-        <v-col md="4" v-for="car, i  in getUnit.slice((page - 1) * perPage, page * perPage)" :key="i">
-            <v-sheet>
+    <div class="list-mobil">
+    <v-row no-gutters >
+        <v-col md="4" v-for="car, y  in getUnit.slice((page - 1) * perPage, page * perPage)" :key="y">
             <BaseCarCard :items="car"></BaseCarCard>
-                <v-col v-if=" i == car" align="center">
-                    <v-sheet>
-            <p>Mudahnya Membeli Mobil Bekas di Nego N Deal</p>
-        </v-sheet>
-                </v-col>
-            </v-sheet>
-
         </v-col>
     </v-row>
+    </div>
     <v-pagination
       v-model="page"
       :length="Math.ceil(getUnit.length/perPage)"
@@ -140,6 +147,7 @@ const result = ref("");
 const merk = ref("");
 const page = ref("1");
 const perPage = ref("6");
+const perRow = ref("3");
 
 const lokasiStore = useLokasiStore()
 
@@ -186,8 +194,8 @@ const handleHargaRendah = () => {
 }
 
 const handleDataMerk = (val) => {
-    search.merk_id = val.merk_id ? val.merk_id : ""
-    search.tipe_mobil = val.tipe_mobil ? val.tipe_mobil : ""
+    search.merk = val.merk ? val.merk : ""
+    search.type = val.type ? val.type : ""
     console.log(val, "merk dan type masuk")
 
     fetchDataSearch()
@@ -290,6 +298,19 @@ const clearSearch = async () => {
     await router.push("/")
     window.location.reload()
 };
+
+const clearFilter = async() => {
+    search.name = ""
+    fetchDataSearch()
+    console.log(search.name, "berhasil Menghapus")
+};
+
+const clearMerk = async() => {
+    search.merk = ""
+    fetchDataSearch()
+    console.log(search.merk, "berhasil Menghapus")
+};
+
 const openModal = () => {
     jenis.value.$refs.jenis.open();
 };

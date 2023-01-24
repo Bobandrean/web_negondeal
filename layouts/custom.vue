@@ -3,24 +3,27 @@
         <v-layout>
             <!-- <v-system-bar color="deep-purple darken-3"></v-system-bar> -->
 
-            <v-app-bar color="orange" prominent>
-                <!-- <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon> -->
-                <v-btn variant="text" icon="mdi-magnify">Logo</v-btn>
-
-                <BaseButton color="black"> Beli Mobil</BaseButton>
-
-                <BaseButton to="/detail"> NND Certified</BaseButton>
-
-                <BaseButton> Jual Mobil </BaseButton>
-
-                <BaseButton> Blog </BaseButton>
-
-                <BaseDropDown></BaseDropDown>
-
-                <v-spacer></v-spacer>
-
-
-            </v-app-bar>
+            <v-app-bar color="#e77200">
+          <v-btn icon="mdi-magnify" @click="goToIndex" class="mr-3">Logo</v-btn>
+          <BaseButton> Beli Mobil</BaseButton>
+  
+          <BaseButton to="/detail"> NND Showroom</BaseButton>
+  
+          <BaseButton> Jual Mobil </BaseButton>
+  
+          <BaseButton> Blog </BaseButton>
+          <BaseDropDown
+            class="justify-end"
+            label="Lainnya"
+            :items="lainnya"
+          ></BaseDropDown>
+          <v-spacer></v-spacer>
+          <BaseDropBar
+            @menuClick="handleAkun"
+            label="Akun"
+            :list="akun"
+          ></BaseDropBar>
+        </v-app-bar>
 
             <v-navigation-drawer v-model="drawer" location="bottom" temporary>
                 <v-list :items="items"></v-list>
@@ -48,7 +51,52 @@
     </v-card>
 
 </template>
-  
+<script setup>
+import { useRoute, useRouter } from "vue-router";
+import { defineProps } from "vue";
+import { useAuthStore } from "@/stores/auth";
+const authStore = useAuthStore();
+const route = useRoute();
+const router = useRouter();
+const daftar = ref("");
+const login = ref("");
+const getUser = computed(() => {
+      return authStore.getUser;
+    });
+const openDaftar = () => {
+  daftar.value.$refs.daftar.open();
+};
+const openLogin = () => {
+  login.value.$refs.login.open();
+};
+const goToIndex = async () => {
+  await router.push("/");
+  window.location.reload();
+};
+const akun = [
+  { text: "Login", value: "pick_login" },
+  { text: "Daftar", value: "pick_daftar" },
+];
+const lainnya = [
+  { text: "tentang NND", value: "" },
+  { text: "FAQ", value: "" },
+  { text: "Cara Membeli", value: "" },
+  { text: "Hubungi Kami", value: "" },
+];
+const handleAkun = (e) => {
+  if (e.id == 0) {
+    openLogin();
+  } else if (e.id == 1) {
+    openDaftar();
+  }
+};
+defineProps({
+  items: {
+    type: Object,
+    default: () => {},
+  },
+});
+</script>
 <script>
 export default {
     data: () => ({

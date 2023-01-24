@@ -22,6 +22,7 @@
           <v-row no-gutters>
             <v-col md="9">
               <v-text-field
+              type="password"
                 v-model="formValues.password"
                 label="password"
                 placeholder="Password"
