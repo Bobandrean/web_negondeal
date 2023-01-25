@@ -21,12 +21,12 @@
             :items="lainnya"
           ></BaseDropDown>
           <v-spacer></v-spacer>
-          
           <BaseDropBar
             @menuClick="handleAkun"
             label="Akun"
             :list="akun"
           ></BaseDropBar>
+          
         </v-app-bar>
   
         <v-navigation-drawer v-model="drawer" location="bottom" temporary>

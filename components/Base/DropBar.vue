@@ -3,7 +3,7 @@
       <v-menu>
         <template v-slot:activator="{ props }">
           <v-btn color="primary" v-bind="props">
-            {{ label }}
+            <v-icon>mdi-account</v-icon> {{ label }}
           </v-btn>
         </template>
         <v-list v-if="!getUser" @click:select="handleSelect">

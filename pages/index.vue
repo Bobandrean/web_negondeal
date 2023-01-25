@@ -6,7 +6,6 @@
     <DialogMobilJenis ref="jenis" @dataJenis="handleDataJenis"></DialogMobilJenis>
     <DialogCarMerk ref="merk" @dataMerk="handleDataMerk"></DialogCarMerk>
     <!-- End Modal -->
-
     <BaseCard>
         <v-row>
             <v-col lg="12">
@@ -36,6 +35,7 @@
             </v-col>
         </v-row>
     </BaseCard>
+    
     <v-row>
         <v-col class="mt-3" md="3" v-if="!!search.name">
             <div class="absolute" style="right: 0; top: -10px">
@@ -72,10 +72,11 @@
         </v-col>
     </v-row>
     <div class="list-mobil">
-    <v-row no-gutters >
+        <v-row>
         <v-col md="4" v-for="car, y  in getUnit.slice((page - 1) * perPage, page * perPage)" :key="y">
             <BaseCarCard :items="car"></BaseCarCard>
         </v-col>
+        <v-col md="12" align="center" v-if="x == 0" style="background-color:aqua" >Test </v-col>
     </v-row>
     </div>
     <v-pagination
@@ -119,6 +120,16 @@
             </v-row>
         </BaseCard>
     </v-row>
+    <v-dialog v-model="loading" fullscreen full-width>
+  <v-container fluid fill-height style="background-color: rgba(255, 255, 255, 0.5);">
+    <v-layout justify-center align-center>
+      <v-progress-circular
+        indeterminate
+        color="primary">
+      </v-progress-circular>
+    </v-layout>
+  </v-container>
+</v-dialog>
 </template>
 
 
@@ -147,7 +158,7 @@ const result = ref("");
 const merk = ref("");
 const page = ref("1");
 const perPage = ref("6");
-const perRow = ref("3");
+const perRow = ref("2");
 
 const lokasiStore = useLokasiStore()
 
@@ -174,8 +185,7 @@ const search = reactive({
     lowest: '',
     merk: '',
     type: '',
-    startIndex: page - '1' * perPage,
-
+    loading: 'false'
 })
 
 const paginatedData = () => {
@@ -184,8 +194,8 @@ const paginatedData = () => {
 }
 
 const handleHargaTinggi = () => {
-    search.highest = "HargaTinggi"
-    fetchDataSearch()
+     search.highest = "HargaTinggi"
+     fetchDataSearch()
 }
 
 const handleHargaRendah = () => {
@@ -235,6 +245,15 @@ const SearchHandle = (val) => {
     search.name = val
     fetchDataSearch()
 };
+
+const currentDate = () => {
+    const date = new Date()
+    console.log(date)
+
+    const currentDateWithFormat = new Date().toJSON().slice(0,10).replace(/-/g,'/');
+            console.log(currentDateWithFormat);
+}
+
 const fetchDataSearch = async () => {
     const query = {}
     if (search.name !== "") {
@@ -305,6 +324,25 @@ const clearFilter = async() => {
     console.log(search.name, "berhasil Menghapus")
 };
 
+const clearLokasi = async() => {
+    search.provinsi = ""
+    search.kota = ""
+    search.kecamatan = ""
+    fetchDataSearch()
+};
+
+const clearSort = async() => {
+    search.lowest = ""
+    fetchDataSearch()
+    console.log(search.lowest, "berhasil Menghapus")
+};
+
+const clearSort1 = async() => {
+    search.highest = ""
+    fetchDataSearch()
+    console.log(search.highest, "berhasil Menghapus")
+};
+
 const clearMerk = async() => {
     search.merk = ""
     fetchDataSearch()
@@ -354,7 +392,7 @@ onMounted(() => {
 const handleMenu = (e) => {
 
     if (e.id == 0) {
-        console.log("buka modal semua lokasi")
+        clearLokasi()
     } else if (e.id == 1) {
         openLokasi()
     }
@@ -373,8 +411,17 @@ const HandleSort = (e) => {
     if (e.id == 0) {
         handleHargaTinggi()
         console.log("test")
+        clearSort()
     } else if (e.id == 1) {
         handleHargaRendah()
+        clearSort1()
+    } else if (e.id == 2){
+        currentDate()
+    } else if (e.id == 3){
+        console.log(search.loading)
+        search.loading = "true"
+        console.log(search.loading)
     }
+
 }
 </script>

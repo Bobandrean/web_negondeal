@@ -456,7 +456,7 @@ onMounted(() => {
 const selectedPhoto = (index) => {
   detailActive.value = index;
 };
-const goToInspeksi = async (id) => {
+const goToInspeksi = async () => {
     await router.push("/inspeksi/${id}")
     window.location.reload()
 };
