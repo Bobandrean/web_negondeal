@@ -111,14 +111,12 @@
         <v-col md="12">
             <p class="ml-14">Highlight</p>
         </v-col>
-        <v-col md="4">
-            <BaseCarCard></BaseCarCard>
-        </v-col>
-        <v-col md="4">
-            <BaseCarCard></BaseCarCard>
-        </v-col>
-        <v-col md="4">
-            <BaseCarCard></BaseCarCard>
+        <v-col md="12">
+            <v-slide-group class="pa-4" show-arrows center-active selected-class="bg-success">
+              <v-slide-group-item v-for="car in getUnit" :key="car.id">
+                <BaseCarCard :items="car"></BaseCarCard>
+              </v-slide-group-item>
+            </v-slide-group>
         </v-col>
     </v-row>
     <div class="list-mobil">
@@ -129,7 +127,12 @@
         <v-col md="12" align="center" v-if="x == 0" style="background-color:aqua" >Test </v-col>
     </v-row>
     </div>
-    <v-pagination
+   <v-row>
+    <v-col>
+        <p >Menampilkan Halaman  {{ page }} Dari {{ Math.ceil(getUnit.length/perPage) }}</p> 
+    </v-col>
+   </v-row> 
+   <v-pagination
       v-model="page"
       :length="Math.ceil(getUnit.length/perPage)"
       circle
