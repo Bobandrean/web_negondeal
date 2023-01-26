@@ -10,7 +10,6 @@
                 </v-row>
 
                 <v-row>
-
                     <v-col>
                         <v-range-slider v-model="range" :max="2023" :min="1990" :step="1"
                             @update:modelValue="handleChangeRange" hide-details class="align-center slider-color">
@@ -20,14 +19,14 @@
                 <v-row>
                     <v-col md="6" align="center">
                         <v-text-field :v-model="formValues.min_year" :model-value="range[0]" hide-details single-line
-                            type="number" variant="outlined" density="compact" disabled style="width: 150px"
+                            type="number" variant="outlined" density="compact"  style="width: 150px"
                             @change="$set(range, 0, $event)">
                         </v-text-field>
                     </v-col>
                     <v-col md="6" align="center">
                         <v-text-field :v-model="formValues.max_year" :model-value="range[1]" hide-details single-line
-                            type="number" variant="outlined" disabled style="width: 150px" density="compact"
-                            @change="$set(range, 1, $event)">
+                            type="number" variant="outlined"  style="width: 150px" density="compact"
+                            @change="$set(range, 1, $event)" @update:model-value="handleChangeText">
                         </v-text-field>
                     </v-col>
                 </v-row>
@@ -74,6 +73,10 @@ export default {
                 formValues.max_year = val[1]
         }
 
+        const handleChangeText = (range) => {
+            formValues.max_year = range[1]
+        }
+
         const tahun = ref()
 
         const handleSubmit = (val1, val2) => {
@@ -86,6 +89,7 @@ export default {
             handleSubmit,
             formValues,
             handleChangeRange,
+            handleChangeText,
             tahun
         }
     }

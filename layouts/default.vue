@@ -16,17 +16,18 @@
   
           <BaseButton> Blog </BaseButton>
           <BaseDropDown
+          @menuClick="handleLainnya"
             class="justify-end"
             label="Lainnya"
             :items="lainnya"
           ></BaseDropDown>
           <v-spacer></v-spacer>
-          
           <BaseDropBar
             @menuClick="handleAkun"
             label="Akun"
             :list="akun"
           ></BaseDropBar>
+          
         </v-app-bar>
   
         <v-navigation-drawer v-model="drawer" location="bottom" temporary>
@@ -85,6 +86,12 @@
     await router.push("/");
     window.location.reload();
   };
+
+  const goToHubungiKami = async () => {
+    await router.push("/hubungikami");
+    window.location.reload();
+  };
+
   const akun = [
     { text: "Login", value: "pick_login" },
     { text: "Daftar", value: "pick_daftar" },
@@ -102,6 +109,17 @@
       openDaftar();
     }
   };
+  const handleLainnya = (e) => {
+    if (e.id == 0) {
+        
+    } else if (e.id == 1) {
+        
+    } else if (e.id == 2) {
+
+    } else if (e.id == 3) {
+      goToHubungiKami()
+    }
+};
   defineProps({
     items: {
       type: Object,

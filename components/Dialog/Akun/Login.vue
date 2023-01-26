@@ -48,22 +48,23 @@
   </BaseDialog>
 </template>
   
-<script setup>
-import { useAuthStore } from "@/stores/auth";
-const authStore = useAuthStore();
-const daftar = ref("");
-const login = ref("");
-const openDaftar = () => {
-  daftar.value.$refs.daftar.open();
-  login.value.close();
-  console.log("test")
-};
-const formValues = reactive({
-  email: "",
-  password: "",
-});
-const handleSubmit = async () => {
-  await authStore.login(formValues);
-  login.value.close();
-};
-</script>
+  <script setup>
+  import { useAuthStore } from "@/stores/auth";
+  const authStore = useAuthStore();
+ const daftar = ref("");
+ const login = ref("");
+  const openDaftar = () => {
+    daftar.value.$refs.daftar.open();
+    login.value.close();
+    console.log("test")
+  };
+  const formValues = reactive({
+    email: "",
+    password: "",
+  });
+  const handleSubmit = async () => {
+    await authStore.login(formValues);
+    console.log("test");
+    login.value.close();
+  };
+  </script>

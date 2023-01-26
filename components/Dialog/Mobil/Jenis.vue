@@ -198,6 +198,7 @@ export default {
   setup(props, context) {
     const router = useRouter();
     const unitStore = useUnitStore();
+    const jenis = ref("");
     const SelectedValue = reactive({
       nama: "",
       bodi: "",
@@ -233,6 +234,7 @@ export default {
     const handleSubmit = () => {
       context.emit("dataJenis", SelectedValue);
       console.log(context);
+      jenis.value.close()
     };
     return {
       SelectedValue,

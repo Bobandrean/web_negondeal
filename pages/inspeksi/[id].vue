@@ -2,7 +2,7 @@
     <v-container>
         <v-row no-gutters>
             <v-col md="12" align="center">
-                <p>Verified By xxxx Car Center</p>
+                <p>Verified By Nego N Deal Car Center</p>
             </v-col>
             <v-col md="12" align="center">
                 <p>Mekanik Berkualitas</p>
@@ -18,7 +18,7 @@
   >
             <v-row no-gutters>
                 <v-col md="6">
-                    <p class="loui4" style="margin-top:5%">Laporan Inspeksi 05 July 2022</p>
+                    <p class="loui4" style="margin-top:5%">Laporan Inspeksi {{ date }}</p>
                 </v-col>
             </v-row>
             <v-row no-gutters>
@@ -847,6 +847,10 @@ onMounted(() => {
   unitStore.fetchDetailUnit(route.params.id);
   console.log(route.params.id);
 });
+
+
+    const date = new Date();
+
 </script>
 
 <style>

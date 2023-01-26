@@ -9,7 +9,6 @@
                 </v-row>
                 <v-row>
                     <v-col md="12" align="center">
-                        {{ SelectedValue }}
                     </v-col>
                     <v-col md="12" align="center">
                         <v-select v-model="SelectedValue.provinsi" @update:model-value="handleCity()"
@@ -51,6 +50,7 @@ import { defineEmits } from 'vue'
 const counterStore = useCounterStore()
 const lokasiStore = useLokasiStore()
 const route = useRoute()
+const lokasim = ref("");
 const router = useRouter()
 const emit = defineEmits(['dataLokasi'])
 const getProvince = computed(() => lokasiStore.getProvince())
@@ -85,6 +85,7 @@ const handleDistrict = async () => {
 const handleSubmit = () => {
     emit('dataLokasi', SelectedValue)
     console.log(SelectedValue)
+    lokasim.value.close();
 };
 </script>
 

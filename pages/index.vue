@@ -6,7 +6,6 @@
     <DialogMobilJenis ref="jenis" @dataJenis="handleDataJenis"></DialogMobilJenis>
     <DialogCarMerk ref="merk" @dataMerk="handleDataMerk"></DialogCarMerk>
     <!-- End Modal -->
-
     <BaseCard>
         <v-row>
             <v-col lg="12">
@@ -36,30 +35,67 @@
             </v-col>
         </v-row>
     </BaseCard>
-    <v-row>
-        <v-col class="mt-3" md="3" v-if="!!search.name">
-            <div class="absolute" style="right: 0; top: -10px">
-            <v-btn text icon color="red lighten-2" @click="clearFilter">
-              <v-icon>mdi-close</v-icon>
-              </v-btn>
-              </div>
-            <v-chip >{{ search.name }}</v-chip>
+    
+    <v-row class="d-flex flex-row mb-6">
+        <v-col  md="2" class=" mt-3" v-if="!!search.name">
+            <v-card
+            class="cardFilter"
+            max-width="125px"
+            >
+            <v-row>
+                <v-col md="8" align="center" class="mt-1">
+                   <p style="font-size:12px; margin-left: 11px;">{{ search.name }}</p> 
+                </v-col>
+                <v-col md="4" align="center" @click="clearFilter">
+                    <v-icon style="margin-right:10px">mdi-close</v-icon>
+                </v-col>
+            </v-row>
+            </v-card>
         </v-col>
-        <v-col class="mt-3" md="3" v-if="!!search.merk">
-            <div class="absolute" style="right: 0; top: -10px">
-            <v-btn text icon color="red lighten-2" @click="clearMerk">
-              <v-icon>mdi-close</v-icon>
-              </v-btn>
-              </div>
-            <v-chip >{{ search.merk }}</v-chip>
+        <v-col class="mt-3" md="2" v-if="!!search.merk">
+            <v-card
+            class="cardFilter"
+            max-width="200px"
+            >
+            <v-row>
+                <v-col md="8" align="center" class="mt-1">
+                   <p style="font-size:13px; margin-left: 11px;">{{ search.merk }}, {{ search.type }}</p> 
+                </v-col>
+                <v-col md="4" align="center" @click="clearMerk">
+                    <v-icon style="margin-right:10px">mdi-close</v-icon>
+                </v-col>
+            </v-row>
+            </v-card>
         </v-col>
-        <v-col class="mt-3" md="3" v-if="!!search.min_year">
-            <div class="absolute" style="right: 0; top: -10px">
-            <v-btn text icon color="red lighten-2" @click="close">
-              <v-icon>mdi-close</v-icon>
-              </v-btn>
-              </div>
-            <v-chip >{{ search.min_year }}</v-chip>
+        <v-col class="mt-3" md="2" v-if="!!search.min_year">
+            <v-card
+            class="cardFilter"
+            max-width="200px"
+            >
+            <v-row>
+                <v-col md="8" align="center" class="mt-1">
+                   <p style="font-size:14px; margin-left: 11px;">{{ search.min_year }} - {{ search.max_year }}</p> 
+                </v-col>
+                <v-col md="4" align="center" @click="clearMerk">
+                    <v-icon style="margin-right:10px">mdi-close</v-icon>
+                </v-col>
+            </v-row>
+            </v-card>
+        </v-col>
+        <v-col class="mt-3" md="2" v-if="!!search.provinsi">
+            <v-card
+            class="cardFilter"
+            max-width="200px"
+            >
+            <v-row>
+                <v-col md="8" align="center" class="mt-1">
+                   <p style="font-size:14px; margin-left: 11px;">{{ search.provinsi }} , {{ search.kota }}, {{ search.kecamatan }}</p> 
+                </v-col>
+                <v-col md="4" align="center" @click="clearMerk">
+                    <v-icon style="margin-right:10px">mdi-close</v-icon>
+                </v-col>
+            </v-row>
+            </v-card>
         </v-col>
     </v-row>
     <v-divider class="ma-6"> </v-divider>
@@ -71,14 +107,32 @@
             <BaseDropDown  @menuClick="HandleSort" color="secondary" label="Sort By" :items="sort"> Sort By</BaseDropDown>
         </v-col>
     </v-row>
+    <v-row style="background-color:gray">
+        <v-col md="12">
+            <p class="ml-14">Highlight</p>
+        </v-col>
+        <v-col md="12">
+            <v-slide-group class="pa-4" show-arrows center-active selected-class="bg-success">
+              <v-slide-group-item v-for="car in getUnit" :key="car.id">
+                <BaseCarCard :items="car"></BaseCarCard>
+              </v-slide-group-item>
+            </v-slide-group>
+        </v-col>
+    </v-row>
     <div class="list-mobil">
-    <v-row no-gutters >
+        <v-row>
         <v-col md="4" v-for="car, y  in getUnit.slice((page - 1) * perPage, page * perPage)" :key="y">
             <BaseCarCard :items="car"></BaseCarCard>
         </v-col>
+        <v-col md="12" align="center" v-if="x == 0" style="background-color:aqua" >Test </v-col>
     </v-row>
     </div>
-    <v-pagination
+   <v-row>
+    <v-col>
+        <p >Menampilkan Halaman  {{ page }} Dari {{ Math.ceil(getUnit.length/perPage) }}</p> 
+    </v-col>
+   </v-row> 
+   <v-pagination
       v-model="page"
       :length="Math.ceil(getUnit.length/perPage)"
       circle
@@ -147,7 +201,7 @@ const result = ref("");
 const merk = ref("");
 const page = ref("1");
 const perPage = ref("6");
-const perRow = ref("3");
+const perRow = ref("2");
 
 const lokasiStore = useLokasiStore()
 
@@ -174,8 +228,7 @@ const search = reactive({
     lowest: '',
     merk: '',
     type: '',
-    startIndex: page - '1' * perPage,
-
+    loading: 'false'
 })
 
 const paginatedData = () => {
@@ -184,8 +237,8 @@ const paginatedData = () => {
 }
 
 const handleHargaTinggi = () => {
-    search.highest = "HargaTinggi"
-    fetchDataSearch()
+     search.highest = "HargaTinggi"
+     fetchDataSearch()
 }
 
 const handleHargaRendah = () => {
@@ -235,6 +288,15 @@ const SearchHandle = (val) => {
     search.name = val
     fetchDataSearch()
 };
+
+const currentDate = () => {
+    const date = new Date()
+    console.log(date)
+
+    const currentDateWithFormat = new Date().toJSON().slice(0,10).replace(/-/g,'/');
+            console.log(currentDateWithFormat);
+}
+
 const fetchDataSearch = async () => {
     const query = {}
     if (search.name !== "") {
@@ -305,8 +367,28 @@ const clearFilter = async() => {
     console.log(search.name, "berhasil Menghapus")
 };
 
+const clearLokasi = async() => {
+    search.provinsi = ""
+    search.kota = ""
+    search.kecamatan = ""
+    fetchDataSearch()
+};
+
+const clearSort = async() => {
+    search.lowest = ""
+    fetchDataSearch()
+    console.log(search.lowest, "berhasil Menghapus")
+};
+
+const clearSort1 = async() => {
+    search.highest = ""
+    fetchDataSearch()
+    console.log(search.highest, "berhasil Menghapus")
+};
+
 const clearMerk = async() => {
     search.merk = ""
+    search.type = ""
     fetchDataSearch()
     console.log(search.merk, "berhasil Menghapus")
 };
@@ -354,7 +436,7 @@ onMounted(() => {
 const handleMenu = (e) => {
 
     if (e.id == 0) {
-        console.log("buka modal semua lokasi")
+        clearLokasi()
     } else if (e.id == 1) {
         openLokasi()
     }
@@ -373,8 +455,30 @@ const HandleSort = (e) => {
     if (e.id == 0) {
         handleHargaTinggi()
         console.log("test")
+        clearSort()
     } else if (e.id == 1) {
         handleHargaRendah()
+        clearSort1()
+    } else if (e.id == 2){
+        currentDate()
+    } else if (e.id == 3){
+        console.log(search.loading)
+        search.loading = "true"
+        console.log(search.loading)
     }
+
 }
 </script>
+
+<style>
+.cardFilter{
+    -webkit-box-align: center;
+    align-items: center;
+    background-color: rgb(229, 241, 255);
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    padding: 6px 8px;
+    height: 32px;
+}
+</style>

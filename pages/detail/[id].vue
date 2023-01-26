@@ -580,8 +580,14 @@ const selectedPhoto = (index) => {
   detailActive.value = index;
 };
 const goToInspeksi = async (id) => {
-    await router.push("/inspeksi/${id}")
+    route.params.id = id
+    await router.push(`/inspeksi/${id}`)
     window.location.reload()
+};
+
+const goToTestDrive = async () => {
+  await router.push("/testdrive")
+  window.location.reload()
 };
 const item = [
   { src: "https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg" },
