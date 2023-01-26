@@ -36,30 +36,66 @@
         </v-row>
     </BaseCard>
     
-    <v-row>
-        <v-col class="mt-3" md="3" v-if="!!search.name">
-            <div class="absolute" style="right: 0; top: -10px">
-            <v-btn text icon color="red lighten-2" @click="clearFilter">
-              <v-icon>mdi-close</v-icon>
-              </v-btn>
-              </div>
-            <v-chip >{{ search.name }}</v-chip>
+    <v-row class="d-flex flex-row mb-6">
+        <v-col  md="2" class=" mt-3" v-if="!!search.name">
+            <v-card
+            class="cardFilter"
+            max-width="125px"
+            >
+            <v-row>
+                <v-col md="8" align="center" class="mt-1">
+                   <p style="font-size:12px; margin-left: 11px;">{{ search.name }}</p> 
+                </v-col>
+                <v-col md="4" align="center" @click="clearFilter">
+                    <v-icon style="margin-right:10px">mdi-close</v-icon>
+                </v-col>
+            </v-row>
+            </v-card>
         </v-col>
-        <v-col class="mt-3" md="3" v-if="!!search.merk">
-            <div class="absolute" style="right: 0; top: -10px">
-            <v-btn text icon color="red lighten-2" @click="clearMerk">
-              <v-icon>mdi-close</v-icon>
-              </v-btn>
-              </div>
-            <v-chip >{{ search.merk }}</v-chip>
+        <v-col class="mt-3" md="2" v-if="!!search.merk">
+            <v-card
+            class="cardFilter"
+            max-width="200px"
+            >
+            <v-row>
+                <v-col md="8" align="center" class="mt-1">
+                   <p style="font-size:13px; margin-left: 11px;">{{ search.merk }}, {{ search.type }}</p> 
+                </v-col>
+                <v-col md="4" align="center" @click="clearMerk">
+                    <v-icon style="margin-right:10px">mdi-close</v-icon>
+                </v-col>
+            </v-row>
+            </v-card>
         </v-col>
-        <v-col class="mt-3" md="3" v-if="!!search.min_year">
-            <div class="absolute" style="right: 0; top: -10px">
-            <v-btn text icon color="red lighten-2" @click="close">
-              <v-icon>mdi-close</v-icon>
-              </v-btn>
-              </div>
-            <v-chip >{{ search.min_year }}</v-chip>
+        <v-col class="mt-3" md="2" v-if="!!search.min_year">
+            <v-card
+            class="cardFilter"
+            max-width="200px"
+            >
+            <v-row>
+                <v-col md="8" align="center" class="mt-1">
+                   <p style="font-size:14px; margin-left: 11px;">{{ search.min_year }} - {{ search.max_year }}</p> 
+                </v-col>
+                <v-col md="4" align="center" @click="clearMerk">
+                    <v-icon style="margin-right:10px">mdi-close</v-icon>
+                </v-col>
+            </v-row>
+            </v-card>
+        </v-col>
+        <v-col class="mt-3" md="2" v-if="!!search.provinsi">
+            <v-card
+            class="cardFilter"
+            max-width="200px"
+            >
+            <v-row>
+                <v-col md="8" align="center" class="mt-1">
+                   <p style="font-size:14px; margin-left: 11px;">{{ search.provinsi }} , {{ search.kota }}, {{ search.kecamatan }}</p> 
+                </v-col>
+                <v-col md="4" align="center" @click="clearMerk">
+                    <v-icon style="margin-right:10px">mdi-close</v-icon>
+                </v-col>
+            </v-row>
+            </v-card>
         </v-col>
     </v-row>
     <v-divider class="ma-6"> </v-divider>
@@ -69,6 +105,20 @@
         </v-col>
         <v-col md="2" no-gutters>
             <BaseDropDown  @menuClick="HandleSort" color="secondary" label="Sort By" :items="sort"> Sort By</BaseDropDown>
+        </v-col>
+    </v-row>
+    <v-row style="background-color:gray">
+        <v-col md="12">
+            <p class="ml-14">Highlight</p>
+        </v-col>
+        <v-col md="4">
+            <BaseCarCard></BaseCarCard>
+        </v-col>
+        <v-col md="4">
+            <BaseCarCard></BaseCarCard>
+        </v-col>
+        <v-col md="4">
+            <BaseCarCard></BaseCarCard>
         </v-col>
     </v-row>
     <div class="list-mobil">
@@ -120,16 +170,6 @@
             </v-row>
         </BaseCard>
     </v-row>
-    <v-dialog v-model="loading" fullscreen full-width>
-  <v-container fluid fill-height style="background-color: rgba(255, 255, 255, 0.5);">
-    <v-layout justify-center align-center>
-      <v-progress-circular
-        indeterminate
-        color="primary">
-      </v-progress-circular>
-    </v-layout>
-  </v-container>
-</v-dialog>
 </template>
 
 
@@ -345,6 +385,7 @@ const clearSort1 = async() => {
 
 const clearMerk = async() => {
     search.merk = ""
+    search.type = ""
     fetchDataSearch()
     console.log(search.merk, "berhasil Menghapus")
 };
@@ -425,3 +466,16 @@ const HandleSort = (e) => {
 
 }
 </script>
+
+<style>
+.cardFilter{
+    -webkit-box-align: center;
+    align-items: center;
+    background-color: rgb(229, 241, 255);
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    padding: 6px 8px;
+    height: 32px;
+}
+</style>

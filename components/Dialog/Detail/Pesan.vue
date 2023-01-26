@@ -9,7 +9,7 @@
             <v-row>
           </v-row>
           <v-row>
-        <NuxtLink class="ml-7" to="/testdrive">
+        <div class="ml-7" style="cursor:pointer" @click="goToTestDrive">
           <v-card
     width="400"
     height="180"
@@ -29,7 +29,7 @@
                 </v-col>
             </v-row>
           </v-card>
-        </NuxtLink>
+        </div>
             </v-row>
         <v-row>
           <v-card
@@ -55,10 +55,17 @@
     </BaseDialog> 
 </template>
 
-<script>
-export default {
+<script setup>
+import { useRoute } from "vue-router";
+import { useRouter } from "vue-router";
 
-}
+const router = useRouter();
+const route = useRoute();
+
+const goToTestDrive = async () => {
+  await router.push("/testdrive")
+  window.location.reload()
+};
 </script>
 
 <style>

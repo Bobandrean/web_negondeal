@@ -73,6 +73,7 @@
   });
   const handleSubmit = async () => {
     await authStore.login(formValues);
+    console.log("test");
     login.value.close();
   };
   </script>

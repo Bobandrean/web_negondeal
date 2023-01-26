@@ -104,29 +104,8 @@
                 </v-col>
             </v-row>
             <v-row style="margin-top:15px">
-                <v-col md="3" align="center">
-                    <BaseButton>Sabtu, 31 Desember</BaseButton>
-                </v-col>
-                <v-col md="3" align="center">
-                    <BaseButton>Minggu, 1 Januari</BaseButton>
-                </v-col>
-                <v-col md="3" align="center">
-                    <BaseButton>Senin, 2 Januari</BaseButton>
-                </v-col>
-                <v-col md="3" align="center">
-                    <BaseButton>Selasa, 3 Januari</BaseButton>
-                </v-col>
-                <v-col md="3" align="center">
-                    <BaseButton>Rabu, 4 Januari</BaseButton>
-                </v-col>
-                <v-col md="3" align="center">
-                    <BaseButton>Kamis, 5 Januari</BaseButton>
-                </v-col>
-                <v-col md="3" align="center">
-                    <BaseButton>Jumat, 6 Januari</BaseButton>
-                </v-col>
-                <v-col md="3" align="center">
-                    <BaseButton>Sabtu, 7 Januari</BaseButton>
+                <v-col md="3" align="center" v-for="n in 7" :key="n">
+                    <BaseButton>{{ format(new Date(date).setDate(new Date(date).getDate() + n)) }}</BaseButton>
                 </v-col>
             </v-row>
             <v-row>
@@ -275,6 +254,16 @@ export default {
         }
     }
 }
+</script>
+<script setup>
+defineProps({
+  date: {
+    type: Date,
+    default: new Date(),
+  },
+})
+
+const { format } = new Intl.DateTimeFormat('en-US', { dateStyle: 'short' })
 </script>
 
 <style>
