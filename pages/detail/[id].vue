@@ -7,14 +7,34 @@
       <v-col md="8">
         <v-row no-gutters>
           <v-col>
-            <v-carousel v-model="detailActive" hide-delimiters>
-              <v-carousel-item v-for="photo in getDetailUnit.photo_selling" :key="photo.id" eager>
-                <v-img :src="photo.path" height="100%" eager />
-              </v-carousel-item>
-            </v-carousel>
-            <v-slide-group class="pa-4" show-arrows center-active selected-class="bg-success">
-              <v-slide-group-item v-for="(photo, index) in getDetailUnit.photo_selling" :key="photo.id">
-                <v-img @click="selectedPhoto(index)" :src="photo.path" height="100px" width="100px" />
+            <div class="images" v-viewer>
+              <v-carousel v-model="detailActive" hide-delimiters>
+                <v-carousel-item
+                  v-for="photo in getDetailUnit.photo_selling"
+                  :key="photo.id"
+                  eager
+                >
+                  <v-img :src="photo.path" height="100%" eager />
+                </v-carousel-item>
+              </v-carousel>
+            </div>
+
+            <v-slide-group
+              class="pa-4"
+              show-arrows
+              center-active
+              selected-class="bg-success"
+            >
+              <v-slide-group-item
+                v-for="(photo, index) in getDetailUnit.photo_selling"
+                :key="photo.id"
+              >
+                <v-img
+                  @click="selectedPhoto(index)"
+                  :src="photo.path"
+                  height="100px"
+                  width="100px"
+                />
               </v-slide-group-item>
             </v-slide-group>
           </v-col>
@@ -121,11 +141,15 @@
                 </v-col>
               </v-row>
               <v-row>
-                <v-card class="mx-auto ma-5" height="200" style="
-                      border-style: thin;
-                      border-color: black;
-                      border-width: 2px;
-                    ">
+                <v-card
+                  class="mx-auto ma-5"
+                  height="200"
+                  style="
+                    border-style: thin;
+                    border-color: black;
+                    border-width: 2px;
+                  "
+                >
                   <v-row justify="center">
                     <v-col md="4" align="center">
                       <p style="margin-top: 50px; font-size: 20px">
@@ -134,9 +158,16 @@
                     </v-col>
                     <v-divider vertical></v-divider>
                     <v-col md="8">
-                      <v-expansion-panels max-width="100" class="mt-4 scrollable">
-                        <v-expansion-panel v-for="i in 3" :key="i" title="Item"
-                          text="Lorem ipsum dolor sit amet,."></v-expansion-panel>
+                      <v-expansion-panels
+                        max-width="100"
+                        class="mt-4 scrollable"
+                      >
+                        <v-expansion-panel
+                          v-for="i in 3"
+                          :key="i"
+                          title="Item"
+                          text="Lorem ipsum dolor sit amet,."
+                        ></v-expansion-panel>
                       </v-expansion-panels>
                     </v-col>
                   </v-row>
@@ -144,10 +175,14 @@
               </v-row>
               <v-row style="margin-top: 30px">
                 <v-col md="6" align="center">
-                  <BaseButton @click="goToInspeksi(getDetailUnit?.id)">Lihat Selengkapnya</BaseButton>
+                  <BaseButton @click="goToInspeksi(getDetailUnit?.id)"
+                    >Lihat Selengkapnya</BaseButton
+                  >
                 </v-col>
                 <v-col md="6" align="center">
-                  <BaseButton @click="openDetail">Download Laporan Inspeksi</BaseButton>
+                  <BaseButton @click="openDetail"
+                    >Download Laporan Inspeksi</BaseButton
+                  >
                 </v-col>
               </v-row>
             </v-card>
@@ -244,11 +279,14 @@
                     <v-chip>Sunroof</v-chip>
                   </v-col>
                 </v-row>
-                <v-card class="mx-auto" style="
-                      border-style: thin;
-                      border-color: black;
-                      border-width: 2px;
-                    ">
+                <v-card
+                  class="mx-auto"
+                  style="
+                    border-style: thin;
+                    border-color: black;
+                    border-width: 2px;
+                  "
+                >
                   <v-container>
                     <v-row>
                       <v-col md="9">
@@ -316,7 +354,9 @@
                 </v-row>
                 <v-row>
                   <v-col align="center">
-                    <BaseButton>Tampilkan ## Lainnya Dari Penjual Ini</BaseButton>
+                    <BaseButton
+                      >Tampilkan ## Lainnya Dari Penjual Ini</BaseButton
+                    >
                   </v-col>
                 </v-row>
                 <v-row>
@@ -338,21 +378,34 @@
                   </v-col>
                 </v-row>
                 <v-row>
-                  <NuxtLink to="/detail">Bagaimana Cara membeli di NND Showroom</NuxtLink>
+                  <NuxtLink to="/detail"
+                    >Bagaimana Cara membeli di NND Showroom</NuxtLink
+                  >
                 </v-row>
                 <v-row>
                   <p>Testimoni Konsumen Atas Penjual Ini :</p>
                 </v-row>
                 <v-row>
-                  <v-card class="mx-auto" max-width="344" outlined style="background-color: grey">
+                  <v-card
+                    class="mx-auto"
+                    max-width="344"
+                    outlined
+                    style="background-color: grey"
+                  >
                     <v-list-item three-line>
                       <v-list-item-content>
                         <div class="text-overline mb-4">OVERLINE</div>
-                        <v-list-item-subtitle>Greyhound divisely hello coldly
-                          fonwderfully</v-list-item-subtitle>
+                        <v-list-item-subtitle
+                          >Greyhound divisely hello coldly
+                          fonwderfully</v-list-item-subtitle
+                        >
                       </v-list-item-content>
 
-                      <v-list-item-avatar tile size="80" color="grey"></v-list-item-avatar>
+                      <v-list-item-avatar
+                        tile
+                        size="80"
+                        color="grey"
+                      ></v-list-item-avatar>
                     </v-list-item>
                   </v-card>
                 </v-row>
@@ -381,7 +434,9 @@
                   <v-card>
                     <div class="d-flex flex-no-wrap justify-space-between">
                       <v-avatar class="ma-3" size="125" rounded="0">
-                        <v-img src="https://cdn.vuetifyjs.com/images/cards/halcyon.png"></v-img>
+                        <v-img
+                          src="https://cdn.vuetifyjs.com/images/cards/halcyon.png"
+                        ></v-img>
                       </v-avatar>
                       <div>
                         <v-card-title class="text-h5">
@@ -400,155 +455,148 @@
       </v-col>
     </v-row>
     <v-row>
-        <v-col md="4">
-            <p class="loui">Favorit</p>
-        </v-col>
-        <v-col md="4">
-            <p class="loui">Bagikan</p>
-        </v-col>
-        <v-col md="4">
-            <p class="loui">Bandingkan</p>
-        </v-col>
+      <v-col md="4">
+        <p class="loui">Favorit</p>
+      </v-col>
+      <v-col md="4">
+        <p class="loui">Bagikan</p>
+      </v-col>
+      <v-col md="4">
+        <p class="loui">Bandingkan</p>
+      </v-col>
     </v-row>
 
-                <v-row>
-                    <v-col>
-                        <v-card
-    class="mx-auto card1"
-    max-width="500"
-    height="500"
-  >
-    <v-card-text>
-      <div>Informasi Penjual</div>
-      <p class="text--primary rounded-0">
-        NND Showroom
-      </p>
-      <p>Penjual Terverifikasi</p>
-      <v-row>
-        <v-col md="4" align="center">
-            <BaseButton @click="openDetail">Test Drive</BaseButton>
-        </v-col>
-        <v-col md="4" align="center">
-            <BaseButton>Hubungi</BaseButton>
-        </v-col>
-        <v-col md="4" align="center">
-            <BaseButton>Deal</BaseButton>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col align="center">
-            <BaseButton>Tampilkan ## Lainnya Dari Penjual Ini</BaseButton>
-        </v-col>
-      </v-row>
-      <v-row><p>Alamat</p></v-row>
-      <v-row><p>{{getDetailUnit.alamat}}</p></v-row>
-      <v-row><p>No Telepon : </p></v-row>
-      <v-row>
-        <v-col md="3">
-            <p v-if="show">081xxxxx </p> 
-            <p v-if="show1">{{getDetailUnit.no_hp}}</p>
-        </v-col>
-        <v-col md="3">
-            <button @click="c1()">tampilkan</button>
-        </v-col>
-    </v-row>
-      <v-row><NuxtLink to="/detail">Bagaimana Cara membeli di NND Showroom</NuxtLink></v-row>
-      <v-row><p>Testimoni Konsumen Atas Penjual Ini :</p></v-row>
-      <v-row>
-        <v-card
-    class="mx-auto"
-    max-width="344"
-    outlined
-    style="background-color : grey"
-  >
-    <v-list-item three-line>
-      <v-list-item-content>
-        <div class="text-overline mb-4">
-          OVERLINE
-        </div>
-        <v-list-item-subtitle>Greyhound divisely hello coldly fonwderfully</v-list-item-subtitle>
-      </v-list-item-content>
-  
-      <v-list-item-avatar
-        tile
-        size="80"
-        color="grey"
-      ></v-list-item-avatar>
-    </v-list-item>
-  </v-card>
-      </v-row>
-      <v-row>
-        <v-col md="6">
-            <NuxtLink to="/detail">Lihat Testimoni Lainnya</NuxtLink>
-        </v-col>
-        <v-col md="6">
-            <NuxtLink to="/detail">Lihat Profil Penjual</NuxtLink>
-        </v-col>
-      </v-row>
-    </v-card-text>
-                        </v-card>
-                    </v-col>
-                </v-row>
-                <v-row>
-                    <v-col>
-                        <v-card
-    max-width="500"
-    class="mx-auto card1"
-  >
-             <v-row>
-            <v-col>
-            <p class="mt-4 ml-4">Kenapa Beli di NND ShowRoom ?</p>
-            </v-col>
+    <v-row>
+      <v-col>
+        <v-card class="mx-auto card1" max-width="500" height="500">
+          <v-card-text>
+            <div>Informasi Penjual</div>
+            <p class="text--primary rounded-0">NND Showroom</p>
+            <p>Penjual Terverifikasi</p>
+            <v-row>
+              <v-col md="4" align="center">
+                <BaseButton @click="openDetail">Test Drive</BaseButton>
+              </v-col>
+              <v-col md="4" align="center">
+                <BaseButton>Hubungi</BaseButton>
+              </v-col>
+              <v-col md="4" align="center">
+                <BaseButton>Deal</BaseButton>
+              </v-col>
             </v-row>
             <v-row>
-                <v-col md="12">
-                <v-card
-          >
-            <div class="d-flex flex-no-wrap justify-space-between">
-                <v-avatar
-                class="ma-3"
-                size="125"
-                rounded="0"
+              <v-col align="center">
+                <BaseButton>Tampilkan ## Lainnya Dari Penjual Ini</BaseButton>
+              </v-col>
+            </v-row>
+            <v-row><p>Alamat</p></v-row>
+            <v-row
+              ><p>{{ getDetailUnit.alamat }}</p></v-row
+            >
+            <v-row><p>No Telepon :</p></v-row>
+            <v-row>
+              <v-col md="3">
+                <p v-if="show">081xxxxx</p>
+                <p v-if="show1">{{ getDetailUnit.no_hp }}</p>
+              </v-col>
+              <v-col md="3">
+                <button @click="c1()">tampilkan</button>
+              </v-col>
+            </v-row>
+            <v-row
+              ><NuxtLink to="/detail"
+                >Bagaimana Cara membeli di NND Showroom</NuxtLink
+              ></v-row
+            >
+            <v-row><p>Testimoni Konsumen Atas Penjual Ini :</p></v-row>
+            <v-row>
+              <v-card
+                class="mx-auto"
+                max-width="344"
+                outlined
+                style="background-color: grey"
               >
-                <v-img src="https://cdn.vuetifyjs.com/images/cards/halcyon.png"></v-img>
-              </v-avatar>
-              <div>
-                <v-card-title class="text-h5">
-                  Halcyon Days
-                </v-card-title>
-  
-                <v-card-subtitle>Ellie Goulding</v-card-subtitle>
-              </div>
-            </div>
-          </v-card>
-        </v-col>
-        </v-row>
-                        </v-card>
-                    </v-col>
-                </v-row>
-        <v-row><p>Mobil Lain Dari Penjual Ini</p></v-row>
-        <v-row>
-        <v-col md="4">
-            <BaseCarCard></BaseCarCard>
-        </v-col>
-        <v-col md="4">
-            <BaseCarCard></BaseCarCard>
-        </v-col>
-        <v-col md="4">
-            <BaseCarCard></BaseCarCard>
-        </v-col>
+                <v-list-item three-line>
+                  <v-list-item-content>
+                    <div class="text-overline mb-4">OVERLINE</div>
+                    <v-list-item-subtitle
+                      >Greyhound divisely hello coldly
+                      fonwderfully</v-list-item-subtitle
+                    >
+                  </v-list-item-content>
+
+                  <v-list-item-avatar
+                    tile
+                    size="80"
+                    color="grey"
+                  ></v-list-item-avatar>
+                </v-list-item>
+              </v-card>
+            </v-row>
+            <v-row>
+              <v-col md="6">
+                <NuxtLink to="/detail">Lihat Testimoni Lainnya</NuxtLink>
+              </v-col>
+              <v-col md="6">
+                <NuxtLink to="/detail">Lihat Profil Penjual</NuxtLink>
+              </v-col>
+            </v-row>
+          </v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <v-card max-width="500" class="mx-auto card1">
+          <v-row>
+            <v-col>
+              <p class="mt-4 ml-4">Kenapa Beli di NND ShowRoom ?</p>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col md="12">
+              <v-card>
+                <div class="d-flex flex-no-wrap justify-space-between">
+                  <v-avatar class="ma-3" size="125" rounded="0">
+                    <v-img
+                      src="https://cdn.vuetifyjs.com/images/cards/halcyon.png"
+                    ></v-img>
+                  </v-avatar>
+                  <div>
+                    <v-card-title class="text-h5"> Halcyon Days </v-card-title>
+
+                    <v-card-subtitle>Ellie Goulding</v-card-subtitle>
+                  </div>
+                </div>
+              </v-card>
+            </v-col>
+          </v-row>
+        </v-card>
+      </v-col>
+    </v-row>
+    <v-row><p>Mobil Lain Dari Penjual Ini</p></v-row>
+    <v-row>
+      <v-col md="4">
+        <BaseCarCard></BaseCarCard>
+      </v-col>
+      <v-col md="4">
+        <BaseCarCard></BaseCarCard>
+      </v-col>
+      <v-col md="4">
+        <BaseCarCard></BaseCarCard>
+      </v-col>
     </v-row>
     <v-row><p>Mobil Lain Yang Mungkin Anda Suka</p></v-row>
-        <v-row>
-        <v-col md="4">
-            <BaseCarCard></BaseCarCard>
-        </v-col>
-        <v-col md="4">
-            <BaseCarCard></BaseCarCard>
-        </v-col>
-        <v-col md="4">
-            <BaseCarCard></BaseCarCard>
-        </v-col>
+    <v-row>
+      <v-col md="4">
+        <BaseCarCard></BaseCarCard>
+      </v-col>
+      <v-col md="4">
+        <BaseCarCard></BaseCarCard>
+      </v-col>
+      <v-col md="4">
+        <BaseCarCard></BaseCarCard>
+      </v-col>
     </v-row>
   </v-container>
 </template>
@@ -559,6 +607,7 @@ import { useCounterStore } from "@/stores/counter";
 import { useUnitStore } from "@/stores/unit";
 import { useRoute } from "vue-router";
 import { useRouter } from "vue-router";
+
 definePageMeta({
   layout: "default",
 });
@@ -572,6 +621,7 @@ const getDetailUnit = computed(() => unitStore.getDetailUnit);
 const openDetail = () => {
   pesandetail.value.$refs.pesandetail.open();
 };
+
 onMounted(() => {
   unitStore.fetchDetailUnit(route.params.id);
   console.log(route.params.id);
@@ -580,14 +630,14 @@ const selectedPhoto = (index) => {
   detailActive.value = index;
 };
 const goToInspeksi = async (id) => {
-    route.params.id = id
-    await router.push(`/inspeksi/${id}`)
-    window.location.reload()
+  route.params.id = id;
+  await router.push(`/inspeksi/${id}`);
+  window.location.reload();
 };
 
 const goToTestDrive = async () => {
-  await router.push("/testdrive")
-  window.location.reload()
+  await router.push("/testdrive");
+  window.location.reload();
 };
 const item = [
   { src: "https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg" },
