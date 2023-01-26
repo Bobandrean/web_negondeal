@@ -1,5 +1,5 @@
 import authServices from "~~/services/authServices";
-
+import Swal from "sweetalert2";
 import { defineStore } from "pinia";
 
 export const useAuthStore = defineStore("auth", () => {
@@ -23,7 +23,9 @@ export const useAuthStore = defineStore("auth", () => {
 
   async function login(payload) {
     try {
-      const res = await authServices.login({ payload });
+      const res = await authServices.login({
+        payload,
+      });
       if (process.client) {
         localStorage.setItem("user", JSON.stringify(res?.data?.user));
         localStorage.setItem("isAuth", true);
@@ -31,10 +33,19 @@ export const useAuthStore = defineStore("auth", () => {
       }
       setUser(res?.data?.user);
       setAuth(true);
-
+      Swal.fire({
+        icon: "success",
+        title: "Welcome to Nego N Deal",
+        text: "You Have Been Logged In Successfully",
+      });
       return res;
     } catch (error) {
       console.error(error);
+      Swal.fire({
+        icon: "error",
+        title: "Welcome to Nego N Deal",
+        text: "Email Or Password Salah",
+      });
     }
   }
 
@@ -64,7 +75,7 @@ export const useAuthStore = defineStore("auth", () => {
     try {
       const res = await authServices.getUser();
 
-      setBlog(res.data);
+      setUser(res.data);
     } catch (error) {
       console.error(error);
     }
@@ -75,7 +86,11 @@ export const useAuthStore = defineStore("auth", () => {
       const res = await authServices.createUser({
         payload,
       });
-
+      Swal.fire({
+        icon: "success",
+        title: "Welcome to Nego N Deal",
+        text: "Sukses Register",
+      });
       return res;
     } catch (error) {
       console.error(error);

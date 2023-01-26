@@ -7,25 +7,18 @@
       <v-row>
         <v-col md="12" align="center">
           <p>Masuk (Log In)</p>
+          {{ getUser }}
         </v-col>
       </v-row>
       <v-form v-model="valid" @submit.prevent="handleSubmit">
         <v-row>
-          <v-text-field
-            v-model="formValues.email"
-            label="email"
-            placeholder="Masukkan Alamat Email Anda"
-            required
-          ></v-text-field>
+          <v-text-field v-model="formValues.email" label="email" placeholder="Masukkan Alamat Email Anda"
+            required></v-text-field>
         </v-row>
         <v-row no-gutters>
           <v-col md="9">
-            <v-text-field
-              v-model="formValues.password"
-              label="password"
-              placeholder="Password"
-              required
-            ></v-text-field>
+            <v-text-field type="password" v-model="formValues.password" label="password" placeholder="Password"
+              required></v-text-field>
           </v-col>
           <v-col md="3">
             <Button>Lupa Password</Button>
@@ -54,24 +47,23 @@
     </v-container>
   </BaseDialog>
 </template>
-
+  
 <script setup>
 import { useAuthStore } from "@/stores/auth";
-
 const authStore = useAuthStore();
-
+const daftar = ref("");
+const login = ref("");
 const openDaftar = () => {
   daftar.value.$refs.daftar.open();
   login.value.close();
+  console.log("test")
 };
-
 const formValues = reactive({
-  email: "admin@gmail.com",
-  password: "123456",
+  email: "",
+  password: "",
 });
-
 const handleSubmit = async () => {
   await authStore.login(formValues);
-  location.reload();
+  login.value.close();
 };
 </script>
