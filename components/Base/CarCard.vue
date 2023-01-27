@@ -1,5 +1,5 @@
 <template>
-    <v-card :loading="loading" class="mx-auto my-12" max-width="374">
+    <v-card :loading="loading" class="mx-auto my-12" max-width="374" style="cursor:pointer">
         <template v-slot:loader="{ isActive }">
             <v-progress-linear :active="isActive" color="deep-purple" height="4" indeterminate></v-progress-linear>
         </template>
@@ -101,6 +101,8 @@ defineProps({
   top: 320px;
   z-index: 1;
 }
+
+
 
 .cardtext{
     font-size:12px;

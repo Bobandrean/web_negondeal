@@ -39,7 +39,7 @@
             <v-col md="12" align="center">
                 Anda Ingin Kirim Email Ke Kami ?
             </v-col>
-            <v-col md="6" class="text-right mt-5">
+            <v-col md="6" align="center">
                 Email
             </v-col>
             <v-col md="6" align="center">

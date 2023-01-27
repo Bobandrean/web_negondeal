@@ -83,6 +83,7 @@ export default {
             const year = [val1, val2]
 
             context.emit('dataYear', year)
+            tahun.value.close()
         };
 
         return {

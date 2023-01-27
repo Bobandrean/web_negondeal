@@ -639,6 +639,9 @@ const goToTestDrive = async () => {
   await router.push("/testdrive");
   window.location.reload();
 };
+
+const gotoHubungi = async () => {
+}
 const item = [
   { src: "https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg" },
   { src: "https://cdn.vuetifyjs.com/images/carousel/sky.jpg" },
