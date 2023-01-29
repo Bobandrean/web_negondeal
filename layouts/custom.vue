@@ -1,4 +1,6 @@
 <template>
+      <DialogUserRegister ref="daftar"></DialogUserRegister>
+    <DialogAkunLogin ref="login"></DialogAkunLogin>
     <v-card>
         <v-layout>
             <!-- <v-system-bar color="deep-purple darken-3"></v-system-bar> -->
@@ -10,7 +12,7 @@
           <BaseButton to="/detail"> NND Showroom</BaseButton>
   
           <BaseButton> Jual Mobil </BaseButton>
-  
+    
           <BaseButton> Blog </BaseButton>
           <BaseDropDown
             class="justify-end"

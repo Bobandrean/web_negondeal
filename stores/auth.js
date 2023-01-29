@@ -10,8 +10,11 @@ export const useAuthStore = defineStore("auth", () => {
     process.client ? JSON.parse(localStorage.getItem("isAuth")) : "" || false
   );
 
+  const profile = ref([])
+
   const getUser = computed(() => user.value);
   const getAuth = computed(() => isAuth.value);
+  const getProfile = computed(() => profile.value);
 
   const setUser = (data) => {
     user.value = data;
@@ -20,6 +23,10 @@ export const useAuthStore = defineStore("auth", () => {
   const setAuth = (data) => {
     isAuth.value = data;
   };
+
+  const setProfile = (data) => {
+    profile.value = data;
+  }
 
   async function login(payload) {
     try {
@@ -70,6 +77,16 @@ export const useAuthStore = defineStore("auth", () => {
       console.error(error);
     }
   }
+  
+async function fetchProfile() {
+  try{
+    const res = await authServices.getProfile();
+
+    setProfile(res.data)
+  } catch(error) {
+    console.error(error);
+  }
+}
 
   async function fetchUser() {
     try {
@@ -101,6 +118,8 @@ export const useAuthStore = defineStore("auth", () => {
     createUser,
     login,
     fetchUser,
+    fetchProfile,
+    getProfile,
     getUser,
     getAuth,
     logout,

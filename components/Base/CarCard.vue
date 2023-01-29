@@ -1,5 +1,5 @@
 <template>
-    <v-card :loading="loading" class="mx-auto my-12" max-width="374">
+    <v-card :loading="loading" class="mx-auto my-12" max-width="374" style="cursor:pointer">
         <template v-slot:loader="{ isActive }">
             <v-progress-linear :active="isActive" color="deep-purple" height="4" indeterminate></v-progress-linear>
         </template>
@@ -7,14 +7,11 @@
         <v-img @click="handleDetail(items?.id)" cover height="250" :src="items?.unit_photo?.[0]?.path"></v-img>
 
         <v-card-item>
-            
                 <v-col md="12" >
                 <p style="font-size:17px">{{ items?.nama }}</p>
                 </v-col>
-                
-            
         </v-card-item>
-
+        <v-icon class="icon-card">mdi-heart-outline</v-icon>
         <div class="px-4">
             <v-card
                 class="mx-auto card1"
@@ -48,7 +45,6 @@
                 <v-col sm="12">
                     <p style="font-size:18px">Rp. {{ items?.harga.toLocaleString() }} (Cash)</p>
                 </v-col>
-
                 <v-col md="6">
                     Rp.135.000.000
                 </v-col>
@@ -100,6 +96,13 @@ defineProps({
   left: 145px;
   top: 320px;
   z-index: 1;
+}
+
+.icon-card{
+    position:absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
 }
 
 .cardtext{

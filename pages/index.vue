@@ -1,7 +1,7 @@
 <template>
     <!-- Modal -->
     <DialogFilterLocation ref="lokasim" @dataLokasi="handleDataLokasi"></DialogFilterLocation>
-    <DialogRangeHarga ref="price" @dataPrice="handleDataPrice"></DialogRangeHarga>
+    <DialogRangeHarga ref="price" @dataPrice ="handleDataPrice"></DialogRangeHarga>
     <DialogCariTahun ref="tahun" @dataYear="handleDataYear"></DialogCariTahun>
     <DialogMobilJenis ref="jenis" @dataJenis="handleDataJenis"></DialogMobilJenis>
     <DialogCarMerk ref="merk" @dataMerk="handleDataMerk"></DialogCarMerk>
@@ -61,16 +61,34 @@
                 </v-row>
             </v-card>
         </v-col>
+        <v-col class="mt-3" md="2" v-if="!!search.min_price">
+            <v-card
+            class="cardFilter"
+            max-width="200px"
+            >
+            <v-row>
+                <v-col md="8" align="center" class="mt-1">
+                   <p style="font-size:10px; margin-left: 11px;">{{ search.min_price }} - {{ search.max_price }}</p> 
+                </v-col>
+                <v-col md="4" align="center" @click="clearPrice">
+                    <v-icon style="margin-right:10px">mdi-close</v-icon>
+                </v-col>
+            </v-row>
+            </v-card>
+        </v-col>
         <v-col class="mt-3" md="2" v-if="!!search.min_year">
-            <v-card class="cardFilter" max-width="200px">
-                <v-row>
-                    <v-col md="8" align="center" class="mt-1">
-                        <p style="font-size:14px; margin-left: 11px;">{{ search.min_year }} - {{ search.max_year }}</p>
-                    </v-col>
-                    <v-col md="4" align="center" @click="clearMerk">
-                        <v-icon style="margin-right:10px">mdi-close</v-icon>
-                    </v-col>
-                </v-row>
+            <v-card
+            class="cardFilter"
+            max-width="200px"
+            >
+            <v-row>
+                <v-col md="8" align="center" class="mt-1">
+                   <p style="font-size:14px; margin-left: 11px;">{{ search.min_year }} - {{ search.max_year }}</p> 
+                </v-col>
+                <v-col md="4" align="center" @click="clearYear">
+                    <v-icon style="margin-right:10px">mdi-close</v-icon>
+                </v-col>
+            </v-row>
             </v-card>
         </v-col>
         <v-col class="mt-3" md="2" v-if="!!search.provinsi">
@@ -100,13 +118,15 @@
     </v-row>
     <v-row style="background-color:gray">
         <v-col md="12">
-            <p class="ml-14">Highlight</p>
+            <p class="ml-14 mt-10" style="font-weight:bold; font-size:30px">Highlight</p>
         </v-col>
         <v-col md="12">
             <v-slide-group class="pa-4" show-arrows center-active selected-class="bg-success">
-                <v-slide-group-item v-for="car in getUnit" :key="car.id">
-                    <BaseCarCard :items="car"></BaseCarCard>
-                </v-slide-group-item>
+              <v-slide-group-item  >
+                <v-col v-for="car in getUnit" :key="car.id">
+                <BaseCarCard :items="car"></BaseCarCard>
+                </v-col>
+              </v-slide-group-item>
             </v-slide-group>
         </v-col>
     </v-row>
@@ -264,8 +284,8 @@ const handleDataYear = (val) => {
     fetchDataSearch()
 }
 const handleDataPrice = (val) => {
-    search.min_price = val[0] ?? 0
-    search.max_price = val[1] ?? 0
+    search.min_price = val.min_price ? val.min_price : ""
+    search.max_price = val.max_price ? val.max_price : ""
     fetchDataSearch()
 }
 const searchResult = () => {
@@ -355,7 +375,21 @@ const clearFilter = async () => {
     console.log(search.name, "berhasil Menghapus")
 };
 
-const clearLokasi = async () => {
+const clearPrice = async() => {
+    search.min_price = ""
+    search.max_price = ""
+    fetchDataSearch()
+    console.log(search.min_price, "berhasil Menghapus")
+};
+
+const clearYear = async() => {
+    search.min_year = ""
+    search.max_year = ""
+    fetchDataSearch()
+    console.log(search.min_year, "berhasil Menghapus")
+};
+
+const clearLokasi = async() => {
     search.provinsi = ""
     search.kota = ""
     search.kecamatan = ""
@@ -386,6 +420,7 @@ const openModal = () => {
 };
 const openHarga = () => {
     price.value.$refs.price.open();
+    console.log("test")
 };
 const openTahun = () => {
     tahun.value.$refs.tahun.open();
