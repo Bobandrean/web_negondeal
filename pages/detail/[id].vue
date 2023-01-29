@@ -9,32 +9,15 @@
           <v-col>
             <div class="images" v-viewer>
               <v-carousel v-model="detailActive" hide-delimiters>
-                <v-carousel-item
-                  v-for="photo in getDetailUnit.photo_selling"
-                  :key="photo.id"
-                  eager
-                >
+                <v-carousel-item v-for="photo in getDetailUnit.photo_selling" :key="photo.id" eager>
                   <v-img :src="photo.path" height="100%" eager />
                 </v-carousel-item>
               </v-carousel>
             </div>
 
-            <v-slide-group
-              class="pa-4"
-              show-arrows
-              center-active
-              selected-class="bg-success"
-            >
-              <v-slide-group-item
-                v-for="(photo, index) in getDetailUnit.photo_selling"
-                :key="photo.id"
-              >
-                <v-img
-                  @click="selectedPhoto(index)"
-                  :src="photo.path"
-                  height="100px"
-                  width="100px"
-                />
+            <v-slide-group class="pa-4" show-arrows center-active selected-class="bg-success">
+              <v-slide-group-item v-for="(photo, index) in getDetailUnit.photo_selling" :key="photo.id">
+                <v-img @click="selectedPhoto(index)" :src="photo.path" height="100px" width="100px" />
               </v-slide-group-item>
             </v-slide-group>
           </v-col>
@@ -141,15 +124,11 @@
                 </v-col>
               </v-row>
               <v-row>
-                <v-card
-                  class="mx-auto ma-5"
-                  height="200"
-                  style="
+                <v-card class="mx-auto ma-5" height="200" style="
                     border-style: thin;
                     border-color: black;
                     border-width: 2px;
-                  "
-                >
+                  ">
                   <v-row justify="center">
                     <v-col md="4" align="center">
                       <p style="margin-top: 50px; font-size: 20px">
@@ -158,16 +137,9 @@
                     </v-col>
                     <v-divider vertical></v-divider>
                     <v-col md="8">
-                      <v-expansion-panels
-                        max-width="100"
-                        class="mt-4 scrollable"
-                      >
-                        <v-expansion-panel
-                          v-for="i in 3"
-                          :key="i"
-                          title="Item"
-                          text="Lorem ipsum dolor sit amet,."
-                        ></v-expansion-panel>
+                      <v-expansion-panels max-width="100" class="mt-4 scrollable">
+                        <v-expansion-panel v-for="i in 3" :key="i" title="Item"
+                          text="Lorem ipsum dolor sit amet,."></v-expansion-panel>
                       </v-expansion-panels>
                     </v-col>
                   </v-row>
@@ -175,14 +147,10 @@
               </v-row>
               <v-row style="margin-top: 30px">
                 <v-col md="6" align="center">
-                  <BaseButton @click="goToInspeksi(getDetailUnit?.id)"
-                    >Lihat Selengkapnya</BaseButton
-                  >
+                  <BaseButton @click="goToInspeksi(getDetailUnit?.id)">Lihat Selengkapnya</BaseButton>
                 </v-col>
                 <v-col md="6" align="center">
-                  <BaseButton @click="openDetail"
-                    >Download Laporan Inspeksi</BaseButton
-                  >
+                  <BaseButton @click="openDetail">Download Laporan Inspeksi</BaseButton>
                 </v-col>
               </v-row>
             </v-card>
@@ -279,14 +247,11 @@
                     <v-chip>Sunroof</v-chip>
                   </v-col>
                 </v-row>
-                <v-card
-                  class="mx-auto"
-                  style="
+                <v-card class="mx-auto" style="
                     border-style: thin;
                     border-color: black;
                     border-width: 2px;
-                  "
-                >
+                  ">
                   <v-container>
                     <v-row>
                       <v-col md="9">
@@ -346,7 +311,9 @@
                     <BaseButton @click="openDetail">Test Drive</BaseButton>
                   </v-col>
                   <v-col md="4" align="center">
-                    <BaseButton>Hubungi</BaseButton>
+                    <BaseButton @click.prevent="goToHubungi(getDetailUnit.no_hp)"><a
+                        :href="`https://api.whatsapp.com/send?phone=${getDetailUnit.no_hp}`"> Hubungi</a>
+                    </BaseButton>
                   </v-col>
                   <v-col md="4" align="center">
                     <BaseButton>Deal</BaseButton>
@@ -354,9 +321,7 @@
                 </v-row>
                 <v-row>
                   <v-col align="center">
-                    <BaseButton
-                      >Tampilkan ## Lainnya Dari Penjual Ini</BaseButton
-                    >
+                    <BaseButton>Tampilkan ## Lainnya Dari Penjual Ini</BaseButton>
                   </v-col>
                 </v-row>
                 <v-row>
@@ -378,34 +343,21 @@
                   </v-col>
                 </v-row>
                 <v-row>
-                  <NuxtLink to="/detail"
-                    >Bagaimana Cara membeli di NND Showroom</NuxtLink
-                  >
+                  <NuxtLink to="/detail">Bagaimana Cara membeli di NND Showroom</NuxtLink>
                 </v-row>
                 <v-row>
                   <p>Testimoni Konsumen Atas Penjual Ini :</p>
                 </v-row>
                 <v-row>
-                  <v-card
-                    class="mx-auto"
-                    max-width="344"
-                    outlined
-                    style="background-color: grey"
-                  >
+                  <v-card class="mx-auto" max-width="344" outlined style="background-color: grey">
                     <v-list-item three-line>
                       <v-list-item-content>
                         <div class="text-overline mb-4">OVERLINE</div>
-                        <v-list-item-subtitle
-                          >Greyhound divisely hello coldly
-                          fonwderfully</v-list-item-subtitle
-                        >
+                        <v-list-item-subtitle>Greyhound divisely hello coldly
+                          fonwderfully</v-list-item-subtitle>
                       </v-list-item-content>
 
-                      <v-list-item-avatar
-                        tile
-                        size="80"
-                        color="grey"
-                      ></v-list-item-avatar>
+                      <v-list-item-avatar tile size="80" color="grey"></v-list-item-avatar>
                     </v-list-item>
                   </v-card>
                 </v-row>
@@ -434,9 +386,7 @@
                   <v-card>
                     <div class="d-flex flex-no-wrap justify-space-between">
                       <v-avatar class="ma-3" size="125" rounded="0">
-                        <v-img
-                          src="https://cdn.vuetifyjs.com/images/cards/halcyon.png"
-                        ></v-img>
+                        <v-img src="https://cdn.vuetifyjs.com/images/cards/halcyon.png"></v-img>
                       </v-avatar>
                       <div>
                         <v-card-title class="text-h5">
@@ -489,11 +439,15 @@
                 <BaseButton>Tampilkan ## Lainnya Dari Penjual Ini</BaseButton>
               </v-col>
             </v-row>
-            <v-row><p>Alamat</p></v-row>
-            <v-row
-              ><p>{{ getDetailUnit.alamat }}</p></v-row
-            >
-            <v-row><p>No Telepon :</p></v-row>
+            <v-row>
+              <p>Alamat</p>
+            </v-row>
+            <v-row>
+              <p>{{ getDetailUnit.alamat }}</p>
+            </v-row>
+            <v-row>
+              <p>No Telepon :</p>
+            </v-row>
             <v-row>
               <v-col md="3">
                 <p v-if="show">081xxxxx</p>
@@ -503,33 +457,22 @@
                 <button @click="c1()">tampilkan</button>
               </v-col>
             </v-row>
-            <v-row
-              ><NuxtLink to="/detail"
-                >Bagaimana Cara membeli di NND Showroom</NuxtLink
-              ></v-row
-            >
-            <v-row><p>Testimoni Konsumen Atas Penjual Ini :</p></v-row>
             <v-row>
-              <v-card
-                class="mx-auto"
-                max-width="344"
-                outlined
-                style="background-color: grey"
-              >
+              <NuxtLink to="/detail">Bagaimana Cara membeli di NND Showroom</NuxtLink>
+            </v-row>
+            <v-row>
+              <p>Testimoni Konsumen Atas Penjual Ini :</p>
+            </v-row>
+            <v-row>
+              <v-card class="mx-auto" max-width="344" outlined style="background-color: grey">
                 <v-list-item three-line>
                   <v-list-item-content>
                     <div class="text-overline mb-4">OVERLINE</div>
-                    <v-list-item-subtitle
-                      >Greyhound divisely hello coldly
-                      fonwderfully</v-list-item-subtitle
-                    >
+                    <v-list-item-subtitle>Greyhound divisely hello coldly
+                      fonwderfully</v-list-item-subtitle>
                   </v-list-item-content>
 
-                  <v-list-item-avatar
-                    tile
-                    size="80"
-                    color="grey"
-                  ></v-list-item-avatar>
+                  <v-list-item-avatar tile size="80" color="grey"></v-list-item-avatar>
                 </v-list-item>
               </v-card>
             </v-row>
@@ -558,9 +501,7 @@
               <v-card>
                 <div class="d-flex flex-no-wrap justify-space-between">
                   <v-avatar class="ma-3" size="125" rounded="0">
-                    <v-img
-                      src="https://cdn.vuetifyjs.com/images/cards/halcyon.png"
-                    ></v-img>
+                    <v-img src="https://cdn.vuetifyjs.com/images/cards/halcyon.png"></v-img>
                   </v-avatar>
                   <div>
                     <v-card-title class="text-h5"> Halcyon Days </v-card-title>
@@ -574,7 +515,9 @@
         </v-card>
       </v-col>
     </v-row>
-    <v-row><p>Mobil Lain Dari Penjual Ini</p></v-row>
+    <v-row>
+      <p>Mobil Lain Dari Penjual Ini</p>
+    </v-row>
     <v-row>
       <v-col md="4">
         <BaseCarCard></BaseCarCard>
@@ -586,7 +529,9 @@
         <BaseCarCard></BaseCarCard>
       </v-col>
     </v-row>
-    <v-row><p>Mobil Lain Yang Mungkin Anda Suka</p></v-row>
+    <v-row>
+      <p>Mobil Lain Yang Mungkin Anda Suka</p>
+    </v-row>
     <v-row>
       <v-col md="4">
         <BaseCarCard></BaseCarCard>
@@ -598,22 +543,22 @@
         <BaseCarCard></BaseCarCard>
       </v-col>
     </v-row>
-      <div class="card-bottom">
-    <v-row>
-      <v-col md="6">
-        {{ getDetailUnit.nama }}<br>
-        {{ getDetailUnit.bahan_bakar }}, {{ getDetailUnit.odometer }} KM
-      </v-col>
-      <v-col md="3">
-       Rp. {{ getDetailUnit.harga }}<br>
-       Rp. XXXXXX
-      </v-col>
-      <v-col md="3" class="text-left">
-        <BaseButton class="ml-2 mt-5">TestDrive</BaseButton>
-        <BaseButton class="ml-4 mt-5">Hubungi</BaseButton>
-      </v-col>
-    </v-row>
-  </div>
+    <div class="card-bottom">
+      <v-row>
+        <v-col md="6">
+          {{ getDetailUnit.nama }}<br>
+          {{ getDetailUnit.bahan_bakar }}, {{ getDetailUnit.odometer }} KM
+        </v-col>
+        <v-col md="3">
+          Rp. {{ getDetailUnit.harga }}<br>
+          Rp. XXXXXX
+        </v-col>
+        <v-col md="3" class="text-left">
+          <BaseButton class="ml-2 mt-5">TestDrive</BaseButton>
+          <BaseButton class="ml-4 mt-5">Hubungi</BaseButton>
+        </v-col>
+      </v-row>
+    </div>
   </v-container>
 </template>
 
@@ -657,7 +602,8 @@ const goToTestDrive = async () => {
   window.location.reload();
 };
 
-const gotoHubungi = async () => {
+const goToHubungi = async (noHp) => {
+  window.open(`https://api.whatsapp.com/send?phone=${noHp}`)
 }
 const item = [
   { src: "https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg" },
@@ -705,13 +651,14 @@ const item = [
   background: white;
   box-shadow: 15px 15px 30px #bebebe, -15px -15px 30px #ffffff;
 }
+
 .card-bottom {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background: gray;
-    line-height: 2;
-    text-align: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: gray;
+  line-height: 2;
+  text-align: center;
 }
 
 .scrollable {
