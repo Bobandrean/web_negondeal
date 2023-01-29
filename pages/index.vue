@@ -128,8 +128,8 @@
         </v-col>
         <v-col md="12">
             <v-slide-group class="pa-4" show-arrows center-active selected-class="bg-success">
-              <v-slide-group-item  v-for="car in getUnit" :key="car.id">
-                <v-col>
+              <v-slide-group-item  >
+                <v-col v-for="car in getUnit" :key="car.id">
                 <BaseCarCard :items="car"></BaseCarCard>
                 </v-col>
               </v-slide-group-item>

@@ -598,8 +598,25 @@
         <BaseCarCard></BaseCarCard>
       </v-col>
     </v-row>
+      <div class="card-bottom">
+    <v-row>
+      <v-col md="6">
+        {{ getDetailUnit.nama }}<br>
+        {{ getDetailUnit.bahan_bakar }}, {{ getDetailUnit.odometer }} KM
+      </v-col>
+      <v-col md="3">
+       Rp. {{ getDetailUnit.harga }}<br>
+       Rp. XXXXXX
+      </v-col>
+      <v-col md="3" class="text-left">
+        <BaseButton class="ml-2 mt-5">TestDrive</BaseButton>
+        <BaseButton class="ml-4 mt-5">Hubungi</BaseButton>
+      </v-col>
+    </v-row>
+  </div>
   </v-container>
 </template>
+
   
 <script setup>
 import { ref } from "vue";
@@ -687,6 +704,14 @@ const item = [
   border-radius: 30px;
   background: white;
   box-shadow: 15px 15px 30px #bebebe, -15px -15px 30px #ffffff;
+}
+.card-bottom {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: gray;
+    line-height: 2;
+    text-align: center;
 }
 
 .scrollable {

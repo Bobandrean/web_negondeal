@@ -12,7 +12,7 @@
           </v-list-item>
         </v-list>
         <v-list v-else>
-          <v-list-item>
+          <v-list-item @click="goToProfile">
             <v-list-item-title>{{ getUser.email }}</v-list-item-title>
           </v-list-item>
           <v-list-item @click="handleLogout">
@@ -23,11 +23,32 @@
     </client-only>
   </template>
   
-  <script>
+  <script setup>
   import { defineEmits } from "vue";
   import { useAuthStore } from "@/stores/auth";
-  export default {
-    props: {
+  import { useRouter } from "vue-router";
+  import { defineProps } from "vue";
+const router = useRouter();
+const authStore = useAuthStore();
+const emit = defineEmits(['handleSelect'])
+
+      const getUser = computed(() => {
+        return authStore.getUser;
+      });
+      const handleSelect = (e) => {
+        emit("menuClick", e);
+      };
+      const handleLogout = async () => {
+        await authStore.logout();
+        location.reload();
+      };
+const goToProfile = async () => {
+        console.log("test")
+      await router.push("/profile");
+      window.location.reload();
+      };
+
+defineProps({
       list: {
         type: Array,
         default: () => [],
@@ -60,24 +81,6 @@
         type: Boolean,
         default: false,
       },
-    },
-    setup(props, context) {
-      const authStore = useAuthStore();
-      const getUser = computed(() => {
-        return authStore.getUser;
-      });
-      const handleSelect = (e) => {
-        context.emit("menuClick", e);
-      };
-      const handleLogout = async () => {
-        await authStore.logout();
-        location.reload();
-      };
-      return {
-        handleSelect,
-        getUser,
-        handleLogout,
-      };
-    },
-  };
+    });
+
   </script>
