@@ -130,14 +130,16 @@
             </v-slide-group>
         </v-col>
     </v-row>
-    <div class="list-mobil">
-        <v-row>
+    <v-row v-if="getUnit.length == 0">
+        <v-col md="12" align="center">
+            <v-img style="height:400px" src="https://cdn.dribbble.com/users/77598/screenshots/6321675/desert-page_dribbble.gif"></v-img>
+        </v-col>
+    </v-row>
+        <v-row v-else>
             <v-col md="4" v-for="car, y  in getUnit.slice((page - 1) * perPage, page * perPage)" :key="y">
                 <BaseCarCard :items="car"></BaseCarCard>
             </v-col>
         </v-row>
-        
-    </div>
     <v-row>
         <v-col>
             <p>Menampilkan Halaman {{ page }} Dari {{ Math.ceil(getUnit.length / perPage) }}</p>
