@@ -134,10 +134,9 @@
         <v-row>
             <v-col md="4" v-for="car, y  in getUnit.slice((page - 1) * perPage, page * perPage)" :key="y">
                 <BaseCarCard :items="car"></BaseCarCard>
-                <v-col md="12" align="center" v-if="y == 1" style="background-color:aqua">Test </v-col>
             </v-col>
-
         </v-row>
+        
     </div>
     <v-row>
         <v-col>

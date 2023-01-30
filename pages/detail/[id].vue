@@ -306,12 +306,24 @@
                 <div>Informasi Penjual</div>
                 <p class="text--primary rounded-0">NND Showroom</p>
                 <p>Penjual Terverifikasi</p>
-                <v-row>
+                <v-row v-if="!getUser">
+                  <v-col md="4" align="center">
+                    <BaseButton >Test Drive</BaseButton>
+                  </v-col>
+                  <v-col md="4" align="center">
+                    <BaseButton> Hubungi
+                    </BaseButton>
+                  </v-col>
+                  <v-col md="4" align="center">
+                    <BaseButton>Deal</BaseButton>
+                  </v-col>
+                </v-row>
+                <v-row v-else>
                   <v-col md="4" align="center">
                     <BaseButton @click="openDetail">Test Drive</BaseButton>
                   </v-col>
                   <v-col md="4" align="center">
-                    <BaseButton @click.prevent="goToHubungi(getDetailUnit.no_hp)"><a
+                    <BaseButton  @click.prevent="goToHubungi(getDetailUnit.no_hp)"><a style="text-decoration:none; color:white"
                         :href="`https://api.whatsapp.com/send?phone=${getDetailUnit.no_hp}`"> Hubungi</a>
                     </BaseButton>
                   </v-col>
@@ -405,117 +417,6 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col md="4">
-        <p class="loui">Favorit</p>
-      </v-col>
-      <v-col md="4">
-        <p class="loui">Bagikan</p>
-      </v-col>
-      <v-col md="4">
-        <p class="loui">Bandingkan</p>
-      </v-col>
-    </v-row>
-
-    <v-row>
-      <v-col>
-        <v-card class="mx-auto card1" max-width="500" height="500">
-          <v-card-text>
-            <div>Informasi Penjual</div>
-            <p class="text--primary rounded-0">NND Showroom</p>
-            <p>Penjual Terverifikasi</p>
-            <v-row>
-              <v-col md="4" align="center">
-                <BaseButton @click="openDetail">Test Drive</BaseButton>
-              </v-col>
-              <v-col md="4" align="center">
-                <BaseButton>Hubungi</BaseButton>
-              </v-col>
-              <v-col md="4" align="center">
-                <BaseButton>Deal</BaseButton>
-              </v-col>
-            </v-row>
-            <v-row>
-              <v-col align="center">
-                <BaseButton>Tampilkan ## Lainnya Dari Penjual Ini</BaseButton>
-              </v-col>
-            </v-row>
-            <v-row>
-              <p>Alamat</p>
-            </v-row>
-            <v-row>
-              <p>{{ getDetailUnit.alamat }}</p>
-            </v-row>
-            <v-row>
-              <p>No Telepon :</p>
-            </v-row>
-            <v-row>
-              <v-col md="3">
-                <p v-if="show">081xxxxx</p>
-                <p v-if="show1">{{ getDetailUnit.no_hp }}</p>
-              </v-col>
-              <v-col md="3">
-                <button @click="c1()">tampilkan</button>
-              </v-col>
-            </v-row>
-            <v-row>
-              <NuxtLink to="/detail">Bagaimana Cara membeli di NND Showroom</NuxtLink>
-            </v-row>
-            <v-row>
-              <p>Testimoni Konsumen Atas Penjual Ini :</p>
-            </v-row>
-            <v-row>
-              <v-card class="mx-auto" max-width="344" outlined style="background-color: grey">
-                <v-list-item three-line>
-                  <v-list-item-content>
-                    <div class="text-overline mb-4">OVERLINE</div>
-                    <v-list-item-subtitle>Greyhound divisely hello coldly
-                      fonwderfully</v-list-item-subtitle>
-                  </v-list-item-content>
-
-                  <v-list-item-avatar tile size="80" color="grey"></v-list-item-avatar>
-                </v-list-item>
-              </v-card>
-            </v-row>
-            <v-row>
-              <v-col md="6">
-                <NuxtLink to="/detail">Lihat Testimoni Lainnya</NuxtLink>
-              </v-col>
-              <v-col md="6">
-                <NuxtLink to="/detail">Lihat Profil Penjual</NuxtLink>
-              </v-col>
-            </v-row>
-          </v-card-text>
-        </v-card>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col>
-        <v-card max-width="500" class="mx-auto card1">
-          <v-row>
-            <v-col>
-              <p class="mt-4 ml-4">Kenapa Beli di NND ShowRoom ?</p>
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col md="12">
-              <v-card>
-                <div class="d-flex flex-no-wrap justify-space-between">
-                  <v-avatar class="ma-3" size="125" rounded="0">
-                    <v-img src="https://cdn.vuetifyjs.com/images/cards/halcyon.png"></v-img>
-                  </v-avatar>
-                  <div>
-                    <v-card-title class="text-h5"> Halcyon Days </v-card-title>
-
-                    <v-card-subtitle>Ellie Goulding</v-card-subtitle>
-                  </div>
-                </div>
-              </v-card>
-            </v-col>
-          </v-row>
-        </v-card>
-      </v-col>
-    </v-row>
-    <v-row>
       <p>Mobil Lain Dari Penjual Ini</p>
     </v-row>
     <v-row>
@@ -543,14 +444,15 @@
         <BaseCarCard></BaseCarCard>
       </v-col>
     </v-row>
-    <div class="card-bottom">
+  </v-container>
+  <div class="card-bottom">
       <v-row>
         <v-col md="6">
           {{ getDetailUnit.nama }}<br>
           {{ getDetailUnit.bahan_bakar }}, {{ getDetailUnit.odometer }} KM
         </v-col>
         <v-col md="3">
-          Rp. {{ getDetailUnit.harga }}<br>
+          Rp. {{ getDetailUnit.harga?.toLocaleString() }}<br>
           Rp. XXXXXX
         </v-col>
         <v-col md="3" class="text-left">
@@ -559,7 +461,6 @@
         </v-col>
       </v-row>
     </div>
-  </v-container>
 </template>
 
   
@@ -567,18 +468,23 @@
 import { ref } from "vue";
 import { useCounterStore } from "@/stores/counter";
 import { useUnitStore } from "@/stores/unit";
+import { useAuthStore } from "@/stores/auth";
 import { useRoute } from "vue-router";
 import { useRouter } from "vue-router";
 
 definePageMeta({
-  layout: "default",
+  layout: "custom",
 });
 const router = useRouter();
 const route = useRoute();
+const authStore = useAuthStore();
 const pesandetail = ref("");
 const detailActive = ref(0);
 const counterStore = useCounterStore();
 const unitStore = useUnitStore();
+const getUser = computed(() => {
+        return authStore.getUser;
+      });
 const getDetailUnit = computed(() => unitStore.getDetailUnit);
 const openDetail = () => {
   pesandetail.value.$refs.pesandetail.open();
