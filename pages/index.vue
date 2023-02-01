@@ -6,35 +6,37 @@
     <DialogMobilJenis ref="jenis" @dataJenis="handleDataJenis"></DialogMobilJenis>
     <DialogCarMerk ref="merk" @dataMerk="handleDataMerk"></DialogCarMerk>
     <!-- End Modal -->
-    <BaseCard>
+   
         <v-row>
-            <v-col lg="12">
+            <v-col>
                 <BaseInput @keyup.enter="SearchHandle(search.name)" v-model="search.name"
-                    placeholder="Cari Mobil Anda (Merek/Jenis)" type="text">
+                    placeholder="Cari Mobil Anda (Merek/Jenis)" type="text" variant="outlined" prepend-inner-icon="mdi-magnify">
                 </BaseInput>
             </v-col>
         </v-row>
         <v-row>
-            <v-col>
-                <BaseButton @click="openMerk">Merk & Jenis</BaseButton>
-            </v-col>
-            <v-col>
-                <BaseButton @click="openHarga">Harga</BaseButton>
-            </v-col>
-            <v-col>
-                <BaseButton @click="openTahun">Tahun</BaseButton>
-            </v-col>
-            <v-col>
-                <BaseDropDown @menuClick="handleMenu" label="Lokasi" :items="lokasi">Lokasi</BaseDropDown>
-            </v-col>
-            <v-col>
-                <BaseButton @click="openModal">Filter Lainnya</BaseButton>
-            </v-col>
-            <v-col>
-                <BaseButton @click="clearSearch">Reset filter</BaseButton>
-            </v-col>
-        </v-row>
-    </BaseCard>
+            <v-col md="3"></v-col>
+            <v-col md="9" class="d-flex flex-row">
+            <v-sheet class=" pa-2">
+                <BaseButton @click="openMerk" class="text-button"><span style="color: #ffffff">Merk & Jenis</span></BaseButton>
+            </v-sheet>
+            <v-sheet class=" pa-2">
+                <BaseButton @click="openHarga" class="text-button"><span style="color: #ffffff">Harga</span></BaseButton>
+            </v-sheet>
+            <v-sheet class="pa-2">
+                <BaseButton @click="openTahun" class="text-button"><span style="color: #ffffff">Tahun</span></BaseButton>
+            </v-sheet>
+            <v-sheet class=" pa-2">
+                <BaseDropDown @menuClick="handleMenu" label="Lokasi" :items="lokasi"><span>Lokasi</span></BaseDropDown>
+            </v-sheet>
+            <v-sheet class=" pa-2">
+                <BaseButton @click="openModal" class="text-button"><span style="color: #ffffff">Filter Lainnya</span></BaseButton>
+            </v-sheet>
+            <v-sheet class="pa-2">
+                <BaseButton @click="clearSearch" class="text-button"><span style="color: #ffffff">Reset Filter</span></BaseButton>
+            </v-sheet>
+        </v-col>
+    </v-row>
 
     <v-row class="d-flex flex-row mb-6">
         <v-col md="2" class=" mt-3" v-if="!!search.name">
@@ -106,9 +108,8 @@
             </v-card>
         </v-col>
     </v-row>
-    <v-divider class="ma-6"> </v-divider>
     <v-row>
-        <v-col md="2" no-gutters align="center">
+        <v-col md="2" class="mt-2 ml-2" no-gutters align="center">
             <p>Menampilkan {{ getUnit.length }} Mobil</p>
         </v-col>
         <v-col md="2" no-gutters>
@@ -116,7 +117,10 @@
             </BaseDropDown>
         </v-col>
     </v-row>
-    <v-row style="background-color:gray">
+    <v-row v-if="getUnit.length == 0">
+
+    </v-row>
+    <v-row style="background-color:gray" v-else>
         <v-col md="12">
             <p class="ml-14 mt-10" style="font-weight:bold; font-size:30px">Highlight</p>
         </v-col>
@@ -124,6 +128,7 @@
             <v-slide-group class="pa-4" show-arrows center-active selected-class="bg-success">
               <v-slide-group-item  >
                 <v-col v-for="car in getUnit" :key="car.id">
+                    
                 <BaseCarCard :items="car"></BaseCarCard>
                 </v-col>
               </v-slide-group-item>
@@ -135,8 +140,8 @@
             <v-img style="height:400px" src="https://cdn.dribbble.com/users/77598/screenshots/6321675/desert-page_dribbble.gif"></v-img>
         </v-col>
     </v-row>
-        <v-row v-else>
-            <v-col md="4" v-for="car, y  in getUnit.slice((page - 1) * perPage, page * perPage)" :key="y">
+        <v-row v-else >
+        <v-col md="4" v-for="car, y  in getUnit.slice((page - 1) * perPage, page * perPage)" :key="y">
                 <BaseCarCard :items="car"></BaseCarCard>
             </v-col>
         </v-row>
@@ -147,7 +152,10 @@
     </v-row>
     <v-pagination v-model="page" :length="Math.ceil(getUnit.length / perPage)" circle></v-pagination>
     <v-divider class="ma-6"> </v-divider>
-    <v-row>
+    <v-row v-if="!getUser">
+
+    </v-row>
+    <v-row v-else>
         <v-col md="4">
             <BaseCarCard></BaseCarCard>
         </v-col>
@@ -171,13 +179,13 @@
             </v-row>
             <v-row>
                 <v-col md="6">
-                    <BaseInput placeholder="pisahkan dengan koma (.) untuk kata kunci lebih dari satu"></BaseInput>
+                    <BaseInput placeholder="pisahkan dengan koma (.) untuk kata kunci lebih dari satu" variant="outlined" style="border-radius:8px"></BaseInput>
                 </v-col>
                 <v-col md="6">
-                    <BaseInput placeholder="No Hp Anda"></BaseInput>
+                    <BaseInput placeholder="No Hp Anda" variant="outlined"></BaseInput>
                 </v-col>
                 <v-col md="12" align="center">
-                    <BaseButton>Beritahu Saya</BaseButton>
+                    <BaseButton class="text-button">Beritahu Saya</BaseButton>
                 </v-col>
             </v-row>
         </BaseCard>
@@ -453,7 +461,13 @@ const fetchData = () => {
 
     const query = {}
 }
-const getUnit = computed(() => unitStore.getUnit())
+const getUnit = computed(() => 
+     unitStore.getUnit()
+);
+
+const dataMobil = computed(() => 
+     unitStore.getUnit()
+);
 onMounted(() => {
     unitStore.getUnitService('')
 })
@@ -505,4 +519,23 @@ const HandleSort = (e) => {
     padding: 6px 8px;
     height: 32px;
 }
+
+.text-button {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 22px;
+    -webkit-box-align: center;
+    align-items: center;
+    border-radius: 12px;
+    color: rgb(255, 255, 255);
+    display: flex;
+    height: 20px;
+    -webkit-box-pack: center;
+    justify-content: center;
+    padding-inline: 16px;
+    text-shadow: none;
+    box-shadow: none;
+}
+
+
 </style>

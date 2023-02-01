@@ -1,5 +1,5 @@
 <template>
-    <v-btn :color="color" v-bind="$attrs">
+    <v-btn color="#4155ae" v-bind="$attrs">
         <slot></slot>
     </v-btn>
 </template>
@@ -11,7 +11,7 @@ export default {
     props: {
         color: {
             type: String,
-            default: 'primary',
+            default: '#4155ae',
         },
     },
 }

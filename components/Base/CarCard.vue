@@ -8,7 +8,7 @@
 
         <v-card-item>
                 <v-col md="12" >
-                <p style="font-size:17px">{{ items?.nama }}</p>
+                <p class="car-title">{{ items?.nama }}</p>
                 </v-col>
         </v-card-item>
         <v-icon class="icon-card">mdi-heart-outline</v-icon>
@@ -20,13 +20,13 @@
             >
             <v-row no-gutters>
                 <v-col md="5" class="ml-5 mt-3" @mouseover="showByIndex = i" @mouseout="showByIndex = null" style="cursor:pointer">
-            <span class="mr-1" style="font-size:16px">NND Cerfified</span>
+            <span class="mr-1" style="font-size:14px">NND Cerfified</span>
             <v-icon color="error" icon="mdi-fire-circle" size="small"></v-icon>
                  </v-col>
             </v-row>
             <v-row no-gutters>
-                <v-col md="12" class="ml-5">
-                    <p class="pb-2 cardtext">{{ items?.tahun }} | {{ items?.odometer }} KM | {{ items?.transmisi }} | {{items?.Provinsi}}</p>
+                <v-col md="12" class="ml-3">
+                    <p class="pb-2"><span class="car-detail">{{ items?.tahun }} | {{ items?.odometer }} KM | {{ items?.transmisi }} | {{items?.Provinsi}}</span></p>
                 </v-col>
             </v-row>
             </v-card>
@@ -43,7 +43,7 @@
         <v-card-text>
             <v-row>
                 <v-col sm="12">
-                    <p style="font-size:18px">Rp. {{ items?.harga.toLocaleString() }} (Cash)</p>
+                    <span class="currency-text">Rp.</span> <span class="car-text">{{ items?.harga.toLocaleString() }} (Cash) </span>
                 </v-col>
                 <v-col md="6">
                     Rp.135.000.000
@@ -86,8 +86,11 @@ defineProps({
 
 <style>
    .card1{
-    border-radius: 20px;
-  background: white;
+    -webkit-box-align: center;
+    align-items: center;
+    border: 0.5px solid rgb(212, 212, 212);
+    border-radius: 12px;
+    background-color: rgba(247, 247, 247, 0.5);
 }
 
 .boxtext{
@@ -100,11 +103,47 @@ defineProps({
 .icon-card{
     position:absolute;
     z-index: 1;
-    top: 0;
+    top: 248px;
     right: 0;
 }
 
 .cardtext{
     font-size:12px;
+}
+
+.currency-text{
+    color: #e77200;
+    font-family: Poppins;
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 700 !important;
+}
+
+.car-text{
+    color: #e77200;
+    font-size: 24px;
+    font-family: Poppins;
+    font-weight: 700 !important;
+}
+
+.car-title{
+    font-family: Poppins;
+    line-height: 24px;
+    margin-top: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    color: rgb(59, 59, 59);
+    font-size: 17px;
+    font-weight: 600 !important;
+}
+
+.car-detail{
+    font-family: Poppins;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 1.5;
+    color: rgb(54, 54, 54);
 }
 </style>

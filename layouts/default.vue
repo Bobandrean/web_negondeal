@@ -7,14 +7,15 @@
   <v-card>
     <v-layout>
       <v-app-bar color="#e77200">
-        <v-btn icon="mdi-magnify" @click="goToIndex" class="mr-3">Logo</v-btn>
-        <BaseButton> Beli Mobil</BaseButton>
+        <v-img @click="goToIndex" src="https://www.linkpicture.com/q/NND_FINAL_logo_PNG-removebg-preview.png" style="width:25px;cursor:pointer"></v-img>
+        <v-spacer></v-spacer>
+        <BaseButton> <span style="color:#ffffff">Beli Mobil</span></BaseButton>
 
-        <BaseButton to="/detail"> NND Showroom</BaseButton>
+        <BaseButton to="/detail"> <span style="color:#ffffff">NND Showroom</span></BaseButton>
 
-        <BaseButton> Jual Mobil </BaseButton>
+        <BaseButton> <span style="color:#ffffff">Jual Mobil</span> </BaseButton>
 
-        <BaseButton> Blog </BaseButton>
+        <BaseButton> <span style="color:#ffffff">Blog</span> </BaseButton>
         <BaseDropDown @menuClick="handleLainnya" class="justify-end" label="Lainnya" :items="lainnya"></BaseDropDown>
         <v-spacer></v-spacer>
         <BaseDropBar @menuClick="handleAkun" label="Akun" :list="akun"></BaseDropBar>

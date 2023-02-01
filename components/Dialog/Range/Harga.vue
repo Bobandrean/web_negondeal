@@ -15,8 +15,8 @@
                 </v-row>
                 <v-row>
                     <v-col md="6" align="center">
-                        <v-text-field v-model="formValues.min_price" hide-details single-line
-                            type="number" variant="outlined" density="compact" style="width: 150px">
+                        <v-text-field v-model="formValues.min_price" hide-details single-line @update:model-value="setTwoNumberDecimal"
+                            type="number"  variant="outlined" density="compact" style="width: 150px">
                         </v-text-field>
                     </v-col>
                     <v-col md="6" align="center">
@@ -50,6 +50,10 @@ const route = useRoute()
 const price = ref("");
 const router = useRouter()
 const emit = defineEmits(['dataPrice'])
+
+const setTwoNumberDecimal = (event) => {
+    this.value = parseFloat(this.value).toFixed(4);
+}
 
 const formValues = reactive({
             min_price : "",

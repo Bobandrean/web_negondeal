@@ -13,7 +13,7 @@
                 <v-card
     class="mx-auto rounded-lg"
     width="600"
-    height="370"
+    height="400"
     style="border-style: thin; border-width: 1px"
   >
             <v-row no-gutters>
@@ -32,7 +32,7 @@
                 size="125"
                 rounded="0"
               >
-                <v-img src="https://cdn.vuetifyjs.com/images/cards/halcyon.png"></v-img>
+              <v-img cover height="250" :src="getDetailUnit?.photo_selling?.[0]?.path"></v-img>
               </v-avatar>
             </v-row>
             <v-row>

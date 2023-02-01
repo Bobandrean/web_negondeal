@@ -14,11 +14,11 @@
                         required></v-text-field>
                 </v-row>
                 <v-row>
-                    <v-text-field v-model="formValues.password" placeholder="Buat Password" required></v-text-field>
+                    <v-text-field v-model="formValues.password" placeholder="Buat Password" required type="password"></v-text-field>
                 </v-row>
                 <v-row>
-                    <v-text-field v-model="formValues.c_password" placeholder="Konfirmasi Password"
-                        required></v-text-field>
+                    <v-text-field  v-model="formValues.c_password" placeholder="Konfirmasi Password"
+                        required type="password"></v-text-field>
                 </v-row>
                 <v-row>
                     <p>Minimal 8 karakter, kombinasi huruf dan angka</p>
@@ -74,5 +74,24 @@ const handleSubmit = () => {
 </script>
 
 <style>
-
+.input-box{
+    box-sizing: border-box;
+    margin: 0;
+    font-variant: tabular-nums;
+    list-style: none;
+    font-feature-settings: "tnum","tnum";
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    min-width: 0;
+    padding: 4px 11px;
+    color: rgba(0,0,0,.85);
+    font-size: 14px;
+    line-height: 1.5715;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #d9d9d9;
+    border-radius: 2px;
+    transition: all .3s;
+}
 </style>

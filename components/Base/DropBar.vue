@@ -2,7 +2,7 @@
     <client-only>
       <v-menu>
         <template v-slot:activator="{ props }">
-          <v-btn color="primary" v-bind="props">
+          <v-btn color="#ffffff" v-bind="props">
             <v-icon>mdi-account</v-icon> {{ label }}
           </v-btn>
         </template>

@@ -7,21 +7,20 @@
       <v-row>
         <v-col md="12" align="center">
           <p>Masuk (Log In)</p>
-          {{ getUser }}
         </v-col>
       </v-row>
       <v-form v-model="valid" @submit.prevent="handleSubmit">
-        <v-row>
-          <v-text-field v-model="formValues.email" label="email" placeholder="Masukkan Alamat Email Anda"
-            required></v-text-field>
+        <v-row class="mt-2">
+          <v-text-field v-model="formValues.email" label="email" placeholder="Masukkan Alamat Email Anda" variant="outlined" counter
+          :rules="[rules.required, rules.email]"></v-text-field>
         </v-row>
-        <v-row no-gutters>
-          <v-col md="9">
-            <v-text-field type="password" v-model="formValues.password" label="password" placeholder="Password"
-              required></v-text-field>
+        <v-row >
+          <v-col md="8">
+            <v-text-field :type="show1 ? 'text' : 'password'" v-model="formValues.password" label="password" placeholder="Password" variant="outlined" :append-inner-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+              :rules="[rules.required]" @click:append-inner="show1 = !show1"></v-text-field>
           </v-col>
-          <v-col md="3">
-            <Button>Lupa Password</Button>
+          <v-col md="4">
+            <BaseButton class="mt-3" ><span style="font-size:12px; color:#ffffff">Lupa Password</span></BaseButton>
           </v-col>
         </v-row>
         <v-row>
@@ -30,7 +29,16 @@
         </v-row>
         <v-row>
           <v-col md="12" align="center">
-            <BaseButton @click="handleSubmit">Masuk</BaseButton>
+           <v-btn
+          block
+          color="success"
+          size="large"
+          type="submit"
+          variant="elevated"
+          @click="handleSubmit"
+        >
+          Sign In
+        </v-btn>
           </v-col>
         </v-row>
         <v-row>
@@ -40,14 +48,33 @@
         </v-row>
         <v-row>
           <v-col md="12" align="center">
-            <BaseButton>Google Account</BaseButton>
+            <BaseButton><span style="color:#ffffff">Google Account</span></BaseButton>
           </v-col>
         </v-row>
       </v-form>
     </v-container>
   </BaseDialog>
 </template>
-  
+<script>
+export default {
+  data () {
+    return {
+      show1 : false,
+      title: 'Preliminary report',
+      email: '',
+      rules: {
+        required: value => !!value || 'Required.',
+        counter: value => value.length <= 20 || 'Max 20 characters',
+        email: value => {
+          const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+          return pattern.test(value) || 'Invalid e-mail.'
+        },
+      },
+    }
+  },
+}
+</script>
+
   <script setup>
   import { useAuthStore } from "@/stores/auth";
   const authStore = useAuthStore();

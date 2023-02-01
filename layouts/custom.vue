@@ -6,26 +6,19 @@
             <!-- <v-system-bar color="deep-purple darken-3"></v-system-bar> -->
 
             <v-app-bar color="#e77200">
-          <v-btn icon="mdi-magnify" @click="goToIndex" class="mr-3">Logo</v-btn>
-          <BaseButton> Beli Mobil</BaseButton>
-  
-          <BaseButton to="/detail"> NND Showroom</BaseButton>
-  
-          <BaseButton> Jual Mobil </BaseButton>
-    
-          <BaseButton> Blog </BaseButton>
-          <BaseDropDown
-            class="justify-end"
-            label="Lainnya"
-            :items="lainnya"
-          ></BaseDropDown>
-          <v-spacer></v-spacer>
-          <BaseDropBar
-            @menuClick="handleAkun"
-            label="Akun"
-            :list="akun"
-          ></BaseDropBar>
-        </v-app-bar>
+        <v-btn icon="mdi-magnify" @click="goToIndex" class="mr-3">Logo</v-btn>
+        <BaseButton> <span style="color:#ffffff">Beli Mobil</span></BaseButton>
+
+        <BaseButton to="/detail"> <span style="color:#ffffff">NND Showroom</span></BaseButton>
+
+        <BaseButton> <span style="color:#ffffff">Jual Mobil</span> </BaseButton>
+
+        <BaseButton> <span style="color:#ffffff">Blog</span> </BaseButton>
+        <BaseDropDown @menuClick="handleLainnya" class="justify-end" label="Lainnya" :items="lainnya"></BaseDropDown>
+        <v-spacer></v-spacer>
+        <BaseDropBar @menuClick="handleAkun" label="Akun" :list="akun"></BaseDropBar>
+
+      </v-app-bar>
 
             <v-navigation-drawer v-model="drawer" location="bottom" temporary>
                 <v-list :items="items"></v-list>
