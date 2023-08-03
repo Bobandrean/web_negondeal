@@ -15,8 +15,7 @@
             </v-col>
         </v-row>
         <v-row>
-            <v-col md="3"></v-col>
-            <v-col md="9" class="d-flex flex-row">
+            <v-col md="12" class="d-flex justify-center">
             <v-sheet class=" pa-2">
                 <BaseButton @click="openMerk" class="text-button"><span style="color: #ffffff">Merk & Jenis</span></BaseButton>
             </v-sheet>
@@ -38,74 +37,38 @@
         </v-col>
     </v-row>
 
-    <v-row class="d-flex flex-row mb-6">
-        <v-col md="2" class=" mt-3" v-if="!!search.name">
-            <v-card class="cardFilter" max-width="125px">
-                <v-row>
-                    <v-col md="8" align="center" class="mt-1">
-                        <p style="font-size:12px; margin-left: 11px;">{{ search.name }}</p>
-                    </v-col>
-                    <v-col md="4" align="center" @click="clearFilter">
-                        <v-icon style="margin-right:10px">mdi-close</v-icon>
-                    </v-col>
-                </v-row>
-            </v-card>
-        </v-col>
-        <v-col class="mt-3" md="2" v-if="!!search.merk">
-            <v-card class="cardFilter" max-width="200px">
-                <v-row>
-                    <v-col md="8" align="center" class="mt-1">
-                        <p style="font-size:13px; margin-left: 11px;">{{ search.merk }}, {{ search.type }}</p>
-                    </v-col>
-                    <v-col md="4" align="center" @click="clearMerk">
-                        <v-icon style="margin-right:10px">mdi-close</v-icon>
-                    </v-col>
-                </v-row>
-            </v-card>
-        </v-col>
-        <v-col class="mt-3" md="2" v-if="!!search.min_price">
-            <v-card
-            class="cardFilter"
-            max-width="200px"
-            >
-            <v-row>
-                <v-col md="8" align="center" class="mt-1">
-                   <p style="font-size:10px; margin-left: 11px;">{{ search.min_price }} - {{ search.max_price }}</p> 
-                </v-col>
-                <v-col md="4" align="center" @click="clearPrice">
-                    <v-icon style="margin-right:10px">mdi-close</v-icon>
-                </v-col>
-            </v-row>
-            </v-card>
-        </v-col>
-        <v-col class="mt-3" md="2" v-if="!!search.min_year">
-            <v-card
-            class="cardFilter"
-            max-width="200px"
-            >
-            <v-row>
-                <v-col md="8" align="center" class="mt-1">
-                   <p style="font-size:14px; margin-left: 11px;">{{ search.min_year }} - {{ search.max_year }}</p> 
-                </v-col>
-                <v-col md="4" align="center" @click="clearYear">
-                    <v-icon style="margin-right:10px">mdi-close</v-icon>
-                </v-col>
-            </v-row>
-            </v-card>
-        </v-col>
-        <v-col class="mt-3" md="2" v-if="!!search.provinsi">
-            <v-card class="cardFilter" max-width="200px">
-                <v-row>
-                    <v-col md="8" align="center" class="mt-1">
-                        <p style="font-size:14px; margin-left: 11px;">{{ search.provinsi }} , {{ search.kota }}, {{
-                            search.kecamatan
-                        }}</p>
-                    </v-col>
-                    <v-col md="4" align="center" @click="clearMerk">
-                        <v-icon style="margin-right:10px">mdi-close</v-icon>
-                    </v-col>
-                </v-row>
-            </v-card>
+    <v-row>
+        <v-col md="2" class=" mt-3 d-flex flex-row mb-6" >
+            <v-sheet class=" pa-2" v-if="!!search.name">
+                <BaseButton  class="text-button">
+                    <span style="color: #ffffff">{{ search.name }}</span>
+                    <v-icon @click="clearFilter" style="margin-left:10px">mdi-close</v-icon>
+                </BaseButton>
+            </v-sheet>
+            <v-sheet class=" pa-2" v-if="!!search.merk">
+                <BaseButton  class="text-button">
+                    <span style="color: #ffffff">{{ search.merk }}, {{ search.type }}</span>
+                    <v-icon @click="clearMerk" style="margin-left:10px">mdi-close</v-icon>
+                </BaseButton>
+            </v-sheet>
+            <v-sheet class=" pa-2" v-if="!!search.min_price">
+                <BaseButton  class="text-button">
+                    <span style="color: #ffffff">{{ search.min_price }} - {{ search.max_price }}</span>
+                    <v-icon @click="clearPrice" style="margin-left:10px">mdi-close</v-icon>
+                </BaseButton>
+            </v-sheet>
+            <v-sheet class=" pa-2" v-if="!!search.min_year">
+                <BaseButton  class="text-button">
+                    <span style="color: #ffffff">{{ search.min_year }} - {{ search.max_year }}</span>
+                    <v-icon @click="clearYear" style="margin-left:10px">mdi-close</v-icon>
+                </BaseButton>
+            </v-sheet>
+            <v-sheet class=" pa-2" v-if="!!search.provinsi">
+                <BaseButton  class="text-button">
+                    <span style="color: #ffffff">{{ search.provinsi }} , {{ search.kota }}, {{search.kecamatan}}</span>
+                    <v-icon @click="clearYear" style="margin-left:10px">mdi-close</v-icon>
+                </BaseButton>
+            </v-sheet>
         </v-col>
     </v-row>
     <v-row>
@@ -141,16 +104,18 @@
         </v-col>
     </v-row>
         <v-row v-else >
-        <v-col md="4" v-for="car, y  in getUnit.slice((page - 1) * perPage, page * perPage)" :key="y">
-                <BaseCarCard :items="car"></BaseCarCard>
+        <v-col md="4" v-for="car, index in getUnit.slice((page - 1) * perPage, page * perPage)" :key="index + 1">
+                <BaseCarCard :items="car"></BaseCarCard> {{ index }}
             </v-col>
         </v-row>
     <v-row>
-        <v-col>
-            <p>Menampilkan Halaman {{ page }} Dari {{ Math.ceil(getUnit.length / perPage) }}</p>
+        <v-col md="8" class="d-flex justify-end">
+           <div class="mt-5"><p>Menampilkan Halaman {{ page }} Dari {{ Math.ceil(getUnit.length / perPage) }}</p></div> 
+           
         </v-col>
+        <v-col md="4"><v-pagination v-model="page" :length="Math.ceil(getUnit.length / perPage)" circle></v-pagination> </v-col>
     </v-row>
-    <v-pagination v-model="page" :length="Math.ceil(getUnit.length / perPage)" circle></v-pagination>
+    
     <v-divider class="ma-6"> </v-divider>
     <v-row v-if="!getUser">
 

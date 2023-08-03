@@ -24,7 +24,7 @@
         </v-row>
         <v-row>
           <v-col>
-            <v-card class="mx-auto card1" height="300">
+            <v-card class="mx-auto card1" height="340">
               <v-row>
                 <v-col md="2" align="center">
                   <p class="loui-1">
@@ -509,6 +509,7 @@ const goToTestDrive = async () => {
 };
 
 const goToHubungi = async (noHp) => {
+  console.log("asd")
   window.open(`https://api.whatsapp.com/send?phone=${noHp}`)
 }
 const item = [
@@ -560,6 +561,7 @@ const item = [
 
 .card-bottom {
   position: fixed;
+  left: 0;
   bottom: 0;
   width: 100%;
   background: gray;

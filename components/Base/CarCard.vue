@@ -4,7 +4,7 @@
             <v-progress-linear :active="isActive" color="deep-purple" height="4" indeterminate></v-progress-linear>
         </template>
 
-        <v-img @click="handleDetail(items?.id)" cover height="250" :src="items?.unit_photo?.[0]?.path"></v-img>
+        <v-img @click="handleDetail(items?.id)" cover height="200" :src="items?.unit_photo?.[0]?.path"></v-img>
 
         <v-card-item>
                 <v-col md="12" >
@@ -103,7 +103,7 @@ defineProps({
 .icon-card{
     position:absolute;
     z-index: 1;
-    top: 248px;
+    top: 200px;
     right: 0;
 }
 
@@ -129,7 +129,6 @@ defineProps({
 .car-title{
     font-family: Poppins;
     line-height: 24px;
-    margin-top: 12px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
